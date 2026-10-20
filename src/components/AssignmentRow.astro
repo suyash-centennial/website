@@ -8,7 +8,7 @@ const d = a.data;
 <li class="row" data-client={d.client} data-line={d.line}>
   <span class="client">{d.client}</span>
   <div>
-    <h3>{hasPage(a) ? <a href={`/experience/${a.id}/`}>{d.title}</a> : d.title}{d.ongoing && <span class="tag">Ongoing</span>}</h3>
+    <h3>{hasPage(a) ? <a href={`/experience/${a.id}/`}>{d.title}</a> : d.title}</h3>
     <div class="office">{[d.office, d.line].filter(Boolean).join(' · ')}</div>
   </div>
   <span class="years">{years(a)}</span>
