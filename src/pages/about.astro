@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import ContactBand from '../components/ContactBand.astro';
 const strengths = [
   ['Proven MDB experience', 'more than 25 years of work with AfDB, AsDB, IDB, IsDB, World Bank, and GEF.'],
   ['Methodological rigor', 'consistent use of OECD-DAC and ECG standards; peer-reviewed outputs under IDEV, GEF, GPE, and MOPAN.'],
@@ -8,36 +9,59 @@ const strengths = [
   ['Regional insight', 'longstanding presence in Africa, with a good understanding of cultural diversity and sensitivity; multilingual expertise.'],
   ['Quality assurance', 'senior oversight by former MDB executives ensures analytical accuracy, timeliness, and utility.'],
 ];
+const values = ['Integrity and objectivity', 'Methodological rigor', 'Partnership and learning', 'Contextual sensitivity'];
 ---
 <Base title="About" description="Company profile, mission and values, geographic experience and organizational strengths of Centennial Advisory.">
-  <PageHero title="About" lede="Centennial Advisory provides high-quality advisory, analytical and evaluation services to public and private clients." />
+  <PageHero title="About Centennial Advisory" lede="Centennial Advisory provides high-quality advisory, analytical and evaluation services to public and private clients." />
 
   <section class="band">
     <div class="wrap">
       <div class="split">
         <h2>Company Profile</h2>
         <div>
-          <p>Centennial Advisory builds on the practice of the Centennial Group, established in 1999 as a globally recognized advisory firm specializing in strategy, policy, and institutional consultancy services, with a proven record of supporting international financial institutions, multilateral development banks (MDBs), and development agencies.</p>
+          <p>Centennial Advisory builds on the practice of the Centennial Group, established in 1999 as a globally recognized advisory firm specializing in strategy, policy, and institutional consultancy services. The Group offered comprehensive advice on a diverse range of development issues and had a proven record of supporting international financial institutions, multilateral development banks (MDBs), and development agencies. Its work spanned diagnostics, policy formulation, strategy development, institutional reform, and program evaluation.</p>
           <p>The Centennial Group novated to Centennial Advisory all rights and interests in its consulting-related intellectual property, staff, methodologies, templates, and databases.</p>
           <p>Centennial collaborates with leading global and regional institutions, including the African Development Bank (AfDB), Asian Development Bank (AsDB), Global Environment Facility (GEF), Global Partnership for Education (GPE), Inter-American Development Bank (IDB), Islamic Development Bank (IsDB), Organisation for Economic Co-operation and Development (OECD) through MOPAN, World Bank Group (WBG), and numerous UN agencies (UNDP, FAO, UNEP, UNCDF).</p>
         </div>
       </div>
       <div class="split">
-        <h2>Mission and Values</h2>
+        <h2>Partnership with the AfDB</h2>
         <div>
-          <p>Centennial aims to strengthen development impact effectiveness by enhancing institutional performance, accountability, and learning across global and regional development organizations. Its mission is to increase development impact through advisory services and independent, evidence-based evaluation that inform strategic decision-making.</p>
-          <p>Guided by its core values of integrity and objectivity, methodological rigor, partnership and learning, and contextual sensitivity, Centennial grounds its work in a nuanced understanding of institutional dynamics and local realities.</p>
+          <p>Centennial has maintained a long-standing partnership with the AfDB, completing more than a dozen strategic evaluations, reviews, and advisory assignments for both IDEV and Bank Management.</p>
+          <p>Beyond IDEV, Centennial has supported AfDB's senior management and Board through major institutional assignments, including the Mid-Term Review of the Ten-Year Strategy 2013–2022, the Strategic Staffing Review (2019–2020), the preparation of six consecutive AfDB Annual Reports (2018–2023), and the High-Level Panel on Accelerating Development Impact in Africa through the High 5s (2016–2017). These engagements have strengthened Centennial's understanding of the Bank's governance, operational systems, and concessional finance architecture, ensuring familiarity with both headquarters and regional operations.</p>
+          <a class="more" href="/experience/">AfDB assignments</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="band alt">
+  <section class="dark">
+    <img class="mark small" src="/icon-512.png" alt="" aria-hidden="true" />
+    <div class="wrap band" style="padding-left:var(--gutter);padding-right:var(--gutter)">
+      <div class="split">
+        <h2>Mission and Values</h2>
+        <div>
+          <p>Centennial aims to strengthen development impact effectiveness by enhancing institutional performance, accountability, and learning across global and regional development organizations. Its mission is to increase development impact through advisory services and independent, evidence-based evaluation that inform strategic decision-making.</p>
+          <p>Guided by its core values, Centennial grounds its work in a nuanced understanding of institutional dynamics and local realities, particularly within Africa's diverse development environments.</p>
+          <div class="grid-2" style="margin-top:26px">{values.map((v) => <div class="card"><h3 style="font-size:20px;margin:0">{v}</h3></div>)}</div>
+        </div>
+      </div>
+      <div class="split">
+        <h2>Leadership and Experts</h2>
+        <div>
+          <p>Centennial operates through a core leadership team supported by an extensive network of senior and regional experts, including former Vice Presidents and Directors of MDBs. This model ensures both agility and depth, deploying multi-disciplinary teams while maintaining consistent quality and client engagement.</p>
+          <a class="more" href="/people/">Leadership and senior experts</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band stone">
     <div class="wrap">
       <div class="split">
         <h2>Geographic Experience</h2>
         <div>
-          <p>Centennial has extensive experience across Africa, with major assignments for the AfDB and IDEV covering North, West, and Southern Africa, including multi-country missions in Côte d'Ivoire, Tunisia, Morocco, Kenya, South Africa, and other Regional Member Countries. The firm's experts have longstanding professional experience in both Anglophone and Francophone contexts, supported by a network of regional consultants.</p>
+          <p>Centennial has extensive experience across Africa, with major assignments for the AfDB and IDEV covering North, West, and Southern Africa, including multi-country missions in Côte d'Ivoire, Tunisia, Morocco, Kenya, South Africa, and other Regional Member Countries. The firm's experts have longstanding professional experience in both Anglophone and Francophone contexts, supported by a network of regional consultants. This combination ensures effective fieldwork, stakeholder engagement, and culturally grounded analysis across diverse African operating environments.</p>
         </div>
       </div>
     </div>
@@ -47,10 +71,9 @@ const strengths = [
     <div class="wrap">
       <div class="split">
         <h2>Organizational Strengths</h2>
-        <ul class="ruled">
-          {strengths.map(([a, b]) => <li><b>{a}</b>, {b}</li>)}
-        </ul>
+        <ul class="ruled">{strengths.map(([a, b]) => <li><b>{a}</b>: {b}</li>)}</ul>
       </div>
     </div>
   </section>
+  <ContactBand />
 </Base>

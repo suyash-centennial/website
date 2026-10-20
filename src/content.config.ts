@@ -6,12 +6,11 @@ const people = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/people' }),
   schema: z.object({
     name: z.string(),
-    role: z.string(),
+    role: z.string(),                       // title at Centennial, or most senior prior post
+    summary: z.string(),                    // one line for cards
     languages: z.string().optional(),
+    education: z.array(z.string()).default([]),
     order: z.number().default(99),
-    core: z.boolean().default(true),
-    photo: z.string().optional(),
-    draft: z.boolean().default(false),
   }),
 });
 
@@ -19,18 +18,15 @@ const assignments = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/assignments' }),
   schema: z.object({
     title: z.string(),
-    client: z.enum([
-      'AfDB', 'AsDB', 'GEF', 'GPE', 'IDB', 'IsDB', 'OECD / MOPAN',
-      'World Bank Group', 'UN agency',
-    ]),
-    office: z.string().optional(),
-    type: z.enum(['Corporate', 'Thematic', 'Systems', 'Country']).optional(),
+    client: z.enum(['AfDB', 'AsDB', 'GEF', 'IFAD', 'IsDB', 'ICA', 'OECD / MOPAN', 'World Bank Group']),
+    office: z.string().optional(),          // commissioning office
+    line: z.enum(['Evaluation', 'Advisory', 'Analysis']),
     start: z.number().optional(),
     end: z.number().optional(),
+    ongoing: z.boolean().default(false),
     region: z.string().optional(),
-    partners: z.string().optional(),
-    report: z.string().url().optional(),
     team: z.array(reference('people')).default([]),
+    featured: z.boolean().default(false),   // shown on the home page
     published: z.boolean().default(true),
   }),
 });

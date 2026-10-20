@@ -1,24 +1,91 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-const lines = ['Evaluation', 'Advisory', 'Analysis'];
+import AssignmentRow from '../components/AssignmentRow.astro';
+import ContactBand from '../components/ContactBand.astro';
+import { publishedAssignments } from '../lib';
+const all = await publishedAssignments();
+const by = (line: string) => all.filter((a) => a.data.line === line && a.data.client !== 'OECD / MOPAN').slice(0, 6);
+
+const S = [
+  {
+    id: 'evaluation', t: 'Evaluation', band: '',
+    intro: [
+      'Evaluations assess the relevance, coherence, effectiveness, efficiency and sustainability of development interventions in line with OECD-DAC criteria and ECG good practice standards. Increasingly, they are used not only to establish accountability but to determine best practice and generate recommendations that inform strategic decision-making.',
+      'Centennial conducts evaluations in close collaboration with the independent evaluation functions that commission them, and integrates their review mechanisms, including internal peer reviewers and Evaluation Reference Groups, into its own quality assurance process.',
+    ],
+    listHead: 'Centennial evaluates',
+    list: [
+      'The efficiency and effectiveness of development organizations',
+      'Corporate policies, strategies and their implementation',
+      'Country and regional strategies',
+      'Development programs, funds and projects, at portfolio and individual level',
+      'Project completion reports, through independent validation',
+      'Resource mobilization processes and replenishment commitments',
+      'The performance of multilateral organisations, under the MOPAN methodology',
+    ],
+  },
+  {
+    id: 'advisory', t: 'Advisory', band: 'stone',
+    intro: [
+      'Centennial advises the leadership of multilateral development institutions on strategy, institutional reform, and development effectiveness. Its senior experts bring first-hand understanding of MDB governance, strategy, organizational reform, development finance, and institutional performance.',
+    ],
+    listHead: 'Areas of advice',
+    list: [
+      'Corporate strategy formulation and mid-term reviews',
+      'Design and evaluation of results management and measurement frameworks',
+      'Results-based allocation of resources',
+      'Quality assurance systems for programs and projects',
+      'Budget reform to align budgets with strategic priorities and results',
+      'Portfolio review and restructuring policy',
+      'Strategic workforce planning and staffing reviews',
+      'Evaluation policy and strategy',
+    ],
+  },
+  {
+    id: 'analysis', t: 'Analysis', band: '',
+    intro: [
+      'Centennial provides analytical support to development institutions, including portfolio and data analysis, benchmarking studies, and the preparation of corporate and financing reports. Its analysts work with qualitative and quantitative tools to produce multiple lines of evidence for evaluations and institutional reviews.',
+    ],
+    listHead: 'Analytical work',
+    list: [
+      'Portfolio analysis and performance reviews',
+      'Benchmarking against peer institutions',
+      'Financing trends and commitments analysis',
+      'Corporate annual reports',
+      'Comparative studies of governance processes and practices',
+      'Survey design and analysis',
+    ],
+  },
+];
 ---
-<Base title="Services" description="Advisory, analytical and evaluation services for multilateral development banks, UN agencies and development organizations.">
+<Base title="Services" description="Evaluation, advisory and analytical services for multilateral development banks, UN agencies and development organizations.">
   <PageHero title="Services" lede="Centennial Advisory provides high-quality advisory, analytical and evaluation services to public and private clients." />
-  <section class="band">
-    <div class="wrap">
-      {lines.map((l) => (
+  {S.map((s) => (
+    <section class={`band ${s.band}`} id={s.id}>
+      <div class="wrap">
         <div class="split">
-          <h2>{l}</h2>
-          <div><p class="draft">Description of this line of work to be confirmed.</p></div>
+          <h2>{s.t}</h2>
+          <div>
+            {s.intro.map((p) => <p>{p}</p>)}
+            <h3>{s.listHead}</h3>
+            <ul class="checks">{s.list.map((l) => <li>{l}</li>)}</ul>
+            {by(s.t).length > 0 && (<>
+              <h3>Selected assignments</h3>
+              <ul class="rows">{by(s.t).map((a) => <AssignmentRow a={a} />)}</ul>
+            </>)}
+          </div>
         </div>
-      ))}
+      </div>
+    </section>
+  ))}
+  <section class="dark">
+    <div class="wrap band" style="padding-left:var(--gutter);padding-right:var(--gutter)">
+      <div class="split">
+        <h2>Scope</h2>
+        <div><p>Centennial's evaluation work is institutional and strategic. It does not conduct impact evaluations.</p><a class="more" href="/approach/">Evaluation approach and methodology</a></div>
+      </div>
     </div>
   </section>
-  <section class="band alt">
-    <div class="wrap">
-      <p>Centennial does not conduct impact evaluations.</p>
-      <a class="more" href="/approach/">How we work</a>
-    </div>
-  </section>
+  <ContactBand />
 </Base>

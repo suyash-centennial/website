@@ -1,0 +1,19 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { initials, photoFor } from '../lib';
+interface Props { p: CollectionEntry<'people'>; brief?: boolean }
+const { p, brief = false } = Astro.props;
+const photo = photoFor(p.id);
+---
+<li class="person">
+  <a class="whole" href={`/people/${p.id}/`}>
+    <div class="portrait">
+      {photo ? <img src={photo} alt={p.data.name} loading="lazy" /> : <div class="ini" aria-hidden="true">{initials(p.data.name)}</div>}
+    </div>
+    <div class="txt">
+      <h3>{p.data.name}</h3>
+      <div class="role">{p.data.role}</div>
+      {!brief && <p>{p.data.summary}</p>}
+    </div>
+  </a>
+</li>

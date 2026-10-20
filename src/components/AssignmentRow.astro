@@ -1,15 +1,15 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { hasPage, years } from '../lib';
 interface Props { a: CollectionEntry<'assignments'>; }
 const { a } = Astro.props;
 const d = a.data;
-const years = d.start && d.end && d.start !== d.end ? `${d.start}–${d.end}` : (d.end ?? d.start ?? '');
 ---
-<li class="row" data-client={d.client} data-type={d.type ?? ''}>
+<li class="row" data-client={d.client} data-line={d.line}>
   <span class="client">{d.client}</span>
   <div>
-    <h3><a href={`/experience/${a.id}/`}>{d.title}</a></h3>
-    {d.office && <div class="office">{d.office}</div>}
+    <h3>{hasPage(a) ? <a href={`/experience/${a.id}/`}>{d.title}</a> : d.title}{d.ongoing && <span class="tag">Ongoing</span>}</h3>
+    <div class="office">{[d.office, d.line].filter(Boolean).join(' · ')}</div>
   </div>
-  <span class="years">{years}</span>
+  <span class="years">{years(a)}</span>
 </li>

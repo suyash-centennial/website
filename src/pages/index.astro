@@ -1,12 +1,23 @@
 ---
 import Base from '../layouts/Base.astro';
-import AssignmentRow from '../components/AssignmentRow.astro';
+import AssignmentCard from '../components/AssignmentCard.astro';
+import PersonCard from '../components/PersonCard.astro';
+import ContactBand from '../components/ContactBand.astro';
 import { INSTITUTIONS } from '../site';
-import { publishedAssignments } from '../lib';
-const recent = (await publishedAssignments()).filter((a) => a.data.end || a.data.start).slice(0, 3);
+import { publishedAssignments, sortedPeople } from '../lib';
+const all = await publishedAssignments();
+const featured = all.filter((a) => a.data.featured).slice(0, 3);
+const mopan = all.filter((a) => a.data.client === 'OECD / MOPAN');
+const people = await sortedPeople();
+const lines = [
+  { t: 'Evaluation', d: 'Independent corporate, strategy, thematic, country and regional evaluations, project completion validations, and institutional assessments of multilateral organisations under the MOPAN methodology.' },
+  { t: 'Advisory', d: 'Advice to the leadership of multilateral development institutions on strategy, institutional reform, results management, and development effectiveness.' },
+  { t: 'Analysis', d: 'Portfolio and data analysis, benchmarking studies, and the preparation of corporate and financing reports for development institutions.' },
+];
 ---
 <Base>
-  <section class="hero">
+  <section class="dark hero">
+    <img class="mark" src="/icon-512.png" alt="" aria-hidden="true" />
     <div class="wrap">
       <h1>Independent, <span class="nb">evidence-based</span> evaluation that informs strategic <span class="nb">decision-making</span>.</h1>
       <p class="lede">Centennial Advisory provides high-quality advisory, analytical and evaluation services to public and private clients.</p>
@@ -14,40 +25,81 @@ const recent = (await publishedAssignments()).filter((a) => a.data.end || a.data
       <div class="stats">
         <div><b>1999</b><span>Practice established as the Centennial Group</span></div>
         <div><b>25+</b><span>Years of work with AfDB, AsDB, IDB, IsDB, World Bank, and GEF</span></div>
-        <div><b>12+</b><span>Strategic evaluations, reviews and advisory assignments for the AfDB</span></div>
+        <div><b>{mopan.filter((m) => !m.data.ongoing).length}</b><span>MOPAN assessments of multilateral organisations since 2021</span></div>
+        <div><b>100+</b><span>AfDB projects validated through Project Completion Report Evaluation Notes</span></div>
       </div>
     </div>
   </section>
 
-  <section class="band alt" aria-labelledby="inst-label">
+  <section class="band stone" aria-labelledby="inst">
     <div class="wrap">
-      <div class="label" id="inst-label">Centennial collaborates with leading global and regional institutions</div>
+      <div class="label" id="inst">Centennial collaborates with leading global and regional institutions</div>
       <ul class="institutions">{INSTITUTIONS.map((n) => <li>{n}</li>)}</ul>
     </div>
   </section>
 
   <section class="band">
     <div class="wrap">
-      <h2>What we do</h2>
-      <p>Centennial Advisory aims to strengthen development impact effectiveness by enhancing institutional performance, accountability, and learning across global and regional development organizations.</p>
-      <p>Its mission is to increase development impact through advisory services and independent, evidence-based evaluation that inform strategic decision-making.</p>
-      <a class="more" href="/services/">Our services</a>
+      <div class="section-head">
+        <div>
+          <div class="label">What we do</div>
+          <h2>Evaluation, advisory and analysis</h2>
+          <p>Centennial Advisory aims to strengthen development impact effectiveness by enhancing institutional performance, accountability, and learning across global and regional development organizations.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        {lines.map((l) => (
+          <article class="card top">
+            <h3>{l.t}</h3>
+            <p>{l.d}</p>
+            <a class="more" href={`/services/#${l.t.toLowerCase()}`}>More</a>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
-  <section class="band alt">
-    <div class="wrap">
-      <h2>Experience</h2>
-      <ul class="rows">{recent.map((a) => <AssignmentRow a={a} />)}</ul>
-      <p style="margin-top:22px"><a class="more" href="/experience/">View all assignments</a></p>
+  <section class="dark">
+    <img class="mark small" src="/icon-512.png" alt="" aria-hidden="true" />
+    <div class="wrap band" style="padding-left:var(--gutter);padding-right:var(--gutter)">
+      <div class="split">
+        <div>
+          <div class="label">MOPAN</div>
+          <h2>MOPAN Assessments</h2>
+        </div>
+        <div>
+          <p>Centennial has conducted assessments for the Multilateral Organisation Performance Assessment Network (MOPAN), hosted by the OECD, and thus has a good understanding of the recent performance and challenges of multilateral development banks and UN agencies. Each assessment captures a panoramic overview of an organisation's performance across strategic management, operational management, relationship management, and performance management and results.</p>
+          <ul class="ruled cols">
+            {mopan.map((m) => <li><b>{m.data.title.replace(/^MOPAN Assessment of (the )?/, '')}</b>{' '}<span style="color:var(--steel)">{m.data.ongoing ? 'ongoing' : m.data.end}</span></li>)}
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="band">
     <div class="wrap">
-      <h2>People</h2>
-      <p>Centennial operates through a core leadership team supported by an extensive network of senior and regional experts, including former Vice Presidents and Directors of MDBs. This model ensures both agility and depth, deploying multi-disciplinary teams while maintaining consistent quality and client engagement.</p>
-      <a class="more" href="/people/">Meet the team</a>
+      <div class="section-head">
+        <div><div class="label">Experience</div><h2>Selected assignments</h2></div>
+        <a class="more" href="/experience/">All assignments</a>
+      </div>
+      <div class="grid-3">{featured.map((a) => <AssignmentCard a={a} />)}</div>
     </div>
   </section>
+
+  <section class="band stone">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="label">People</div>
+          <h2>Leadership and senior experts</h2>
+          <p>Centennial operates through a core leadership team supported by an extensive network of senior and regional experts, including former Vice Presidents and Directors of MDBs.</p>
+        </div>
+        <a class="more" href="/people/">All profiles</a>
+      </div>
+      <ul class="people compact">{people.map((p) => <PersonCard p={p} brief />)}</ul>
+    </div>
+  </section>
+
+  <ContactBand />
 </Base>

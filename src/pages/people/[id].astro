@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import AssignmentRow from '../../components/AssignmentRow.astro';
+import ContactBand from '../../components/ContactBand.astro';
+import { initials, photoFor, publishedAssignments } from '../../lib';
+
+export async function getStaticPaths() {
+  const people = await getCollection('people');
+  return people.map((p) => ({ params: { id: p.id }, props: { p } }));
+}
+const { p } = Astro.props;
+const { Content } = await render(p);
+const photo = photoFor(p.id);
+const work = (await publishedAssignments()).filter((a) => a.data.team.some((t) => t.id === p.id));
+---
+<Base title={p.data.name} description={`${p.data.name}, ${p.data.role}. ${p.data.summary}`}>
+  <PageHero title={p.data.name} lede={p.data.role} crumb={{ href: '/people/', label: 'People' }} />
+  <section class="band">
+    <div class="wrap">
+      <div class="profile">
+        <div>
+          <div class="portrait">
+            {photo ? <img src={photo} alt={p.data.name} /> : <div class="ini" aria-hidden="true">{initials(p.data.name)}</div>}
+          </div>
+          <div class="facts">
+            {p.data.education.length > 0 && (<><h2>Education</h2><ul>{p.data.education.map((e) => <li>{e}</li>)}</ul></>)}
+            {p.data.languages && (<><h2>Languages</h2><ul><li>{p.data.languages}</li></ul></>)}
+          </div>
+        </div>
+        <div class="prose">
+          <Content />
+          {work.length > 0 && (<>
+            <h2>Selected assignments with Centennial</h2>
+            <ul class="rows">{work.map((a) => <AssignmentRow a={a} />)}</ul>
+          </>)}
+        </div>
+      </div>
+    </div>
+  </section>
+  <ContactBand />
+</Base>

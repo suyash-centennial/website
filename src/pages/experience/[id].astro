@@ -2,41 +2,50 @@
 import { getCollection, getEntries, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
+import AssignmentRow from '../../components/AssignmentRow.astro';
+import ContactBand from '../../components/ContactBand.astro';
+import { hasPage, years, publishedAssignments } from '../../lib';
 
 export async function getStaticPaths() {
-  const items = await getCollection('assignments', ({ data }) => data.published);
+  const items = (await getCollection('assignments', ({ data }) => data.published)).filter(hasPage);
   return items.map((a) => ({ params: { id: a.id }, props: { a } }));
 }
 const { a } = Astro.props;
 const d = a.data;
 const { Content } = await render(a);
 const team = d.team.length ? await getEntries(d.team) : [];
-const years = d.start && d.end && d.start !== d.end ? `${d.start}–${d.end}` : (d.end ?? d.start);
+const related = (await publishedAssignments()).filter((x) => x.id !== a.id && x.data.client === d.client).slice(0, 5);
 ---
-<Base title={d.title} description={`${d.title}${d.office ? `, ${d.office}` : ''}. Centennial Advisory.`}>
-  <PageHero title={d.title}>
+<Base title={d.title} description={`${d.title}. ${d.office ?? d.client}. Centennial Advisory.`}>
+  <PageHero title={d.title} crumb={{ href: '/experience/', label: 'Experience' }}>
     <div class="meta">
       <span>{d.client}</span>
       {d.office && <span>{d.office}</span>}
-      {years && <span>{years}</span>}
+      {years(a) && <span>{years(a)}</span>}
       {d.region && <span>{d.region}</span>}
     </div>
   </PageHero>
   <section class="band">
     <div class="wrap">
-      <div class="split detail">
+      <div class="detail">
         <div class="prose"><Content /></div>
         <aside class="aside">
-          {d.type && (<><h2>Type</h2><p>{d.type} evaluation</p></>)}
-          <h2>Team</h2>
-          {team.length
-            ? <ul>{team.map((p) => <li><a href="/people/">{p.data.name}</a></li>)}</ul>
-            : <p class="draft">To be confirmed</p>}
-          {d.partners && (<><h2>In partnership with</h2><p>{d.partners}</p></>)}
-          {d.report && (<><h2>Report</h2><p><a href={d.report}>Published report</a></p></>)}
-          <p><a class="more" href="/experience/">All assignments</a></p>
+          <h2>Client</h2><p>{d.client}{d.office && <><br />{d.office}</>}</p>
+          <h2>Service</h2><p>{d.line}</p>
+          {years(a) && (<><h2>Period</h2><p>{years(a)}</p></>)}
+          {team.length > 0 && (<><h2>Centennial experts</h2><ul>{team.map((p) => <li><a href={`/people/${p.id}/`}>{p.data.name}</a></li>)}</ul></>)}
+          <p style="margin:0"><a class="more" href="/experience/">All assignments</a></p>
         </aside>
       </div>
     </div>
   </section>
+  {related.length > 0 && (
+    <section class="band stone">
+      <div class="wrap">
+        <h2 style="font-size:26px;margin-bottom:18px">More {d.client} assignments</h2>
+        <ul class="rows">{related.map((r) => <AssignmentRow a={r} />)}</ul>
+      </div>
+    </section>
+  )}
+  <ContactBand />
 </Base>

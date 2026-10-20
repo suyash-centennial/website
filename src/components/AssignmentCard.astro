@@ -1,0 +1,16 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { years } from '../lib';
+interface Props { a: CollectionEntry<'assignments'>; }
+const { a } = Astro.props;
+const d = a.data;
+const blurb = (a.body ?? '').split('\n').find((l) => l.trim() && !l.startsWith('#'))?.trim() ?? '';
+const short = blurb.length > 230 ? blurb.slice(0, blurb.lastIndexOf(' ', 220)) + '…' : blurb;
+---
+<article class="card acard">
+  <div class="client">{d.client}</div>
+  <h3><a href={`/experience/${a.id}/`}>{d.title}</a></h3>
+  <div class="meta2">{[d.office, years(a)].filter(Boolean).join(' · ')}</div>
+  <p>{short}</p>
+  <a class="more" href={`/experience/${a.id}/`}>Read more</a>
+</article>
