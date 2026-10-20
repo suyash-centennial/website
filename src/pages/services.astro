@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+const lines = ['Evaluation', 'Advisory', 'Analysis'];
+---
+<Base title="Services" description="Advisory, analytical and evaluation services for multilateral development banks, UN agencies and development organizations.">
+  <PageHero title="Services" lede="Centennial Advisory provides high-quality advisory, analytical and evaluation services to public and private clients." />
+  <section class="band">
+    <div class="wrap">
+      {lines.map((l) => (
+        <div class="split">
+          <h2>{l}</h2>
+          <div><p class="draft">Description of this line of work to be confirmed.</p></div>
+        </div>
+      ))}
+    </div>
+  </section>
+  <section class="band alt">
+    <div class="wrap">
+      <p>Centennial does not conduct impact evaluations.</p>
+      <a class="more" href="/approach/">How we work</a>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../site';
+---
+<Base title="Contact" description="Contact Centennial Advisory in Washington DC.">
+  <PageHero title="Contact" />
+  <section class="band">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div><h2>Office</h2><p>{SITE.address.map((l) => <>{l}<br /></>)}</p></div>
+        <div><h2>Telephone</h2><p><a href={`tel:${SITE.phone.replace(/[^+\d]/g, '')}`}>{SITE.phone}</a></p></div>
+        <div><h2>Email</h2>{SITE.email ? <p><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p> : <p class="draft">Firm email address to be confirmed</p>}</div>
+      </div>
+    </div>
+  </section>
+</Base>

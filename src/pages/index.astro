@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import AssignmentRow from '../components/AssignmentRow.astro';
+import { INSTITUTIONS } from '../site';
+import { publishedAssignments } from '../lib';
+const recent = (await publishedAssignments()).filter((a) => a.data.end || a.data.start).slice(0, 3);
+---
+<Base>
+  <section class="hero">
+    <div class="wrap">
+      <h1>Independent, <span class="nb">evidence-based</span> evaluation that informs strategic <span class="nb">decision-making</span>.</h1>
+      <p class="lede">Centennial Advisory provides high-quality advisory, analytical and evaluation services to public and private clients.</p>
+      <div class="eyebrow">Washington DC</div>
+      <div class="stats">
+        <div><b>1999</b><span>Practice established as the Centennial Group</span></div>
+        <div><b>25+</b><span>Years of work with AfDB, AsDB, IDB, IsDB, World Bank, and GEF</span></div>
+        <div><b>12+</b><span>Strategic evaluations, reviews and advisory assignments for the AfDB</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" aria-labelledby="inst-label">
+    <div class="wrap">
+      <div class="label" id="inst-label">Centennial collaborates with leading global and regional institutions</div>
+      <ul class="institutions">{INSTITUTIONS.map((n) => <li>{n}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2>What we do</h2>
+      <p>Centennial Advisory aims to strengthen development impact effectiveness by enhancing institutional performance, accountability, and learning across global and regional development organizations.</p>
+      <p>Its mission is to increase development impact through advisory services and independent, evidence-based evaluation that inform strategic decision-making.</p>
+      <a class="more" href="/services/">Our services</a>
+    </div>
+  </section>
+
+  <section class="band alt">
+    <div class="wrap">
+      <h2>Experience</h2>
+      <ul class="rows">{recent.map((a) => <AssignmentRow a={a} />)}</ul>
+      <p style="margin-top:22px"><a class="more" href="/experience/">View all assignments</a></p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2>People</h2>
+      <p>Centennial operates through a core leadership team supported by an extensive network of senior and regional experts, including former Vice Presidents and Directors of MDBs. This model ensures both agility and depth, deploying multi-disciplinary teams while maintaining consistent quality and client engagement.</p>
+      <a class="more" href="/people/">Meet the team</a>
+    </div>
+  </section>
+</Base>

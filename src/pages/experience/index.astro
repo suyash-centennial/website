@@ -1,0 +1,50 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import AssignmentRow from '../../components/AssignmentRow.astro';
+import { publishedAssignments } from '../../lib';
+const items = await publishedAssignments();
+const clients = [...new Set(items.map((a) => a.data.client))];
+const types = [...new Set(items.map((a) => a.data.type).filter(Boolean))] as string[];
+---
+<Base title="Experience" description="Evaluations, reviews and advisory assignments for multilateral development banks, UN agencies and global funds.">
+  <PageHero title="Experience" lede="More than 25 years of work with the AfDB, AsDB, IDB, IsDB, World Bank and GEF." />
+  <section class="band">
+    <div class="wrap">
+      <div class="filters-wrap">
+        <div class="filters" role="group" aria-label="Filter by client">
+          <button class="chip" type="button" data-filter="client" data-value="" aria-pressed="true">All clients</button>
+          {clients.map((c) => <button class="chip" type="button" data-filter="client" data-value={c} aria-pressed="false">{c}</button>)}
+        </div>
+        {types.length > 0 && (
+          <div class="filters" role="group" aria-label="Filter by type">
+            <button class="chip" type="button" data-filter="type" data-value="" aria-pressed="true">All types</button>
+            {types.map((t) => <button class="chip" type="button" data-filter="type" data-value={t} aria-pressed="false">{t}</button>)}
+          </div>
+        )}
+        <p class="count" aria-live="polite"><span id="count">{items.length}</span> assignments</p>
+      </div>
+      <ul class="rows" id="rows">{items.map((a) => <AssignmentRow a={a} />)}</ul>
+    </div>
+  </section>
+</Base>
+<script>
+  const state: Record<string, string> = { client: '', type: '' };
+  const rows = Array.from(document.querySelectorAll<HTMLElement>('#rows .row'));
+  const count = document.getElementById('count');
+  document.querySelectorAll<HTMLButtonElement>('.chip').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const key = chip.dataset.filter!;
+      state[key] = chip.dataset.value ?? '';
+      document.querySelectorAll<HTMLButtonElement>(`.chip[data-filter="${key}"]`).forEach((c) =>
+        c.setAttribute('aria-pressed', String(c === chip)));
+      let shown = 0;
+      rows.forEach((r) => {
+        const ok = (!state.client || r.dataset.client === state.client) && (!state.type || r.dataset.type === state.type);
+        r.hidden = !ok;
+        if (ok) shown++;
+      });
+      if (count) count.textContent = String(shown);
+    });
+  });
+</script>

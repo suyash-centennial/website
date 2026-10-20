@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+const phases = [
+  ['01', 'Inception and Design'],
+  ['02', 'Data Collection and Country Work'],
+  ['03', 'Analysis and Reporting'],
+];
+const tools = ['Theory of Change', 'Evaluation matrix', 'Portfolio review', 'Quality-at-entry assessment',
+  'Benchmarking study', 'Country case studies', 'Surveys', 'Qualitative coding', 'Quantitative analysis'];
+---
+<Base title="Approach" description="Theory-based, utility-focused mixed-method evaluation aligned with OECD-DAC and ECG standards.">
+  <PageHero title="Evaluation Approach and Methodology" lede="Theory-based, utility-focused mixed-method design, aligned with OECD-DAC and ECG standards." />
+  <section class="band">
+    <div class="wrap">
+      <div class="split">
+        <h2>Phases</h2>
+        <div>
+          {phases.map(([n, t]) => (
+            <div class="phase"><div class="n">{n}</div><div><h3>{t}</h3><p class="draft">Description to be carried over from the EOI methodology section.</p></div></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="band alt">
+    <div class="wrap">
+      <div class="split">
+        <h2>Analytical Methods and Tools</h2>
+        <ul class="tags">{tools.map((t) => <li>{t}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+  <section class="band">
+    <div class="wrap">
+      <div class="split">
+        <h2>Quality Assurance and Knowledge Management</h2>
+        <div>
+          <p>Centennial applies a structured internal quality assurance process combining senior peer review and independent validation to ensure methodological soundness and factual accuracy. Ethical guidelines (informed consent, anonymity), adaptive risk management, and iterative deliverable reviews ensure independence, robustness, and relevance.</p>
+          <p>Knowledge management focuses on ensuring that evaluation findings are actionable and widely disseminated. Centennial synthesizes lessons into products such as policy briefs, infographics, and presentations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

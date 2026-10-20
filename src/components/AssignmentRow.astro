@@ -1,0 +1,15 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { a: CollectionEntry<'assignments'>; }
+const { a } = Astro.props;
+const d = a.data;
+const years = d.start && d.end && d.start !== d.end ? `${d.start}–${d.end}` : (d.end ?? d.start ?? '');
+---
+<li class="row" data-client={d.client} data-type={d.type ?? ''}>
+  <span class="client">{d.client}</span>
+  <div>
+    <h3><a href={`/experience/${a.id}/`}>{d.title}</a></h3>
+    {d.office && <div class="office">{d.office}</div>}
+  </div>
+  <span class="years">{years}</span>
+</li>
