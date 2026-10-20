@@ -7,10 +7,10 @@ import { publishedAssignments } from '../../lib';
 const items = await publishedAssignments();
 const count = (k: string, v: string) => items.filter((a) => (a.data as any)[k] === v).length;
 const clients = [...new Set(items.map((a) => a.data.client))].sort((a, b) => count('client', b) - count('client', a));
-const lines = ['Evaluation', 'Advisory', 'Analysis'].filter((l) => count('line', l));
+const lines = ['Evaluation', 'Advisory', 'Analysis', 'Economics'].filter((l) => count('line', l));
 ---
 <Base title="Experience" description="Evaluations, institutional assessments, advisory and analytical assignments for multilateral development banks, UN agencies and global funds.">
-  <PageHero title="Experience" lede="More than 25 years of work with the AfDB, AsDB, IDB, IsDB, World Bank and GEF, and MOPAN assessments of multilateral organisations since 2020." />
+  <PageHero title="Experience" lede="More than 25 years of evaluation, advisory and economic work with the AfDB, AsDB, IDB, IsDB, JICA, World Bank and GEF, and MOPAN assessments of multilateral organisations since 2020." />
   <section class="band">
     <div class="wrap">
       <div class="filters" role="group" aria-label="Filter by client">

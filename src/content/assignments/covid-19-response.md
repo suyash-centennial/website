@@ -7,7 +7,7 @@ start: 2021
 end: 2022
 region: "Regional"
 team: [anil-sood]
-featured: true
+featured: false
 ---
 
 ## The assignment

@@ -7,7 +7,7 @@ start: 2017
 end: 2020
 region: "Regional"
 team: [gaiv-tata, catherine-kleynhoff, anil-sood]
-featured: true
+featured: false
 ---
 
 ## The assignment

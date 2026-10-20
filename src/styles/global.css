@@ -111,6 +111,8 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
 /* ---------- card grids ---------- */
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.grid-4 .card { padding: 26px 24px 24px; }
 .card { background: var(--card); border: 1px solid var(--line); padding: 30px 30px 28px; display: flex; flex-direction: column; }
 .card h3 { margin: 0 0 10px; font-size: 23px; }
 .card p { font-size: 16.5px; }
@@ -250,7 +252,7 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
   .ruled.cols { columns: 1; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .split, .detail, .profile { grid-template-columns: 1fr; gap: 24px; }
-  .grid-3, .people { grid-template-columns: repeat(2, 1fr); }
+  .grid-3, .grid-4, .people { grid-template-columns: repeat(2, 1fr); }
   .site-footer .wrap { grid-template-columns: 1fr 1fr; }
   .profile .portrait { max-width: 300px; }
 }
@@ -302,7 +304,7 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
   .logos img { height: calc(var(--h, 40px) * .7); }
 
   /* cards */
-  .grid-3, .grid-2, .people, .contact-grid { grid-template-columns: 1fr; gap: 14px; }
+  .grid-3, .grid-4, .grid-2, .people, .contact-grid { grid-template-columns: 1fr; gap: 14px; }
   .card { padding: 22px 20px 20px; }
   .card h3 { font-size: 20px; }
   .card p { font-size: 16px; }

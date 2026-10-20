@@ -8,11 +8,13 @@ import { publishedAssignments, sortedPeople } from '../lib';
 const all = await publishedAssignments();
 const featured = all.filter((a) => a.data.featured).slice(0, 3);
 const mopan = all.filter((a) => a.data.title.startsWith('MOPAN Assessment'));
+const econ = all.filter((a) => a.data.line === 'Economics');
 const people = await sortedPeople();
 const lines = [
   { t: 'Evaluation', d: 'Independent corporate, strategy, thematic, country and regional evaluations, project completion validations, and institutional assessments of multilateral organisations under the MOPAN methodology.' },
   { t: 'Advisory', d: 'Advice to the leadership of multilateral development institutions on strategy, institutional reform, results management, and development effectiveness.' },
   { t: 'Analysis', d: 'Portfolio and data analysis, benchmarking studies, and the preparation of corporate and financing reports for development institutions.' },
+  { t: 'Economics', d: 'Long-term development outlooks and growth scenarios, macroeconomic and debt sustainability analysis, and studies of infrastructure investment and finance.' },
 ];
 ---
 <Base>
@@ -43,11 +45,11 @@ const lines = [
       <div class="section-head">
         <div>
           <div class="label">What we do</div>
-          <h2>Evaluation, advisory and analysis</h2>
+          <h2>Evaluation, advisory, analysis and economics</h2>
           <p>Centennial Advisory aims to strengthen development impact effectiveness by enhancing institutional performance, accountability, and learning across global and regional development organizations.</p>
         </div>
       </div>
-      <div class="grid-3">
+      <div class="grid-4">
         {lines.map((l) => (
           <article class="card top">
             <h3>{l.t}</h3>
@@ -78,6 +80,24 @@ const lines = [
 
   <section class="band">
     <div class="wrap">
+      <div class="split">
+        <div>
+          <div class="label">Economics</div>
+          <h2>Economic Research</h2>
+        </div>
+        <div>
+          <p>Centennial's economic work spans long-term development outlooks, macroeconomic and debt sustainability analysis, and the impact and financing of infrastructure. Studies such as Africa 2050 and Africa Reset, prepared for JICA, were presented at the TICAD V and TICAD VI Summits, the AfDB Annual Meetings and the Emerging Markets Forum.</p>
+          <ul class="ruled cols">
+            {econ.map((m) => <li><a href={`/experience/${m.id}/`}><b>{m.data.title}</b></a>{' '}<span style="color:var(--muted)">{m.data.client} · {m.data.end ?? m.data.start}</span></li>)}
+          </ul>
+          <a class="more" href="/experience/?line=Economics" style="margin-top:18px">All economics assignments</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band stone">
+    <div class="wrap">
       <div class="section-head">
         <div><div class="label">Experience</div><h2>Selected assignments</h2></div>
         <a class="more" href="/experience/">All assignments</a>
@@ -86,7 +106,7 @@ const lines = [
     </div>
   </section>
 
-  <section class="band stone">
+  <section class="band">
     <div class="wrap">
       <div class="section-head">
         <div>
