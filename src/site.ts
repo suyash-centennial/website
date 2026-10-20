@@ -4,7 +4,7 @@ export const SITE = {
   // Keep false until launch so search engines skip the preview. Set true when the real domain goes live.
   indexable: false,
   description:
-    'Centennial Advisory provides high-quality advisory, analytical and evaluation services to public and private clients.',
+    'Centennial Advisory provides high-quality advisory, analytical and evaluation services.',
   address: ['2522 Virginia Avenue, NW', 'Washington, DC 20037', 'United States'],
   phone: '+1 (202) 393-6663',
   // Leave empty until confirmed; the Contact page shows a marker instead.
