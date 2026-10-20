@@ -1,6 +1,8 @@
 // Firm details used across the site. Edit here, not in the pages.
 export const SITE = {
   name: 'Centennial Advisory',
+  // Keep false until launch so search engines skip the preview. Set true when the real domain goes live.
+  indexable: false,
   description:
     'Centennial Advisory provides high-quality advisory, analytical and evaluation services to public and private clients.',
   address: ['2522 Virginia Avenue, NW', 'Washington, DC 20037', 'United States'],

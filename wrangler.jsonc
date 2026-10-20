@@ -1,0 +1,15 @@
+// Cloudflare Workers config. The site is plain static files built by Astro into ./dist.
+{
+  "name": "centennial-advisory",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    // Serve our own styled 404 page for unknown addresses.
+    "not_found_handling": "404-page",
+    // /about and /about/ both work.
+    "html_handling": "auto-trailing-slash"
+  },
+  // Keep the *.workers.dev address and per-branch preview links.
+  "workers_dev": true,
+  "preview_urls": true
+}

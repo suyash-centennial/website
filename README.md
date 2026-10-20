@@ -1,6 +1,6 @@
 # Centennial Advisory website
 
-Static site built with [Astro](https://astro.build), hosted on Cloudflare Pages.
+Static site built with [Astro](https://astro.build), hosted on Cloudflare Workers (static assets).
 
 ## Run it locally
 
@@ -24,11 +24,19 @@ Set `published: false` to hide it without deleting it. `team` lists people by th
 
 Red italic text on the site marks content still to be supplied. Search the code for `class="draft"` to find it all.
 
-## Cloudflare Pages settings
+## Hosting
 
-- Framework preset: Astro
-- Build command: `npm run build`
-- Build output directory: `dist`
+Cloudflare builds and deploys automatically on every push.
+
+- Live preview: https://centennial-advisory.suyash-3c6.workers.dev
+- Config: `wrangler.jsonc` (static files from `dist`, styled 404 page)
+- Build command: `npm run build` · Deploy command: `npx wrangler deploy`
 - Node version: 22 (set by `.nvmrc`)
 
-Every push to a branch gets a preview link. Merging to `main` publishes the live site.
+Pushing to `main` updates the live site. Other branches get their own preview link.
+
+## Before launch
+
+1. Set `site` in `astro.config.mjs` to the real domain.
+2. Set `indexable: true` in `src/site.ts`.
+3. Add the firm email in `src/site.ts`.
