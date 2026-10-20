@@ -7,6 +7,14 @@ const phases = [
   ['02', 'Data Collection and Country Work', 'Extensive review of relevant documentation and portfolio data; data collection missions across countries, undertaken jointly with the commissioning evaluation office; interviews and surveys; individual project sheets, interview notes and sector-specific technical analyses.'],
   ['03', 'Analysis and Reporting', 'Background reports providing multiple lines of evidence; a Technical Report with analysis, key observations, findings, lessons learned and recommendations; presentations summarizing key findings; and written responses to peer reviewers and the Evaluation Reference Group.'],
 ];
+const qa = [
+  ['Quality of deliverables', 'Ensuring the highest quality of all outputs, particularly the final report.'],
+  ['Utility of the report', 'Making the report useful for its intended users by focusing on their information needs, ensuring clarity and readability, and aligning with the client\'s strategic objectives.'],
+  ['Methodological excellence', 'Applying methodologies that adhere to the best professional standards, ensuring robust and reliable findings and recommendations.'],
+  ['Timeliness and reliability', 'Delivering consistently and on schedule, adhering to agreed timelines without compromising quality.'],
+  ['Stakeholder and client relationships', 'Maintaining strong, effective communication with stakeholders and clients throughout the assignment.'],
+  ['Ongoing quality assessment', 'Continuously monitoring potential quality issues and implementing timely mitigation measures.'],
+];
 const criteria = ['Relevance', 'Coherence', 'Effectiveness', 'Efficiency', 'Impact', 'Sustainability'];
 const tools = ['Theory of Change', 'Evaluation matrix', 'Portfolio review', 'Quality-at-entry assessment', 'Benchmarking study',
   'Country case studies', 'Surveys', 'Stakeholder interviews', 'Qualitative coding', 'Quantitative analysis'];
@@ -65,6 +73,7 @@ const mopan = [
         <h2>Quality Assurance and Knowledge Management</h2>
         <div>
           <p>Centennial applies a structured internal quality assurance process combining senior peer review and independent validation to ensure methodological soundness and factual accuracy. The client's own review mechanisms, including internal peer reviewers and the Evaluation Reference Group, are integrated into this process. Ethical guidelines (informed consent, anonymity), adaptive risk management, and iterative deliverable reviews ensure independence, robustness, and relevance.</p>
+          <div class="grid-2" style="margin:24px 0 26px">{qa.map(([t, d]) => <div class="card"><h3 style="font-size:19px">{t}</h3><p>{d}</p></div>)}</div>
           <p>Knowledge management focuses on ensuring that evaluation findings are actionable and widely disseminated. Centennial synthesizes lessons into products such as policy briefs, infographics, and presentations. Interim validation workshops with the commissioning office and the Evaluation Reference Group help refine emerging conclusions, while synthesis and summary products support Board discussions and public learning.</p>
         </div>
       </div>

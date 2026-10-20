@@ -18,7 +18,7 @@ const assignments = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/assignments' }),
   schema: z.object({
     title: z.string(),
-    client: z.enum(['AfDB', 'AsDB', 'GEF', 'IFAD', 'IsDB', 'ICA', 'OECD / MOPAN', 'World Bank Group']),
+    client: z.enum(['AfDB', 'AsDB', 'FAO', 'GEF', 'IFAD', 'IsDB', 'ICA', 'OECD / MOPAN', 'World Bank Group']),
     office: z.string().optional(),          // commissioning office
     line: z.enum(['Evaluation', 'Advisory', 'Analysis']),
     start: z.number().optional(),

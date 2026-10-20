@@ -13,4 +13,6 @@ Mr. Kenneth Lay is a development finance expert and former Treasurer of the Worl
 
 Earlier in his World Bank career, he conceived and led the issuance of the first global bond, which became a principal vehicle for sovereign and supranational financing, and served as Country Director for Latin America and for Southeastern Europe. Before joining the World Bank, he headed the branch of corporation finance enforcement at the United States Securities and Exchange Commission.
 
+With Centennial, he contributed to the Mid-Term Review of the AfDB Ten-Year Strategy 2013–2022 and to the support provided to the High-Level Panel on Accelerating Development Impact in Africa through the High 5s.
+
 He has served as Chair of the Board of Directors of the International Finance Facility for Immunisation (IFFIm), and advises international institutions, private foundations and non-governmental organizations on financing approaches for humanitarian, environmental and other global priorities.

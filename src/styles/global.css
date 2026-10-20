@@ -91,6 +91,9 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
 .label { display: flex; align-items: center; gap: 12px; font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; font-weight: 600; }
 .label::before { content: ''; width: 22px; height: 2px; background: var(--teal); flex: none; }
 
+.logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px 34px; list-style: none; padding: 0; margin: 0; }
+.logos img { width: auto; filter: grayscale(1) contrast(1.05); opacity: .72; transition: filter .25s, opacity .25s; }
+.logos li:hover img { filter: none; opacity: 1; }
 .institutions { display: flex; flex-wrap: wrap; gap: 14px 38px; list-style: none; padding: 0; margin: 0; }
 .institutions li { font-family: var(--serif); font-weight: 600; font-size: 21px; color: #5A6573; }
 
@@ -267,4 +270,6 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
   .checks { columns: 1; }
   .filters .fl { width: 100%; }
   .institutions li { font-size: 18px; }
+  .logos { gap: 24px 32px; }
+  .logos img { max-height: 36px; }
 }

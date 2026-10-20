@@ -20,8 +20,16 @@ export const NAV = [
   { href: '/contact/', label: 'Contact' },
 ];
 
-// Order follows the EOI client sentence.
+// Order follows the EOI client sentence. h = display height in px, set per logo to balance visual weight.
 export const INSTITUTIONS = [
-  'AfDB', 'AsDB', 'GEF', 'GPE', 'IDB', 'IsDB', 'OECD / MOPAN',
-  'World Bank Group', 'UNDP', 'FAO', 'UNEP', 'UNCDF',
+  { name: 'African Development Bank', logo: 'afdb', h: 46 },
+  { name: 'Asian Development Bank', logo: 'asdb', h: 46 },
+  { name: 'Global Environment Facility', logo: 'gef', h: 42 },
+  { name: 'Inter-American Development Bank', logo: 'idb', h: 32 },
+  { name: 'OECD / MOPAN', logo: 'oecd', h: 30 },
+  { name: 'World Bank Group', logo: 'wbg', h: 28 },
+  { name: 'United Nations Development Programme', logo: 'undp', h: 54 },
+  { name: 'Food and Agriculture Organization', logo: 'fao', h: 50 },
+  { name: 'United Nations Environment Programme', logo: 'unep', h: 50 },
+  { name: 'United Nations Capital Development Fund', logo: 'uncdf', h: 50 },
 ];
