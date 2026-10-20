@@ -72,7 +72,8 @@ const S = [
             <ul class="checks">{s.list.map((l) => <li>{l}</li>)}</ul>
             {by(s.t).length > 0 && (<>
               <h3>Selected assignments</h3>
-              <ul class="rows">{by(s.t).map((a) => <AssignmentRow a={a} />)}</ul>
+              <ul class="rows limit">{by(s.t).map((a) => <AssignmentRow a={a} />)}</ul>
+              <a class="more all-link" href={`/experience/?line=${s.t}`}>All {s.t.toLowerCase()} assignments</a>
             </>)}
           </div>
         </div>

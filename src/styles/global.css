@@ -95,7 +95,7 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
 .label::before { content: ''; width: 26px; height: 3px; background: var(--accent); flex: none; }
 
 .logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px 34px; list-style: none; padding: 0; margin: 0; }
-.logos img { width: auto; filter: grayscale(1) contrast(1.05); opacity: .72; transition: filter .25s, opacity .25s; }
+.logos img { height: var(--h, 40px); width: auto; filter: grayscale(1) contrast(1.05); opacity: .72; transition: filter .25s, opacity .25s; }
 .logos li:hover img { filter: none; opacity: 1; }
 .institutions { display: flex; flex-wrap: wrap; gap: 14px 38px; list-style: none; padding: 0; margin: 0; }
 .institutions li { font-family: var(--serif); font-weight: 600; font-size: 21px; color: #56657A; }
@@ -241,6 +241,9 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
 .legal { border-top: 1px solid rgba(255,255,255,.1); }
 .legal .wrap { display: block; padding-top: 18px; padding-bottom: 22px; font-size: 13.5px; color: #8CA2B8; }
 
+/* services: link under each assignment list */
+.all-link { margin-top: 16px; }
+
 /* ---------- responsive ---------- */
 @media (max-width: 1000px) {
   .people.compact { grid-template-columns: repeat(3, 1fr); }
@@ -253,28 +256,109 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
 }
 @media (max-width: 760px) {
   :root { --gutter: 20px; }
-  body { font-size: 17px; }
-  .site-header .wrap { min-height: 68px; flex-wrap: wrap; }
-  .brand img { height: 36px; }
+  body { font-size: 16.5px; }
+  p { margin-bottom: .85em; }
+
+  /* header and menu */
+  .site-header .wrap { min-height: 64px; flex-wrap: wrap; gap: 0 16px; }
+  .brand img { height: 34px; }
   .nav-toggle { display: block; }
-  .nav { display: none; width: 100%; flex-direction: column; gap: 0; padding-bottom: 12px; }
+  .nav { display: none; width: 100%; flex-direction: column; gap: 0; padding-bottom: 10px; }
   .nav.open { display: flex; }
-  .nav a { padding: 10px 0; border-top: 1px solid var(--line); font-size: 17px; box-shadow: none !important; }
-  .hero .wrap { padding-top: 52px; padding-bottom: 44px; }
-  .hero h1 { font-size: 34px; }
-  .page-hero h1 { font-size: 31px; }
-  .mark { width: 360px; right: -140px; opacity: .06; }
-  .stats { grid-template-columns: 1fr; gap: 20px; }
-  .stats b { font-size: 32px; }
-  .band { padding: 50px 0; }
-  .band h2 { font-size: 28px; }
-  .row { grid-template-columns: 1fr; gap: 4px; }
-  .row .years { text-align: left; }
-  .grid-3, .grid-2, .people, .contact-grid, .site-footer .wrap { grid-template-columns: 1fr; }
-  .people.compact { grid-template-columns: repeat(2, 1fr); }
+  .nav a { padding: 12px 0; border-top: 1px solid var(--line); font-size: 17px; box-shadow: none !important; }
+  .nav a[aria-current='page'] { color: var(--accent-ink); }
+
+  /* heroes */
+  .hero .wrap { padding-top: 40px; padding-bottom: 34px; }
+  .hero h1 { font-size: 30px; line-height: 1.12; margin-bottom: 16px; }
+  .hero .lede { font-size: 17px; margin-bottom: 18px; }
+  .hero .eyebrow { margin-bottom: 26px; }
+  .page-hero .wrap { padding-top: 34px; padding-bottom: 30px; }
+  .page-hero h1 { font-size: 28px; margin-bottom: 10px; }
+  .page-hero p { font-size: 16.5px; }
+  .mark { width: 300px; right: -130px; opacity: .06; }
+  .mark.small { width: 220px; right: -90px; }
+  .stats { grid-template-columns: 1fr 1fr; gap: 20px 16px; padding-top: 22px; }
+  .stats div { padding-left: 12px; }
+  .stats b { font-size: 26px; margin-bottom: 6px; }
+  .stats span { font-size: 13.5px; line-height: 1.4; }
+
+  /* sections */
+  .band { padding: 40px 0; }
+  .band h2, .split > h2 { font-size: 25px; margin-bottom: 12px; }
+  .band h3 { font-size: 20px; margin: 26px 0 8px; }
+  .band .card h3 { margin: 0 0 8px; }
+  .band .row h3 { margin: 0 0 3px; }
+  .band .person h3 { margin: 0 0 2px; }
+  .band .aside h2 { font-size: 12px; margin: 0 0 6px; }
+  .aside p, .aside ul { margin-bottom: 16px; }
+  .split, .detail, .profile { gap: 0; }
+  .split + .split { margin-top: 34px; padding-top: 34px; }
+  .section-head { margin-bottom: 20px; gap: 10px; }
+  .label { font-size: 11.5px; margin-bottom: 12px; }
+
+  /* logos: centred rows, scaled down */
+  .logos { justify-content: center; gap: 18px 24px; }
+  .logos img { height: calc(var(--h, 40px) * .7); }
+
+  /* cards */
+  .grid-3, .grid-2, .people, .contact-grid { grid-template-columns: 1fr; gap: 14px; }
+  .card { padding: 22px 20px 20px; }
+  .card h3 { font-size: 20px; }
+  .card p { font-size: 16px; }
+  .acard p { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+  /* lists */
+  .ruled li { padding: 12px 0; }
+  .ruled.cols li { padding: 10px 0; }
   .checks { columns: 1; }
-  .filters .fl { width: 100%; }
+  .checks li { font-size: 16px; padding-bottom: 9px; }
+  .row { grid-template-columns: 1fr; gap: 2px; padding: 14px 0; }
+  .row .client { font-size: 13px; }
+  .row h3 { font-size: 17.5px; }
+  .row .office, .row .years { font-size: 13.5px; text-align: left; }
+  .rows.limit .row:nth-child(n+5) { display: none; }
+  .rows.limit .row:nth-child(4) { border-bottom: 1px solid var(--line); }
+
+  /* experience filters */
+  .filters { gap: 8px; margin-bottom: 14px; }
+  .filters .fl { width: 100%; font-size: 12px; }
+  .chip { font-size: 14px; padding: 5px 12px; }
+
+  /* people: horizontal rows with a small portrait */
+  .people.compact { grid-template-columns: 1fr; gap: 10px; }
+  .person a.whole { flex-direction: row; align-items: stretch; }
+  .person .portrait { flex: 0 0 96px; aspect-ratio: auto; min-height: 120px; }
+  .person .portrait .ini { font-size: 28px; }
+  .person .txt { padding: 14px 16px; align-self: center; }
+  .person h3 { font-size: 18.5px; }
+  .person .role { font-size: 13.5px; margin-bottom: 6px; }
+  .person p { font-size: 14.5px; line-height: 1.5; }
+  .people.compact .portrait { flex-basis: 64px; min-height: 72px; }
+  .people.compact .ini { font-size: 20px; }
+  .people.compact .txt { padding: 10px 14px; }
+  .people.compact h3 { font-size: 17px; }
+
+  /* profile page: portrait beside education */
+  .profile > div:first-child { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 26px; }
+  .profile .portrait { flex: 0 0 116px; max-width: 116px; }
+  .profile .portrait .ini { font-size: 30px; }
+  .profile .facts { margin-top: 0; }
+  .prose h2 { font-size: 22px; margin: 30px 0 10px; }
+  .prose p { font-size: 16.5px; }
+  .aside { margin-top: 28px; }
+
+  /* approach */
+  .phase { grid-template-columns: 44px 1fr; padding: 20px 0; }
+  .phase .n { font-size: 22px; }
+  .phase h3 { font-size: 19px; }
+  .tags { gap: 8px; }
+  .tags li { font-size: 14px; padding: 5px 12px; }
+
+  /* contact strip and footer */
+  .cta .wrap { padding-top: 38px; padding-bottom: 40px; gap: 20px; }
+  .cta h2 { font-size: 24px; }
+  .site-footer .wrap { grid-template-columns: 1fr 1fr; gap: 28px 20px; padding-top: 38px; padding-bottom: 30px; }
+  .site-footer .wrap > :first-child { grid-column: 1 / -1; }
   .institutions li { font-size: 18px; }
-  .logos { gap: 24px 32px; }
-  .logos img { max-height: 36px; }
 }

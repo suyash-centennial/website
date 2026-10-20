@@ -47,4 +47,9 @@ const lines = ['Evaluation', 'Advisory', 'Analysis'].filter((l) => count('line',
       if (count) count.textContent = String(shown);
     });
   });
+  const q = new URLSearchParams(location.search);
+  ['client', 'line'].forEach((k) => {
+    const v = q.get(k);
+    if (v) document.querySelectorAll<HTMLButtonElement>(`.chip[data-filter="${k}"]`).forEach((c) => { if (c.dataset.value === v) c.click(); });
+  });
 </script>
