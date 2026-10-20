@@ -1,4 +1,4 @@
-/* Palette: logo blue for structure, orange accent for contrast (complement of the logo blue). Navy only in hero, contact strip and footer. */
+/* Palette: logo blue for structure, deep logo teal as a quiet accent. Navy only in hero, contact strip and footer. */
 :root {
   --navy: #12416E;        /* hero, contact strip: softer deep blue */
   --navy-2: #0F3A63;      /* contact strip */
@@ -7,10 +7,8 @@
   --blue: #075399;        /* logo blue: links */
   --steel: #A9C0D8;       /* muted text on dark */
   --mist: #DCE6F0;        /* body text on dark */
-  --teal: #0BB9B4;        /* logo teal: kept for reference, unused */
-  --accent: #E8792B;      /* orange: rules, bars, buttons */
-  --accent-ink: #B5540E;  /* orange text on light backgrounds */
-  --accent-soft: #FCEBDD; /* orange tint */
+  --accent: #0E8C89;      /* deep logo teal: rules, bars, buttons */
+  --accent-ink: #0A6F6D;  /* teal text on light backgrounds */
 
   --parchment: #F8F8F6;   /* page background, near white */
   --stone: #EEF1F4;       /* alternate band, light neutral grey */
@@ -103,12 +101,12 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
 .institutions li { font-family: var(--serif); font-weight: 600; font-size: 21px; color: #56657A; }
 
 .more { display: inline-block; font-weight: 600; font-size: 16px; color: var(--accent-ink); }
-.dark .more { color: #FFB27A; }
+.dark .more { color: #7FD8D5; }
 .more::after { content: ' \2192'; }
 .button { display: inline-block; background: var(--accent); color: #fff; font-weight: 600; padding: 12px 22px; border-radius: 3px; }
-.button:hover { background: #CF6519; text-decoration: none; }
+.button:hover { background: #0B7573; text-decoration: none; }
 .dark .button { background: var(--accent); color: #fff; }
-.dark .button:hover { background: #F08A40; }
+.dark .button:hover { background: #12A3A0; }
 
 /* ---------- card grids ---------- */
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
