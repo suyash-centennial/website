@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import ContactBand from '../components/ContactBand.astro';
+import WorldMap from '../components/WorldMap.astro';
+import { COUNTRIES, REGIONS } from '../data/countries';
 const strengths = [
   ['Proven MDB experience', 'more than 25 years of work with AfDB, AsDB, IDB, IsDB, World Bank, and GEF.'],
   ['Methodological rigor', 'consistent use of OECD-DAC and ECG standards; peer-reviewed outputs under IDEV, GEF, GPE, and MOPAN.'],
@@ -63,6 +65,19 @@ const values = ['Integrity and objectivity', 'Methodological rigor', 'Partnershi
         <h2>Geographic Experience</h2>
         <div>
           <p>Centennial has extensive experience across Africa, with major assignments for the AfDB and IDEV covering North, West, and Southern Africa, including multi-country missions in Côte d'Ivoire, Tunisia, Morocco, Kenya, South Africa, and other Regional Member Countries. The firm's experts have longstanding professional experience in both Anglophone and Francophone contexts, supported by a network of regional consultants. This combination ensures effective fieldwork, stakeholder engagement, and culturally grounded analysis across diverse African operating environments.</p>
+          <p>Beyond Africa, Centennial teams have carried out country missions and case studies in the Middle East, Europe and Central Asia, Asia, and Latin America, including debt sustainability analysis in more than 20 economies.</p>
+        </div>
+      </div>
+      <div class="countries" id="countries">
+        <WorldMap />
+        <div class="country-list">
+          <p class="count-line"><b>{COUNTRIES.length} countries</b> with country work, missions or case studies</p>
+          {REGIONS.map((r) => (
+            <div class="region">
+              <h3>{r}</h3>
+              <p>{COUNTRIES.filter((c) => c.region === r).map((c) => c.name).join(' · ')}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

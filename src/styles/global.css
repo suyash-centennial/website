@@ -244,12 +244,40 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
 .legal { border-top: 1px solid rgba(255,255,255,.1); }
 .legal .wrap { display: block; padding-top: 18px; padding-bottom: 22px; font-size: 13.5px; color: #8CA2B8; }
 
+/* publications */
+.pubs { list-style: none; padding: 0; margin: 18px 0 0; }
+.pubs li { border-top: 1px solid var(--line); padding: 18px 0; }
+.pubs li:last-child { border-bottom: 1px solid var(--line); }
+.band .pubs h3 { font-size: 19px; line-height: 1.3; margin: 0 0 4px; }
+.pubs h3 a { color: var(--heading); }
+.pubs h3 a::after { content: ' \2197'; font-family: var(--sans); font-size: .8em; color: var(--accent-ink); }
+.pmeta { font-size: 14.5px; color: var(--muted); }
+.credit { display: inline-block; margin-left: 10px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-ink); border: 1px solid #9FD3D1; border-radius: 3px; padding: 0 7px; vertical-align: 1px; }
+.pnote { font-size: 14.5px; color: var(--body); margin-top: 2px; }
+.more.small { font-size: 14.5px; margin-top: 6px; }
+
+/* countries map */
+.countries { margin-top: 40px; display: grid; grid-template-columns: 1.7fr 1fr; gap: 40px; align-items: start; }
+.map { margin: 0; background: var(--card); border: 1px solid var(--line); padding: 18px; }
+.map svg { width: 100%; height: auto; display: block; }
+.map .land { fill: #DCE2E8; stroke: #fff; stroke-width: .5; }
+.map .land.on { fill: var(--blue); }
+.map .land.on:hover { fill: var(--accent); }
+.map .dot { fill: var(--blue); stroke: #fff; stroke-width: 1.2; }
+.country-list .count-line { font-size: 16px; color: var(--body); margin-bottom: 18px; }
+.country-list .count-line b { font-family: var(--serif); font-size: 30px; color: var(--heading); display: block; line-height: 1.1; }
+.region { border-top: 1px solid var(--line); padding: 12px 0; }
+.region h3 { font-family: var(--sans); font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 4px; }
+.band .region h3 { font-size: 12.5px; margin: 0 0 4px; }
+.region p { font-size: 15.5px; margin: 0; }
+
 /* services: link under each assignment list */
 .all-link { margin-top: 16px; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 1000px) {
   .people.compact { grid-template-columns: repeat(3, 1fr); }
+  .countries { grid-template-columns: 1fr; gap: 24px; }
   .ruled.cols { columns: 1; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .split, .detail, .profile { grid-template-columns: 1fr; gap: 24px; }
@@ -294,6 +322,8 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
   .band .row h3 { margin: 0 0 3px; }
   .band .person h3 { margin: 0 0 2px; }
   .band .aside h2 { font-size: 12px; margin: 0 0 6px; }
+  .map { padding: 8px; }
+  .countries { margin-top: 28px; }
   .aside p, .aside ul { margin-bottom: 16px; }
   .split, .detail, .profile { gap: 0; }
   .split + .split { margin-top: 34px; padding-top: 34px; }

@@ -5,6 +5,7 @@ import PageHero from '../../components/PageHero.astro';
 import AssignmentRow from '../../components/AssignmentRow.astro';
 import ContactBand from '../../components/ContactBand.astro';
 import { hasPage, years, publishedAssignments } from '../../lib';
+import { PUBLICATIONS } from '../../data/publications';
 
 export async function getStaticPaths() {
   const items = (await getCollection('assignments', ({ data }) => data.published)).filter(hasPage);
@@ -14,6 +15,7 @@ const { a } = Astro.props;
 const d = a.data;
 const { Content } = await render(a);
 const team = d.team.length ? await getEntries(d.team) : [];
+const pubs = PUBLICATIONS.filter((p) => p.assignment === a.id);
 const related = (await publishedAssignments()).filter((x) => x.id !== a.id && x.data.client === d.client).slice(0, 5);
 ---
 <Base title={d.title} description={`${d.title}. ${d.office ?? d.client}. Centennial Advisory.`}>
@@ -33,6 +35,7 @@ const related = (await publishedAssignments()).filter((x) => x.id !== a.id && x.
           <h2>Client</h2><p>{d.client}{d.office && <><br />{d.office}</>}</p>
           <h2>Service</h2><p>{d.line}</p>
           {years(a) && (<><h2>Period</h2><p>{years(a)}</p></>)}
+          {pubs.length > 0 && (<><h2>Published report</h2><ul>{pubs.map((p) => <li><a href={p.url} target="_blank" rel="noopener">{p.title}</a> <span class="pmeta">({p.publisher}, {p.year})</span></li>)}</ul></>)}
           {team.length > 0 && (<><h2>Centennial experts</h2><ul>{team.map((p) => <li><a href={`/people/${p.id}/`}>{p.data.name}</a></li>)}</ul></>)}
           <p style="margin:0"><a class="more" href="/experience/">All assignments</a></p>
         </aside>

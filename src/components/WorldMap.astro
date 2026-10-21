@@ -1,0 +1,26 @@
+---
+// World map drawn at build time; no script runs in the browser.
+import { geoNaturalEarth1, geoPath, geoArea, geoCentroid } from 'd3-geo';
+import { feature } from 'topojson-client';
+import world from 'world-atlas/countries-110m.json';
+import { COUNTRIES } from '../data/countries';
+
+const W = 960, H = 470;
+const all = (feature(world as any, (world as any).objects.countries) as any).features.filter((f: any) => f.id !== '010');
+const projection = geoNaturalEarth1().fitExtent([[0, 0], [W, H]], { type: 'FeatureCollection', features: all } as any);
+const path = geoPath(projection);
+const byId = new Map(COUNTRIES.map((c) => [c.id, c.name]));
+const shapes = all.map((f: any) => ({ d: path(f) ?? '', on: byId.has(f.id), name: byId.get(f.id) ?? f.properties.name }));
+// small countries get a dot so they stay visible
+const dots = all.filter((f: any) => byId.has(f.id) && geoArea(f) < 0.0004).map((f: any) => {
+  const [x, y] = projection(geoCentroid(f)) as [number, number];
+  return { x, y, name: byId.get(f.id) };
+});
+---
+<figure class="map">
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Map of ${COUNTRIES.length} countries where Centennial teams have worked`}>
+    {shapes.filter((s) => !s.on).map((s) => <path d={s.d} class="land" />)}
+    {shapes.filter((s) => s.on).map((s) => <path d={s.d} class="land on"><title>{s.name}</title></path>)}
+    {dots.map((p) => <circle cx={p.x} cy={p.y} r="4" class="dot"><title>{p.name}</title></circle>)}
+  </svg>
+</figure>

@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactBand from '../components/ContactBand.astro';
+import { PUBLICATIONS, GROUPS } from '../data/publications';
+const intro: Record<string, string> = {
+  'MOPAN assessments and studies': 'Institutional assessments and studies published by the Multilateral Organisation Performance Assessment Network (MOPAN), hosted by the OECD.',
+  'Independent evaluations': 'Evaluations published by the independent evaluation functions of the African Development Bank and IFAD.',
+  'Economic research': 'Books and reports on Africa\'s long-term development and infrastructure finance.',
+};
+---
+<Base title="Publications" description="Published reports, evaluations and books from Centennial assignments for MOPAN, the African Development Bank, IFAD, JICA and the Infrastructure Consortium for Africa.">
+  <PageHero title="Publications" lede="Published reports from Centennial assignments, including MOPAN assessments, independent evaluations and economic research." />
+  {GROUPS.map((g, i) => (
+    <section class={`band ${i % 2 ? 'stone' : ''}`}>
+      <div class="wrap">
+        <div class="split">
+          <div>
+            <h2>{g}</h2>
+          </div>
+          <div>
+            <p>{intro[g]}</p>
+            <ul class="pubs">
+              {PUBLICATIONS.filter((p) => p.group === g).map((p) => (
+                <li>
+                  <h3><a href={p.url} target="_blank" rel="noopener">{p.title}</a></h3>
+                  <div class="pmeta">{p.publisher} · {p.year}{p.credited && <span class="credit">Centennial credited in the report</span>}</div>
+                  {p.note && <div class="pnote">{p.note}</div>}
+                  {p.assignment && <a class="more small" href={`/experience/${p.assignment}/`}>About the assignment</a>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+  <ContactBand />
+</Base>
