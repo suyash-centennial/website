@@ -2,7 +2,8 @@
 title: "Infrastructure Fund Pre-Feasibility Study and Initial Project Pipeline"
 client: "NDF Saudi Arabia"
 office: "National Development Fund, Saudi Arabia"
-line: Economics
+line: "Research and Analysis"
+economic: true
 start: 2019
 region: "Saudi Arabia"
 ---

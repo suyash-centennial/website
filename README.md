@@ -11,7 +11,7 @@ Static site built with [Astro](https://astro.build), hosted on Cloudflare Worker
 
 | To change | Edit |
 |---|---|
-| Address, phone, email, menu, institution list | `src/site.ts` |
+| Location, email, menu, institution list | `src/site.ts` |
 | An assignment | `src/content/assignments/<name>.md` |
 | A person | `src/content/people/<name>.md` |
 | A headshot | `public/images/people/<name>.jpg` |
@@ -47,4 +47,3 @@ Pushing to `main` updates the live site. Other branches get their own preview li
 
 1. Set `site` in `astro.config.mjs` to the real domain.
 2. Set `indexable: true` in `src/site.ts`.
-3. Add the firm email in `src/site.ts`.

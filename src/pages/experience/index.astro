@@ -7,7 +7,7 @@ import { publishedAssignments } from '../../lib';
 const items = await publishedAssignments();
 const count = (k: string, v: string) => items.filter((a) => (a.data as any)[k] === v).length;
 const clients = [...new Set(items.map((a) => a.data.client))].sort((a, b) => count('client', b) - count('client', a));
-const lines = ['Evaluation', 'Advisory', 'Analysis', 'Economics'].filter((l) => count('line', l));
+const lines = ['Evaluation', 'Advisory', 'Research and Analysis'].filter((l) => count('line', l));
 ---
 <Base title="Experience" description="Evaluations, institutional assessments, advisory and analytical assignments for multilateral development banks, UN agencies and global funds.">
   <PageHero title="Experience" lede="More than 25 years of evaluation, advisory and economic work with the AfDB, AsDB, IDB, IsDB, JICA, World Bank and GEF, and MOPAN assessments of multilateral organisations since 2020." />
@@ -15,13 +15,17 @@ const lines = ['Evaluation', 'Advisory', 'Analysis', 'Economics'].filter((l) => 
     <div class="wrap">
       <div class="filters" role="group" aria-label="Filter by client">
         <span class="fl">Client</span>
+        <div class="chips">
         <button class="chip" type="button" data-filter="client" data-value="" aria-pressed="true">All</button>
         {clients.map((c) => <button class="chip" type="button" data-filter="client" data-value={c} aria-pressed="false">{c} ({count('client', c)})</button>)}
+        </div>
       </div>
       <div class="filters" role="group" aria-label="Filter by service">
         <span class="fl">Service</span>
+        <div class="chips">
         <button class="chip" type="button" data-filter="line" data-value="" aria-pressed="true">All</button>
         {lines.map((l) => <button class="chip" type="button" data-filter="line" data-value={l} aria-pressed="false">{l}</button>)}
+        </div>
       </div>
       <p class="count" aria-live="polite"><span id="count">{items.length}</span> assignments</p>
       <ul class="rows" id="rows">{items.map((a) => <AssignmentRow a={a} />)}</ul>

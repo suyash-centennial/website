@@ -8,9 +8,8 @@ import { SITE } from '../site';
   <section class="band">
     <div class="wrap">
       <div class="contact-grid">
-        <div class="card"><h2>Office</h2><p>{SITE.address.map((l) => <>{l}<br /></>)}</p></div>
-        <div class="card"><h2>Telephone</h2><p><a href={`tel:${SITE.phone.replace(/[^+\d]/g, '')}`}>{SITE.phone}</a></p></div>
-        <div class="card"><h2>Email</h2>{SITE.email ? <p><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p> : <p class="draft">Firm email address to be confirmed</p>}</div>
+        <div class="card"><h2>Email</h2><p><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p></div>
+        <div class="card"><h2>Location</h2><p>{SITE.location}</p></div>
       </div>
     </div>
   </section>

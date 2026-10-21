@@ -43,28 +43,18 @@ const S = [
     ],
   },
   {
-    id: 'analysis', t: 'Analysis', band: '',
+    id: 'research', t: 'Research and Analysis', band: '',
     intro: [
       'Centennial provides analytical support to development institutions, including portfolio and data analysis, benchmarking studies, and the preparation of corporate and financing reports. Its analysts work with qualitative and quantitative tools to produce multiple lines of evidence for evaluations and institutional reviews.',
+      'Centennial also carries forward the Centennial Group\'s economic research and policy work on long-term development, macroeconomic outlooks, debt sustainability, and infrastructure investment and finance. Its teams combine economic, financial and social data from reputable and original sources with the Centennial Group\'s in-house model of the global economy, which projects real GDP growth as a function of labor force, capital stock and total factor productivity. Findings have been presented at the TICAD V and TICAD VI Summits, the AfDB Annual Meetings, the Annual Meetings of the Infrastructure Consortium for Africa, and the Emerging Markets Forum.',
     ],
-    listHead: 'Analytical work',
+    listHead: 'Research and analytical work',
     list: [
       'Portfolio analysis and performance reviews',
       'Benchmarking against peer institutions',
-      'Financing trends and commitments analysis',
       'Corporate annual reports',
       'Comparative studies of governance processes and practices',
       'Survey design and analysis',
-    ],
-  },
-  {
-    id: 'economics', t: 'Economics', band: 'stone',
-    intro: [
-      'Centennial carries forward the Centennial Group\'s economic research and policy work on long-term development, macroeconomic outlooks, debt sustainability, and infrastructure investment and finance. Its teams combine economic, financial and social data from reputable and original sources with the Centennial Group\'s in-house model of the global economy, which projects real GDP growth as a function of labor force, capital stock and total factor productivity.',
-      'Findings have been presented at the TICAD V and TICAD VI Summits, the AfDB Annual Meetings, the Annual Meetings of the Infrastructure Consortium for Africa, and the Emerging Markets Forum.',
-    ],
-    listHead: 'Economic work',
-    list: [
       'Long-term growth scenarios and development outlooks',
       'Macroeconomic analysis, financial programming and debt sustainability analysis',
       'Economic and social impact of infrastructure investment',
@@ -89,18 +79,18 @@ const S = [
             {by(s.t).length > 0 && (<>
               <h3>Selected assignments</h3>
               <ul class="rows limit">{by(s.t).map((a) => <AssignmentRow a={a} />)}</ul>
-              <a class="more all-link" href={`/experience/?line=${s.t}`}>All {s.t.toLowerCase()} assignments</a>
+              <a class="more all-link" href={`/experience/?line=${encodeURIComponent(s.t)}`}>All {s.t.toLowerCase()} assignments</a>
             </>)}
           </div>
         </div>
       </div>
     </section>
   ))}
-  <section class="band">
+  <section class="band stone">
     <div class="wrap">
       <div class="split">
         <h2>Scope</h2>
-        <div><p>Centennial's evaluation work is institutional and strategic. It does not conduct impact evaluations.</p><a class="more" href="/approach/">Evaluation approach and methodology</a></div>
+        <div><p>Centennial's evaluation work is institutional and strategic. It does not conduct impact evaluations.</p></div>
       </div>
     </div>
   </section>

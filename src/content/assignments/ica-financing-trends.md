@@ -2,7 +2,8 @@
 title: "Infrastructure Financing Trends in Africa: 2018 and 2019–2020 Reports"
 client: "ICA"
 office: "Infrastructure Consortium for Africa, hosted by the AfDB"
-line: Economics
+line: "Research and Analysis"
+economic: true
 start: 2019
 end: 2022
 region: "Africa"

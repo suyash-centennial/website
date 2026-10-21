@@ -2,7 +2,8 @@
 title: "Economic Effects of COVID-19 and Non-Paris Club Investment in Ethiopia, Kenya and Zambia"
 client: "GIZ"
 office: "Deutsche Gesellschaft für Internationale Zusammenarbeit"
-line: Economics
+line: "Research and Analysis"
+economic: true
 start: 2020
 region: "Ethiopia, Kenya and Zambia"
 ---

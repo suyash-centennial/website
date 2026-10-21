@@ -149,8 +149,9 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
 .row .years { font-size: 14.5px; color: var(--muted); text-align: right; white-space: nowrap; }
 .tag { display: inline-block; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); padding: 1px 8px; border-radius: 3px; margin-left: 8px; vertical-align: 2px; }
 
-.filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; align-items: center; }
-.filters .fl { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); width: 74px; }
+.filters { display: grid; grid-template-columns: 84px 1fr; gap: 10px; margin-bottom: 12px; align-items: start; }
+.filters .fl { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding-top: 9px; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
 .chip { font: inherit; font-size: 15px; border: 1px solid var(--chip); background: var(--card); color: var(--body); border-radius: 40px; padding: 6px 16px; cursor: pointer; }
 .chip[aria-pressed='true'] { background: var(--heading); border-color: var(--heading); color: #fff; }
 .count { font-size: 15px; color: var(--muted); margin: 14px 0 6px; }
@@ -221,7 +222,7 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
 .dims { counter-reset: d; }
 
 /* ---------- contact ---------- */
-.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.contact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 360px)); gap: 26px; }
 .contact-grid .card h2 { font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; font-family: var(--sans); color: var(--muted); margin-bottom: 10px; }
 .contact-grid .card p { margin: 0; font-size: 18px; color: var(--ink); }
 
@@ -323,8 +324,9 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
   .rows.limit .row:nth-child(4) { border-bottom: 1px solid var(--line); }
 
   /* experience filters */
-  .filters { gap: 8px; margin-bottom: 14px; }
-  .filters .fl { width: 100%; font-size: 12px; }
+  .filters { grid-template-columns: 1fr; gap: 8px; margin-bottom: 14px; }
+  .filters .fl { font-size: 12px; padding-top: 0; }
+  .chips { gap: 8px; }
   .chip { font-size: 14px; padding: 5px 12px; }
 
   /* people: horizontal rows with a small portrait */
@@ -350,7 +352,7 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
   .prose p { font-size: 16.5px; }
   .aside { margin-top: 28px; }
 
-  /* approach */
+  /* phases and tags */
   .phase { grid-template-columns: 44px 1fr; padding: 20px 0; }
   .phase .n { font-size: 22px; }
   .phase h3 { font-size: 19px; }

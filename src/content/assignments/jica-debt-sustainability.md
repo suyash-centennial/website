@@ -2,7 +2,8 @@
 title: "Debt Sustainability Analysis and Financial Programming for Developing Economies"
 client: "JICA"
 office: "Japan International Cooperation Agency"
-line: Economics
+line: "Research and Analysis"
+economic: true
 start: 2008
 end: 2017
 region: "Africa, Asia, Europe and Latin America"

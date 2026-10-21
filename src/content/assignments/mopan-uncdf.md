@@ -3,7 +3,7 @@ title: "MOPAN Assessment of the United Nations Capital Development Fund (UNCDF)"
 client: "OECD / MOPAN"
 office: "Multilateral Organisation Performance Assessment Network"
 line: Evaluation
-ongoing: true
+end: 2026
 team: []
 ---
 

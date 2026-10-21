@@ -2,7 +2,8 @@
 title: "Economic and Social Impact of Infrastructure Investments by Non-Paris Club Countries in Five African Countries"
 client: "JICA"
 office: "Japan International Cooperation Agency"
-line: Economics
+line: "Research and Analysis"
+economic: true
 start: 2019
 end: 2019
 region: "Cameroon, Ethiopia, Ghana, Kenya and Zambia"

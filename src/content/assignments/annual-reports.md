@@ -2,7 +2,7 @@
 title: "African Development Bank Annual Reports 2018–2023"
 client: "AfDB"
 office: "Bank Management"
-line: Analysis
+line: "Research and Analysis"
 start: 2019
 end: 2024
 team: [anil-sood, catherine-kleynhoff]

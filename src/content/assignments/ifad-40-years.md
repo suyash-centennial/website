@@ -1,7 +1,7 @@
 ---
 title: "IFAD at 40: Documenting IFAD's Operational and Thematic Evolution"
 client: "IFAD"
-line: Analysis
+line: "Research and Analysis"
 start: 2017
 end: 2018
 team: [anil-sood]

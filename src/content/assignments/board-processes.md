@@ -2,7 +2,7 @@
 title: "Board Processes, Procedures and Practices: A Survey of Experiences and Lessons"
 client: "AfDB"
 office: "Board of Directors"
-line: Analysis
+line: "Research and Analysis"
 start: 2016
 end: 2018
 team: [anil-sood]

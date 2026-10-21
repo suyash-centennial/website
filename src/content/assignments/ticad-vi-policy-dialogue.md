@@ -2,7 +2,8 @@
 title: "Africa 2050 Policy Papers: TICAD VI Seminar, ICA Symposium and Africa Emerging Markets Forum"
 client: "JICA"
 office: "Japan International Cooperation Agency"
-line: Economics
+line: "Research and Analysis"
+economic: true
 start: 2016
 end: 2017
 region: "Africa"

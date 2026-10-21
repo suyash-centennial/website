@@ -2,7 +2,8 @@
 title: "Africa Reset: A New Way Forward"
 client: "JICA"
 office: "Japan International Cooperation Agency"
-line: Economics
+line: "Research and Analysis"
+economic: true
 start: 2016
 end: 2016
 region: "Africa"

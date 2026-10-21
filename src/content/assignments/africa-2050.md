@@ -2,7 +2,8 @@
 title: "Africa 2050: Realizing the Continent's Full Potential"
 client: "JICA"
 office: "Japan International Cooperation Agency"
-line: Economics
+line: "Research and Analysis"
+economic: true
 start: 2013
 end: 2014
 region: "Africa"

@@ -2,7 +2,7 @@
 title: "Lessons in Multilateral Effectiveness. More than the Sum of its Parts? The Multilateral Response to COVID-19"
 client: "OECD / MOPAN"
 office: "Multilateral Organisation Performance Assessment Network"
-line: Analysis
+line: "Research and Analysis"
 start: 2020
 end: 2021
 team: [anil-sood]

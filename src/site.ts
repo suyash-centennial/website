@@ -5,17 +5,14 @@ export const SITE = {
   indexable: false,
   description:
     'Centennial Advisory provides high-quality advisory, analytical and evaluation services.',
-  address: ['2522 Virginia Avenue, NW', 'Washington, DC 20037', 'United States'],
-  phone: '+1 (202) 393-6663',
-  // Leave empty until confirmed; the Contact page shows a marker instead.
-  email: '',
+  location: 'Washington DC',
+  email: 'contact@centennial-advisory.com',
 };
 
 export const NAV = [
   { href: '/about/', label: 'About' },
   { href: '/services/', label: 'Services' },
   { href: '/experience/', label: 'Experience' },
-  { href: '/approach/', label: 'Approach' },
   { href: '/people/', label: 'People' },
   { href: '/contact/', label: 'Contact' },
 ];

@@ -6,7 +6,7 @@ const year = new Date().getFullYear();
   <div class="wrap">
     <div>
       <div class="firm">{SITE.name}</div>
-      <p>{SITE.address.slice(0, 2).join(', ')}</p>
+      <p>{SITE.location}</p>
     </div>
     <div>
       <h2>Pages</h2>
@@ -14,8 +14,7 @@ const year = new Date().getFullYear();
     </div>
     <div>
       <h2>Contact</h2>
-      <p>{SITE.phone}</p>
-      {SITE.email && <p><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>}
+      <p><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
     </div>
   </div>
   <div class="legal"><div class="wrap">&copy; {year} {SITE.name}</div></div>
