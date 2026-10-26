@@ -6,6 +6,7 @@ line: Evaluation
 start: 2014
 end: 2014
 team: [anil-sood]
+financing: true
 ---
 
 ## The assignment

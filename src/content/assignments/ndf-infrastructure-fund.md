@@ -6,6 +6,7 @@ line: "Research and Analysis"
 economic: true
 start: 2019
 region: "Saudi Arabia"
+financing: true
 ---
 
 ## The assignment

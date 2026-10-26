@@ -21,7 +21,8 @@ const assignments = defineCollection({
     client: z.enum(['AfDB', 'AsDB', 'FAO', 'GEF', 'IFAD', 'IsDB', 'ICA', 'OECD / MOPAN', 'World Bank Group', 'JICA', 'GIZ', 'NDF Saudi Arabia']),
     office: z.string().optional(),          // commissioning office
     line: z.enum(['Evaluation', 'Advisory', 'Research and Analysis']),
-    economic: z.boolean().default(false),   // listed under Economic Research on the home page,
+    economic: z.boolean().default(false),   // listed under Economic Research on the home page
+    financing: z.boolean().default(false),  // shown under Financing and Resource Mobilization
     start: z.number().optional(),
     end: z.number().optional(),
     ongoing: z.boolean().default(false),

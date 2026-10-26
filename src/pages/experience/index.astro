@@ -4,15 +4,26 @@ import PageHero from '../../components/PageHero.astro';
 import AssignmentRow from '../../components/AssignmentRow.astro';
 import ContactBand from '../../components/ContactBand.astro';
 import { publishedAssignments } from '../../lib';
+import { SERVICES, SECTORS, EXPERTISE, FIN } from '../../data/services';
 const items = await publishedAssignments();
 const count = (k: string, v: string) => items.filter((a) => (a.data as any)[k] === v).length;
 const clients = [...new Set(items.map((a) => a.data.client))].sort((a, b) => count('client', b) - count('client', a));
-const lines = ['Evaluation', 'Advisory', 'Research and Analysis'].filter((l) => count('line', l));
+const finCount = items.filter((a) => a.data.financing).length;
+// service chips follow the order of the service descriptions
+const services = SERVICES.map((s) => s.t).filter((t) => (t === FIN ? finCount : count('line', t)));
+const n = (t: string) => (t === FIN ? finCount : count('line', t));
 ---
-<Base title="Experience" description="Evaluations, institutional assessments, advisory and analytical assignments for multilateral development banks, UN agencies and global funds.">
+<Base title="Experience" description="Evaluation, advisory, financing and research assignments for multilateral development banks, UN agencies, global funds and governments.">
   <PageHero title="Experience" lede="More than 25 years of evaluation, policy advisory and economic work with the AfDB, AsDB, CAF, IDB, IFAD, IsDB, JICA, World Bank and GEF, and MOPAN assessments of multilateral organisations since 2020." />
   <section class="band">
     <div class="wrap">
+      <div class="filters" role="group" aria-label="Filter by service">
+        <span class="fl">Service</span>
+        <div class="chips">
+        <button class="chip" type="button" data-filter="line" data-value="" aria-pressed="true">All</button>
+        {services.map((l) => <button class="chip" type="button" data-filter="line" data-value={l} aria-pressed="false">{l} ({n(l)})</button>)}
+        </div>
+      </div>
       <div class="filters" role="group" aria-label="Filter by client">
         <span class="fl">Client</span>
         <div class="chips">
@@ -20,13 +31,25 @@ const lines = ['Evaluation', 'Advisory', 'Research and Analysis'].filter((l) => 
         {clients.map((c) => <button class="chip" type="button" data-filter="client" data-value={c} aria-pressed="false">{c} ({count('client', c)})</button>)}
         </div>
       </div>
-      <div class="filters" role="group" aria-label="Filter by service">
-        <span class="fl">Service</span>
-        <div class="chips">
-        <button class="chip" type="button" data-filter="line" data-value="" aria-pressed="true">All</button>
-        {lines.map((l) => <button class="chip" type="button" data-filter="line" data-value={l} aria-pressed="false">{l}</button>)}
+
+      <div class="svc" data-for="">
+        <h2>Institutional and Sector Expertise</h2>
+        <div>
+          <p>{EXPERTISE}</p>
+          <ul class="tags">{SECTORS.map((x) => <li>{x}</li>)}</ul>
         </div>
       </div>
+      {SERVICES.map((s) => (
+        <div class="svc" data-for={s.t} id={s.id} hidden>
+          <h2>{s.t}</h2>
+          <div>
+            {s.intro.map((p) => <p>{p}</p>)}
+            <h3>{s.listHead}</h3>
+            <ul class="checks">{s.list.map((l) => <li>{l}</li>)}</ul>
+          </div>
+        </div>
+      ))}
+
       <p class="count" aria-live="polite"><span id="count">{items.length}</span> assignments</p>
       <ul class="rows" id="rows">{items.map((a) => <AssignmentRow a={a} />)}</ul>
       <p class="note" style="margin-top:22px">Includes assignments delivered by the Centennial Group.</p>
@@ -35,20 +58,27 @@ const lines = ['Evaluation', 'Advisory', 'Research and Analysis'].filter((l) => 
   <ContactBand />
 </Base>
 <script>
+  const FIN = 'Financing and Resource Mobilization';
   const state: Record<string, string> = { client: '', line: '' };
   const rows = Array.from(document.querySelectorAll<HTMLElement>('#rows .row'));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('.svc'));
   const count = document.getElementById('count');
+  const matchLine = (r: HTMLElement) => !state.line || (state.line === FIN ? r.dataset.fin === '1' : r.dataset.line === state.line);
+  function apply() {
+    let shown = 0;
+    rows.forEach((r) => {
+      const ok = (!state.client || r.dataset.client === state.client) && matchLine(r);
+      r.hidden = !ok; if (ok) shown++;
+    });
+    panels.forEach((p) => { p.hidden = p.dataset.for !== state.line; });
+    if (count) count.textContent = String(shown);
+  }
   document.querySelectorAll<HTMLButtonElement>('.chip').forEach((chip) => {
     chip.addEventListener('click', () => {
       const key = chip.dataset.filter!;
       state[key] = chip.dataset.value ?? '';
       document.querySelectorAll<HTMLButtonElement>(`.chip[data-filter="${key}"]`).forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
-      let shown = 0;
-      rows.forEach((r) => {
-        const ok = (!state.client || r.dataset.client === state.client) && (!state.line || r.dataset.line === state.line);
-        r.hidden = !ok; if (ok) shown++;
-      });
-      if (count) count.textContent = String(shown);
+      apply();
     });
   });
   const q = new URLSearchParams(location.search);
@@ -56,4 +86,8 @@ const lines = ['Evaluation', 'Advisory', 'Research and Analysis'].filter((l) => 
     const v = q.get(k);
     if (v) document.querySelectorAll<HTMLButtonElement>(`.chip[data-filter="${k}"]`).forEach((c) => { if (c.dataset.value === v) c.click(); });
   });
+  // old Services page anchors, e.g. /experience/#advisory
+  const h = location.hash.slice(1);
+  const byHash = h && document.getElementById(h);
+  if (byHash && byHash.classList.contains('svc')) document.querySelector<HTMLButtonElement>(`.chip[data-filter="line"][data-value="${byHash.dataset.for}"]`)?.click();
 </script>

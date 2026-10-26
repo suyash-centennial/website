@@ -1,0 +1,86 @@
+// Service descriptions shown on the Experience page when a service is selected.
+export const FIN = 'Financing and Resource Mobilization';
+export const SECTORS = [
+  'Agriculture and rural development',
+  'Climate change and environment',
+  'Energy',
+  'Transport, water and ICT infrastructure',
+  'Finance and private sector development',
+  'Education',
+  'Health',
+  'Governance and public sector management',
+];
+export const EXPERTISE = "Centennial's experts bring first-hand understanding of MDB governance, operations, strategy and development finance, gained in senior roles at the World Bank, the International Monetary Fund, the African Development Bank and the Asian Development Bank. Its work spans the full range of development sectors.";
+export const SERVICES: { id: string; t: string; band: string; intro: string[]; listHead: string; list: string[]; ids?: string[] }[] = [
+  {
+    id: 'evaluation', t: 'Evaluation', band: '',
+    intro: [
+      'Evaluations assess the relevance, coherence, effectiveness, efficiency and sustainability of development interventions in line with OECD-DAC criteria and ECG good practice standards. Increasingly, they are used not only to establish accountability but to determine best practice and generate recommendations that inform strategic decision-making.',
+      'Centennial conducts evaluations in close collaboration with the independent evaluation functions that commission them, and integrates their review mechanisms, including internal peer reviewers and Evaluation Reference Groups, into its own quality assurance process.',
+    ],
+    listHead: 'Centennial evaluates',
+    list: [
+      'The efficiency and effectiveness of development organizations',
+      'Corporate policies, strategies and their implementation',
+      'Country and regional strategies',
+      'Development programs, funds and projects, at portfolio and individual level',
+      'Project completion reports, through independent validation',
+      'Resource mobilization processes and replenishment commitments',
+      'The performance of multilateral organisations, under the MOPAN methodology',
+    ],
+  },
+  {
+    id: 'advisory', t: 'Advisory', band: 'stone',
+    intro: [
+      'Centennial advises the leadership of multilateral development institutions on strategy, institutional reform, and development effectiveness. Its senior experts bring first-hand understanding of MDB governance, strategy, organizational reform, development finance, and institutional performance.',
+    ],
+    listHead: 'Areas of advice',
+    list: [
+      'Corporate strategy formulation and mid-term reviews',
+      'Design and evaluation of results management and measurement frameworks',
+      'Results-based allocation of resources',
+      'Quality assurance systems for programs and projects',
+      'Budget reform to align budgets with strategic priorities and results',
+      'Portfolio review and restructuring policy',
+      'Strategic workforce planning and staffing reviews',
+      'Board processes, procedures and practices',
+      'Evaluation policy and strategy',
+    ],
+  },
+  {
+    id: 'financing', t: 'Financing and Resource Mobilization', band: '',
+    intro: [
+      'Centennial advises development institutions on mobilizing and managing the resources that finance their operations, from capital increases and fund replenishments to co-financing and new financing vehicles. Its experts include a former Treasurer of the World Bank, a former World Bank Vice President for Strategy and Resource Management, and a former manager of IDA resource mobilization.',
+    ],
+    listHead: 'Areas of work',
+    list: [
+      'Capital increases and replenishment commitments',
+      'Co-financing strategies',
+      'Design of national and regional financing funds',
+      'Financial policy and risk management',
+      'Budget reform and resource allocation',
+    ],
+    ids: ['gci-adf-commitments', 'ifad-cofinancing-strategy', 'ndf-infrastructure-fund', 'ten-year-strategy-mtr'],
+  },
+  {
+    id: 'research', t: 'Research and Analysis', band: 'stone',
+    intro: [
+      'Centennial provides analytical support to development institutions, including portfolio and data analysis, benchmarking studies, and the preparation of corporate and financing reports. Its analysts work with qualitative and quantitative tools to produce multiple lines of evidence for evaluations and institutional reviews.',
+      'Centennial also carries forward the Centennial Group\'s economic research and policy work on long-term development, macroeconomic outlooks, debt sustainability, and infrastructure investment and finance. Its teams combine economic, financial and social data from reputable and original sources with the Centennial Group\'s in-house model of the global economy, which projects real GDP growth as a function of labor force, capital stock and total factor productivity. Findings have been presented at the TICAD V and TICAD VI Summits, the AfDB Annual Meetings, the Annual Meetings of the Infrastructure Consortium for Africa, and the Emerging Markets Forum.',
+    ],
+    listHead: 'Research and analytical work',
+    list: [
+      'Portfolio analysis and performance reviews',
+      'Benchmarking against peer institutions',
+      'Corporate annual reports',
+      'Comparative studies of governance processes and practices',
+      'Survey design and analysis',
+      'Long-term growth scenarios and development outlooks',
+      'Macroeconomic analysis, financial programming and debt sustainability analysis',
+      'Economic and social impact of infrastructure investment',
+      'Infrastructure financing trends and the design of infrastructure funds',
+      'Economic effects of external shocks, including COVID-19',
+      'Policy and background papers for high-level panels, summits and forums',
+    ],
+  },
+];

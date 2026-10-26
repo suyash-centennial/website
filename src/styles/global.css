@@ -256,6 +256,13 @@ h3.sub + .ruled { margin-bottom: 30px; }
 .strands .yr { color: var(--muted); font-size: 14px; white-space: nowrap; }
 .strands .more { margin-top: 16px; }
 
+/* experience: service descriptions */
+.svc { display: grid; grid-template-columns: 280px 1fr; gap: 56px; background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--accent); padding: 30px 32px; margin: 26px 0 8px; }
+.svc h2 { font-size: 26px; margin: 0; }
+.svc p { font-size: 16.5px; }
+.band .svc h3 { font-size: 19px; margin: 20px 0 10px; }
+.svc .checks { margin-bottom: 0; }
+
 /* publications */
 .pubs { list-style: none; padding: 0; margin: 18px 0 0; }
 .pubs li { border-top: 1px solid var(--line); padding: 18px 0; }
@@ -290,6 +297,7 @@ h3.sub + .ruled { margin-bottom: 30px; }
 @media (max-width: 1000px) {
   .people.compact { grid-template-columns: repeat(3, 1fr); }
   .countries { grid-template-columns: 1fr; gap: 24px; }
+  .svc { grid-template-columns: 1fr; gap: 12px; }
   .ruled.cols { columns: 1; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .split, .detail, .profile { grid-template-columns: 1fr; gap: 24px; }
@@ -335,6 +343,8 @@ h3.sub + .ruled { margin-bottom: 30px; }
   .band .person h3 { margin: 0 0 2px; }
   .band .aside h2 { font-size: 12px; margin: 0 0 6px; }
   .map { padding: 8px; }
+  .svc { padding: 22px 20px; }
+  .svc h2 { font-size: 22px; }
   .countries { margin-top: 28px; }
   .aside p, .aside ul { margin-bottom: 16px; }
   .split, .detail, .profile { gap: 0; }

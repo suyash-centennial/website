@@ -5,6 +5,7 @@ line: Advisory
 start: 2018
 end: 2018
 team: [anil-sood, catherine-kleynhoff]
+financing: true
 ---
 
 ## The assignment

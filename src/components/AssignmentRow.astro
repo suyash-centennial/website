@@ -5,7 +5,7 @@ interface Props { a: CollectionEntry<'assignments'>; }
 const { a } = Astro.props;
 const d = a.data;
 ---
-<li class="row" data-client={d.client} data-line={d.line}>
+<li class="row" data-client={d.client} data-line={d.line} data-fin={d.financing ? "1" : "0"}>
   <span class="client">{d.client}</span>
   <div>
     <h3>{hasPage(a) ? <a href={`/experience/${a.id}/`}>{d.title}</a> : d.title}</h3>
