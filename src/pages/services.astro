@@ -6,8 +6,19 @@ import ContactBand from '../components/ContactBand.astro';
 import { publishedAssignments } from '../lib';
 const all = await publishedAssignments();
 const by = (line: string) => all.filter((a) => a.data.line === line && a.data.client !== 'OECD / MOPAN').slice(0, 6);
+const pick = (ids: string[]) => ids.map((id) => all.find((a) => a.id === id)).filter(Boolean) as typeof all;
+const SECTORS = [
+  'Agriculture and rural development',
+  'Climate change and environment',
+  'Energy',
+  'Transport, water and ICT infrastructure',
+  'Finance and private sector development',
+  'Education',
+  'Health',
+  'Governance and public sector management',
+];
 
-const S = [
+const S: { id: string; t: string; band: string; intro: string[]; listHead: string; list: string[]; ids?: string[] }[] = [
   {
     id: 'evaluation', t: 'Evaluation', band: '',
     intro: [
@@ -39,11 +50,27 @@ const S = [
       'Budget reform to align budgets with strategic priorities and results',
       'Portfolio review and restructuring policy',
       'Strategic workforce planning and staffing reviews',
+      'Board processes, procedures and practices',
       'Evaluation policy and strategy',
     ],
   },
   {
-    id: 'research', t: 'Research and Analysis', band: '',
+    id: 'financing', t: 'Financing and Resource Mobilization', band: '',
+    intro: [
+      'Centennial advises development institutions on mobilizing and managing the resources that finance their operations, from capital increases and fund replenishments to co-financing and new financing vehicles. Its experts include a former Treasurer of the World Bank, a former World Bank Vice President for Strategy and Resource Management, and a former manager of IDA resource mobilization.',
+    ],
+    listHead: 'Areas of work',
+    list: [
+      'Capital increases and replenishment commitments',
+      'Co-financing strategies',
+      'Design of national and regional financing funds',
+      'Financial policy and risk management',
+      'Budget reform and resource allocation',
+    ],
+    ids: ['gci-adf-commitments', 'ifad-cofinancing-strategy', 'ndf-infrastructure-fund', 'ten-year-strategy-mtr'],
+  },
+  {
+    id: 'research', t: 'Research and Analysis', band: 'stone',
     intro: [
       'Centennial provides analytical support to development institutions, including portfolio and data analysis, benchmarking studies, and the preparation of corporate and financing reports. Its analysts work with qualitative and quantitative tools to produce multiple lines of evidence for evaluations and institutional reviews.',
       'Centennial also carries forward the Centennial Group\'s economic research and policy work on long-term development, macroeconomic outlooks, debt sustainability, and infrastructure investment and finance. Its teams combine economic, financial and social data from reputable and original sources with the Centennial Group\'s in-house model of the global economy, which projects real GDP growth as a function of labor force, capital stock and total factor productivity. Findings have been presented at the TICAD V and TICAD VI Summits, the AfDB Annual Meetings, the Annual Meetings of the Infrastructure Consortium for Africa, and the Emerging Markets Forum.',
@@ -67,6 +94,17 @@ const S = [
 ---
 <Base title="Services" description="Evaluation, advisory and analytical services for multilateral development banks, UN agencies and development organizations.">
   <PageHero title="Services" lede="Centennial Advisory provides high-quality advisory, analytical and evaluation services." />
+  <section class="band stone" id="expertise">
+    <div class="wrap">
+      <div class="split">
+        <h2>Institutional and Sector Expertise</h2>
+        <div>
+          <p>Centennial's experts bring first-hand understanding of MDB governance, operations, strategy and development finance, gained in senior roles at the World Bank, the International Monetary Fund, the African Development Bank and the Asian Development Bank. Its work spans the full range of development sectors.</p>
+          <ul class="tags">{SECTORS.map((x) => <li>{x}</li>)}</ul>
+        </div>
+      </div>
+    </div>
+  </section>
   {S.map((s) => (
     <section class={`band ${s.band}`} id={s.id}>
       <div class="wrap">
@@ -76,7 +114,10 @@ const S = [
             {s.intro.map((p) => <p>{p}</p>)}
             <h3>{s.listHead}</h3>
             <ul class="checks">{s.list.map((l) => <li>{l}</li>)}</ul>
-            {by(s.t).length > 0 && (<>
+            {s.ids ? (<>
+              <h3>Selected assignments</h3>
+              <ul class="rows">{pick(s.ids).map((a) => <AssignmentRow a={a} />)}</ul>
+            </>) : by(s.t).length > 0 && (<>
               <h3>Selected assignments</h3>
               <ul class="rows limit">{by(s.t).map((a) => <AssignmentRow a={a} />)}</ul>
               <a class="more all-link" href={`/experience/?line=${encodeURIComponent(s.t)}`}>All {s.t.toLowerCase()} assignments</a>
