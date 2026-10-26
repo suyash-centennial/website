@@ -9,10 +9,10 @@ const all = await publishedAssignments();
 const featured = all.filter((a) => a.data.featured).slice(0, 3);
 const mopan = all.filter((a) => a.data.title.startsWith('MOPAN Assessment'));
 const strands = [
-  { t: 'Strategy and policy advice', d: 'Advice to the leadership and Boards of development institutions on strategy, institutional reform and resource mobilization.', items: all.filter((a) => a.data.line === 'Advisory'), link: '/experience/?line=Advisory' },
-  { t: 'Corporate and strategic evaluation', d: 'Independent evaluations of the strategies, policies, programs and operations of multilateral development banks and funds.', items: all.filter((a) => a.data.line === 'Evaluation' && a.data.client !== 'OECD / MOPAN'), link: '/experience/?line=Evaluation' },
-  { t: 'Economic research', d: 'Long-term development outlooks, macroeconomic and debt sustainability analysis, and infrastructure investment and finance.', items: all.filter((a) => a.data.economic), link: '/experience/?line=Research%20and%20Analysis' },
-  { t: 'Institutional assessments', d: 'MOPAN assessments of the performance of multilateral development banks, UN agencies and global funds.', items: mopan, link: '/experience/?client=OECD%20%2F%20MOPAN' },
+  { t: 'Strategy and policy advice', items: all.filter((a) => a.data.line === 'Advisory'), link: '/experience/?line=Advisory' },
+  { t: 'Corporate and strategic evaluation', items: all.filter((a) => a.data.line === 'Evaluation' && a.data.client !== 'OECD / MOPAN'), link: '/experience/?line=Evaluation' },
+  { t: 'Economic research', items: all.filter((a) => a.data.economic), link: '/experience/?line=Research%20and%20Analysis' },
+  { t: 'Institutional assessments', items: mopan, link: '/experience/?client=OECD%20%2F%20MOPAN' },
 ];
 const people = await sortedPeople();
 const lines = [
@@ -25,8 +25,8 @@ const lines = [
   <section class="dark hero">
     <img class="mark" src="/icon-512.png" alt="" aria-hidden="true" />
     <div class="wrap">
-      <h1>Evaluation, policy advice and strategy for development institutions.</h1>
-      <p class="lede">Centennial Advisory is exclusively focused on evaluation, policy advisory and strategic decision-making for development institutions.</p>
+      <h1>Independent, <span class="nb">evidence-based</span> evaluation that informs strategic <span class="nb">decision-making</span>.</h1>
+      <p class="lede">Exclusively focused on evaluation, policy advisory and strategic <span class="nb">decision-making</span>.</p>
       <div class="eyebrow">Washington DC</div>
       <div class="stats">
         <div><b>1999</b><span>Practice established as the Centennial Group</span></div>
@@ -78,7 +78,6 @@ const lines = [
         {strands.map((st) => (
           <article class="card">
             <h3>{st.t}</h3>
-            <p>{st.d}</p>
             <ul class="ruled">
               {st.items.slice(0, 4).map((m) => <li><a href={`/experience/${m.id}/`}>{m.data.title}</a> <span class="yr">{m.data.client === 'OECD / MOPAN' ? '' : m.data.client + ' · '}{m.data.ongoing ? 'ongoing' : (m.data.end ?? m.data.start)}</span></li>)}
             </ul>

@@ -7,9 +7,10 @@ import { sortedPeople } from '../../lib';
 const people = await sortedPeople();
 ---
 <Base title="People" description="Centennial Advisory's leadership and senior experts, including former Vice Presidents and Directors of multilateral development banks.">
-  <PageHero title="People" lede="Centennial operates through a core leadership team supported by an extensive network of senior and regional experts, including former Vice Presidents and Directors of MDBs." />
+  <PageHero title="People" lede="Centennial's experts bring together an extensive and unique blend of experience in high-level policy and strategy formulation at the institutional, national and international levels." />
   <section class="band">
     <div class="wrap">
+      <p style="margin-bottom:30px">Centennial operates through a core leadership team supported by an extensive network of senior and regional experts, including former Vice Presidents and Directors of MDBs.</p>
       <ul class="people">{people.map((p) => <PersonCard p={p} />)}</ul>
       <p class="note" style="margin-top:30px">This model ensures both agility and depth, deploying multi-disciplinary teams while maintaining consistent quality and client engagement.</p>
     </div>

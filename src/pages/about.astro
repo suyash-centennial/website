@@ -16,7 +16,7 @@ const HOW = ['Methodological rigor', 'Quality assurance'];
 const values = ['Integrity and objectivity', 'Methodological rigor', 'Partnership and learning', 'Contextual sensitivity'];
 ---
 <Base title="About" description="Company profile, mission and values, geographic experience and organizational strengths of Centennial Advisory.">
-  <PageHero title="About Centennial Advisory" lede="Centennial Advisory is exclusively focused on evaluation, policy advisory and strategic decision-making for development institutions." />
+  <PageHero title="About Centennial Advisory" lede="Centennial Advisory provides high-quality advisory, analytical and evaluation services." />
 
   <section class="band">
     <div class="wrap">
@@ -24,7 +24,6 @@ const values = ['Integrity and objectivity', 'Methodological rigor', 'Partnershi
         <h2>Company Profile</h2>
         <div>
           <p>Centennial Advisory builds on the practice of the Centennial Group, established in 1999 as a globally recognized advisory firm specializing in strategy, policy, and institutional consultancy services. The Group offered comprehensive advice on a diverse range of development issues and had a proven record of supporting international financial institutions, multilateral development banks (MDBs), and development agencies. Its work spanned diagnostics, policy formulation, strategy development, institutional reform, and program evaluation.</p>
-          <p>The Centennial Group's consulting practice, including its staff, methodologies, templates, databases and intellectual property, passed to Centennial Advisory.</p>
           <p>Centennial's clients include leading global and regional institutions: the African Development Bank (AfDB), Asian Development Bank (AsDB), Development Bank of Latin America (CAF), Global Environment Facility (GEF), Global Partnership for Education (GPE), Inter-American Development Bank (IDB), International Fund for Agricultural Development (IFAD), Islamic Development Bank (IsDB), Japan International Cooperation Agency (JICA), Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ), the Organisation for Economic Co-operation and Development (OECD) through MOPAN, the World Bank Group (WBG), and UN agencies including UNDP and FAO. Through MOPAN, Centennial has also assessed multilateral development banks, UN agencies and global funds, including the World Bank, IFC, EBRD, AsDB, UNEP, UNCDF and UNOPS.</p>
         </div>
       </div>
@@ -88,12 +87,7 @@ const values = ['Integrity and objectivity', 'Methodological rigor', 'Partnershi
     <div class="wrap">
       <div class="split">
         <h2>Organizational Strengths</h2>
-        <div>
-          <h3 class="sub">What Centennial brings</h3>
-          <ul class="ruled">{strengths.filter(([a]) => !HOW.includes(a)).map(([a, b]) => <li><b>{a}</b>: {b}</li>)}</ul>
-          <h3 class="sub">How Centennial works</h3>
-          <ul class="ruled">{strengths.filter(([a]) => HOW.includes(a)).map(([a, b]) => <li><b>{a}</b>: {b}</li>)}</ul>
-        </div>
+        <ul class="ruled">{[...strengths.filter(([a]) => !HOW.includes(a)), ...strengths.filter(([a]) => HOW.includes(a))].map(([a, b]) => <li><b>{a}</b>: {b}</li>)}</ul>
       </div>
     </div>
   </section>
