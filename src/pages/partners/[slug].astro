@@ -1,0 +1,92 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import PartnerNav from '../../components/PartnerNav.astro';
+import AssignmentRow from '../../components/AssignmentRow.astro';
+import PersonCard from '../../components/PersonCard.astro';
+import ContactBand from '../../components/ContactBand.astro';
+import { getEntries } from 'astro:content';
+import { PARTNERS, workFor, type Partner } from '../../data/partners';
+import { PUBLICATIONS } from '../../data/publications';
+import { publishedAssignments, sortedPeople } from '../../lib';
+
+export async function getStaticPaths() {
+  const all = await publishedAssignments();
+  return PARTNERS.filter((p) => workFor(p, all).length > 0).map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+const { p } = Astro.props as { p: Partner };
+const all = await publishedAssignments();
+const work = workFor(p, all);
+const startY = Math.min(...work.map((a) => a.data.start ?? a.data.end ?? 9999));
+const ongoing = work.some((a) => a.data.ongoing);
+const endY = Math.max(...work.map((a) => a.data.end ?? a.data.start ?? 0));
+const span = ongoing ? `${startY}–present` : startY === endY ? String(endY) : `${startY}–${endY}`;
+const reports = PUBLICATIONS.filter((x) => x.assignment && work.some((a) => a.id === x.assignment));
+const LINES = ['Evaluation', 'Advisory', 'Research and Analysis'];
+const groups = LINES.map((l) => ({ l, items: work.filter((a) => a.data.line === l) })).filter((g) => g.items.length);
+const teamIds = new Set(work.flatMap((a) => a.data.team.map((t) => t.id)));
+const people = (await sortedPeople()).filter((x) => teamIds.has(x.id));
+const oneClient = new Set(work.map((a) => a.data.client)).size === 1;
+const mopanN = p.slug === 'oecd-mopan' ? 0 : work.filter((a) => a.data.client === 'OECD / MOPAN').length;
+---
+<Base title={p.name} description={`Centennial's work with the ${p.name}: ${work.length} assignments, ${span}.`}>
+  <PageHero title={p.name} crumb={{ href: '/partners/', label: 'Partners' }}>
+    <div class="meta">
+      <span>{work.length} {work.length === 1 ? 'assignment' : 'assignments'}</span>
+      <span>{span}</span>
+      {reports.length > 0 && <span>{reports.length} published {reports.length === 1 ? 'report' : 'reports'}</span>}
+    </div>
+  </PageHero>
+
+  <section class="band stone pnav-band">
+    <div class="wrap"><PartnerNav current={p.slug} compact /></div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          {p.logo && <div class="plogo"><img src={`/images/institutions/${p.logo}.png`} alt={p.name} /></div>}
+        </div>
+        <div>
+          {p.intro?.map((t) => <p>{t}</p>)}
+          {mopanN > 0 && <p class="note">Includes {mopanN === 1 ? 'the MOPAN assessment' : 'MOPAN assessments'} of {p.short}.</p>}
+          {groups.map((g) => (
+            <>
+              <h3 class="sub" style="margin-top:28px">{g.l}</h3>
+              <ul class={`rows ${oneClient ? 'noclient' : ''}`}>{g.items.map((a) => <AssignmentRow a={a} />)}</ul>
+            </>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {reports.length > 0 && (
+    <section class="band stone">
+      <div class="wrap">
+        <div class="split">
+          <h2>Published reports</h2>
+          <ul class="pubs" style="margin-top:0">
+            {reports.map((r) => (
+              <li>
+                <h3><a href={r.url} target="_blank" rel="noopener">{r.title}</a></h3>
+                <div class="pmeta">{r.publisher} · {r.year}{r.credited && <span class="credit">Centennial credited in the report</span>}</div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {people.length > 0 && (
+    <section class={`band ${reports.length ? '' : 'stone'}`}>
+      <div class="wrap">
+        <div class="section-head"><div><div class="label">People</div><h2>Centennial experts on this work</h2></div></div>
+        <ul class="people compact">{people.map((x) => <PersonCard p={x} brief />)}</ul>
+      </div>
+    </section>
+  )}
+  <ContactBand />
+</Base>

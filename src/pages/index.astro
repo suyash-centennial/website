@@ -4,6 +4,7 @@ import AssignmentCard from '../components/AssignmentCard.astro';
 import PersonCard from '../components/PersonCard.astro';
 import ContactBand from '../components/ContactBand.astro';
 import { INSTITUTIONS } from '../site';
+import { PARTNERS, workFor } from '../data/partners';
 import { publishedAssignments, sortedPeople } from '../lib';
 const all = await publishedAssignments();
 const featured = all.filter((a) => a.data.featured).slice(0, 3);
@@ -15,6 +16,7 @@ const strands = [
   { t: 'Institutional assessments', items: mopan, link: '/experience/?client=OECD%20%2F%20MOPAN' },
 ];
 const people = await sortedPeople();
+const pageFor = (logo: string) => PARTNERS.find((p) => p.logo === logo && workFor(p, all).length > 0);
 const lines = [
   { id: 'evaluation', t: 'Evaluation', d: 'Independent corporate, strategy, thematic, country and regional evaluations, project completion validations, and institutional assessments of multilateral organisations under the MOPAN methodology.' },
   { id: 'advisory', t: 'Advisory', d: 'Advice to the leadership of multilateral development institutions on strategy, institutional reform, results management, and development effectiveness.' },
@@ -39,8 +41,9 @@ const lines = [
 
   <section class="band stone" aria-labelledby="inst">
     <div class="wrap">
-      <div class="label center" id="inst">Clients and institutions assessed</div>
-      <ul class="logos">{INSTITUTIONS.map((i) => <li><img src={`/images/institutions/${i.logo}.png`} alt={i.name} title={i.name} style={`--h:${i.h}px`} loading="lazy" /></li>)}</ul>
+      <div class="label center" id="inst">Institutions Centennial has worked with</div>
+      <ul class="logos">{INSTITUTIONS.map((i) => { const pg = pageFor(i.logo); const img = <img src={`/images/institutions/${i.logo}.png`} alt={i.name} title={i.name} style={`--h:${i.h}px`} loading="lazy" />; return <li>{pg ? <a href={`/partners/${pg.slug}/`}>{img}</a> : img}</li>; })}</ul>
+      <p class="center-link"><a class="more" href="/partners/">Work by partner institution</a></p>
     </div>
   </section>
 
