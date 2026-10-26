@@ -20,17 +20,17 @@ export const NAV = [
 
 // Order follows the EOI client sentence. h = display height in px, set per logo to balance visual weight.
 export const INSTITUTIONS = [
-  { name: 'African Development Bank', logo: 'afdb', h: 46 },
-  { name: 'Asian Development Bank', logo: 'asdb', h: 46 },
-  { name: 'CAF, Development Bank of Latin America and the Caribbean', logo: 'caf', h: 30 },
-  { name: 'Global Environment Facility', logo: 'gef', h: 42 },
-  { name: 'Inter-American Development Bank', logo: 'idb', h: 32 },
+  { name: 'African Development Bank', logo: 'afdb', h: 44 },
+  { name: 'Asian Development Bank', logo: 'asdb', h: 44 },
+  { name: 'CAF, Development Bank of Latin America and the Caribbean', logo: 'caf', h: 36 },
   { name: 'International Fund for Agricultural Development', logo: 'ifad', h: 50 },
+  { name: 'Inter-American Development Bank', logo: 'idb', h: 32 },
   { name: 'Japan International Cooperation Agency', logo: 'jica', h: 42 },
-  { name: 'OECD / MOPAN', logo: 'oecd', h: 30 },
-  { name: 'World Bank Group', logo: 'wbg', h: 28 },
-  { name: 'United Nations Development Programme', logo: 'undp', h: 54 },
-  { name: 'Food and Agriculture Organization', logo: 'fao', h: 50 },
-  { name: 'United Nations Environment Programme', logo: 'unep', h: 50 },
-  { name: 'United Nations Capital Development Fund', logo: 'uncdf', h: 50 },
+  { name: 'World Bank Group', logo: 'wbg', h: 24 },
+  { name: 'Global Environment Facility', logo: 'gef', h: 42 },
+  { name: 'OECD / MOPAN', logo: 'oecd', h: 28 },
+  { name: 'United Nations Development Programme', logo: 'undp', h: 52 },
+  { name: 'Food and Agriculture Organization', logo: 'fao', h: 46 },
+  { name: 'United Nations Environment Programme', logo: 'unep', h: 48 },
+  { name: 'United Nations Capital Development Fund', logo: 'uncdf', h: 48 },
 ];
