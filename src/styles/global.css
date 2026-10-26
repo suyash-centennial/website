@@ -95,7 +95,7 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
 .label { display: flex; align-items: center; gap: 12px; font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; font-weight: 600; }
 .label::before { content: ''; width: 26px; height: 3px; background: var(--accent); flex: none; }
 
-.logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px 34px; list-style: none; padding: 0; margin: 0; }
+.logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 30px 56px; list-style: none; padding: 0; margin: 0; }
 .logos img { height: var(--h, 40px); width: auto; filter: grayscale(1) contrast(1.05); opacity: .72; transition: filter .25s, opacity .25s; }
 .logos li:hover img { filter: none; opacity: 1; }
 .institutions { display: flex; flex-wrap: wrap; gap: 14px 38px; list-style: none; padding: 0; margin: 0; }
