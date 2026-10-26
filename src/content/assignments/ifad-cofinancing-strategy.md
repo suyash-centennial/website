@@ -6,6 +6,7 @@ start: 2018
 end: 2018
 team: [anil-sood, catherine-kleynhoff]
 financing: true
+sectors: ["Agriculture and rural development"]
 ---
 
 ## The assignment

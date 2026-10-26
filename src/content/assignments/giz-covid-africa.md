@@ -6,6 +6,7 @@ line: "Research and Analysis"
 economic: true
 start: 2020
 region: "Ethiopia, Kenya and Zambia"
+sectors: ["Transport, water and ICT infrastructure"]
 ---
 
 ## The assignment

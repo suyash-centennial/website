@@ -220,6 +220,9 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
 .dark .phase .n { color: var(--steel); }
 .tags { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 0; }
 .tags li { border: 1px solid var(--chip); border-radius: 40px; padding: 6px 16px; font-size: 15px; color: var(--body); background: var(--card); }
+.tags li a { color: var(--body); }
+.tags li:has(a):hover { border-color: var(--accent); }
+.tags li:has(a):hover a { color: var(--accent-ink); text-decoration: none; }
 .dims { counter-reset: d; }
 
 /* ---------- contact ---------- */

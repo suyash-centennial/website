@@ -3,6 +3,7 @@ title: "Assessment of the Strategy, Structure and Competitive Advantage of the G
 client: "GEF"
 line: Evaluation
 team: []
+sectors: ["Climate change and environment"]
 ---
 
 ## The assignment

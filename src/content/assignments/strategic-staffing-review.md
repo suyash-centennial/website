@@ -6,6 +6,7 @@ line: Advisory
 start: 2019
 end: 2020
 team: [anil-sood]
+sectors: ["Governance and public sector management"]
 ---
 
 ## The assignment

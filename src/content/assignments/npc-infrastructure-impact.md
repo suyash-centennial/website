@@ -7,6 +7,7 @@ economic: true
 start: 2019
 end: 2019
 region: "Cameroon, Ethiopia, Ghana, Kenya and Zambia"
+sectors: ["Transport, water and ICT infrastructure"]
 ---
 
 ## The assignment

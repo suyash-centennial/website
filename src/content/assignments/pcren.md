@@ -8,6 +8,7 @@ end: 2020
 region: "Regional"
 team: [gaiv-tata, catherine-kleynhoff, anil-sood]
 featured: false
+sectors: ["Finance and private sector development", "Transport, water and ICT infrastructure", "Agriculture and rural development", "Climate change and environment"]
 ---
 
 ## The assignment

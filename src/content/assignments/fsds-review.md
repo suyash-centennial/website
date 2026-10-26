@@ -6,6 +6,7 @@ line: Evaluation
 start: 2018
 end: 2019
 team: [gaiv-tata, anil-sood, catherine-kleynhoff]
+sectors: ["Finance and private sector development"]
 ---
 
 ## The assignment

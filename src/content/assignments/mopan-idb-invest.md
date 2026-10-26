@@ -6,6 +6,7 @@ line: Evaluation
 start: 2022
 end: 2023
 team: [gaiv-tata, rakesh-nangia]
+sectors: ["Finance and private sector development"]
 ---
 
 ## The assignment

@@ -6,6 +6,7 @@ line: "Research and Analysis"
 start: 2016
 end: 2018
 team: [anil-sood]
+sectors: ["Governance and public sector management"]
 ---
 
 ## The assignment

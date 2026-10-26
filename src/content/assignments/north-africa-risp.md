@@ -8,6 +8,7 @@ end: 2025
 region: "North Africa"
 team: [catherine-kleynhoff]
 featured: true
+sectors: ["Transport, water and ICT infrastructure"]
 ---
 
 ## The assignment

@@ -7,6 +7,7 @@ economic: true
 start: 2019
 region: "Saudi Arabia"
 financing: true
+sectors: ["Transport, water and ICT infrastructure", "Energy"]
 ---
 
 ## The assignment

@@ -5,6 +5,7 @@ office: "Multilateral Organisation Performance Assessment Network"
 line: Evaluation
 end: 2024
 team: []
+sectors: ["Finance and private sector development"]
 ---
 
 ## The assignment

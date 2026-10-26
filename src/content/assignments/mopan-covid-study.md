@@ -6,6 +6,7 @@ line: "Research and Analysis"
 start: 2020
 end: 2021
 team: [anil-sood]
+sectors: ["Health"]
 ---
 
 ## The assignment

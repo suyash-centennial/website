@@ -7,6 +7,7 @@ start: 2016
 end: 2017
 region: "Italy"
 team: [anil-sood]
+sectors: ["Agriculture and rural development"]
 ---
 
 ## The assignment

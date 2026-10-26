@@ -7,6 +7,7 @@ start: 2016
 end: 2016
 region: "Africa"
 team: [anil-sood, gaiv-tata]
+sectors: ["Finance and private sector development"]
 ---
 
 ## The assignment

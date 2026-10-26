@@ -7,6 +7,7 @@ start: 2016
 end: 2016
 region: "Eastern Africa"
 team: [anil-sood]
+sectors: ["Transport, water and ICT infrastructure"]
 ---
 
 ## The assignment

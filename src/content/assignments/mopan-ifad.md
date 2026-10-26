@@ -6,6 +6,7 @@ line: Evaluation
 start: 2022
 end: 2024
 team: [rakesh-nangia, anil-sood]
+sectors: ["Agriculture and rural development"]
 ---
 
 ## The assignment

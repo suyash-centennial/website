@@ -5,6 +5,7 @@ line: "Research and Analysis"
 start: 2017
 end: 2018
 team: [anil-sood]
+sectors: ["Agriculture and rural development"]
 ---
 
 ## The assignment

@@ -8,6 +8,7 @@ start: 2019
 end: 2022
 region: "Africa"
 team: [catherine-kleynhoff]
+sectors: ["Transport, water and ICT infrastructure", "Energy"]
 ---
 
 ## The assignment

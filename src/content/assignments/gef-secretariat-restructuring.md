@@ -6,6 +6,7 @@ line: Advisory
 start: 2023
 end: 2023
 team: []
+sectors: ["Climate change and environment"]
 ---
 
 ## The assignment

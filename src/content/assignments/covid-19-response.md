@@ -8,6 +8,7 @@ end: 2022
 region: "Regional"
 team: [anil-sood]
 featured: false
+sectors: ["Health"]
 ---
 
 ## The assignment

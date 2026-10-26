@@ -6,6 +6,7 @@ line: Evaluation
 start: 2011
 end: 2012
 team: [anil-sood]
+sectors: ["Agriculture and rural development"]
 ---
 
 ## The assignment
