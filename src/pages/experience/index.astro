@@ -39,7 +39,6 @@ const sectors = SECTORS.filter((s) => inSector(s));
       </div>
       <p class="count" aria-live="polite"><span id="count">{items.length}</span> assignments</p>
       <ul class="rows" id="rows">{items.map((a) => <AssignmentRow a={a} />)}</ul>
-      <p class="note" style="margin-top:22px">Includes assignments delivered by the Centennial Group.</p>
     </div>
   </section>
   <ContactBand />

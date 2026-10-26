@@ -27,9 +27,8 @@ const groups = LINES.map((l) => ({ l, items: work.filter((a) => a.data.line === 
 const teamIds = new Set(work.flatMap((a) => a.data.team.map((t) => t.id)));
 const people = (await sortedPeople()).filter((x) => teamIds.has(x.id));
 const oneClient = new Set(work.map((a) => a.data.client)).size === 1;
-const mopanN = p.slug === 'oecd-mopan' ? 0 : work.filter((a) => a.data.client === 'OECD / MOPAN').length;
 ---
-<Base title={p.name} description={`Centennial's work with the ${p.name}: ${work.length} assignments, ${span}.`}>
+<Base title={p.name} description={`${p.name}. Centennial Advisory.`}>
   <PageHero title={p.name} crumb={{ href: '/partners/', label: 'Partners' }}>
     <div class="meta">
       <span>{work.length} {work.length === 1 ? 'assignment' : 'assignments'}</span>
@@ -50,7 +49,6 @@ const mopanN = p.slug === 'oecd-mopan' ? 0 : work.filter((a) => a.data.client ==
         </div>
         <div>
           {p.intro?.map((t) => <p>{t}</p>)}
-          {mopanN > 0 && <p class="note">Includes {mopanN === 1 ? 'the MOPAN assessment' : 'MOPAN assessments'} of {p.short}.</p>}
           {groups.map((g) => (
             <>
               <h3 class="sub" style="margin-top:28px">{g.l}</h3>
@@ -71,7 +69,7 @@ const mopanN = p.slug === 'oecd-mopan' ? 0 : work.filter((a) => a.data.client ==
             {reports.map((r) => (
               <li>
                 <h3><a href={r.url} target="_blank" rel="noopener">{r.title}</a></h3>
-                <div class="pmeta">{r.publisher} · {r.year}{r.credited && <span class="credit">Centennial credited in the report</span>}</div>
+                <div class="pmeta">{r.publisher} · {r.year}</div>
               </li>
             ))}
           </ul>
@@ -83,7 +81,7 @@ const mopanN = p.slug === 'oecd-mopan' ? 0 : work.filter((a) => a.data.client ==
   {people.length > 0 && (
     <section class={`band ${reports.length ? '' : 'stone'}`}>
       <div class="wrap">
-        <div class="section-head"><div><div class="label">People</div><h2>Centennial experts on this work</h2></div></div>
+        <div class="section-head"><div><div class="label">People</div><h2>Centennial experts</h2></div></div>
         <ul class="people compact">{people.map((x) => <PersonCard p={x} brief />)}</ul>
       </div>
     </section>
