@@ -8,7 +8,12 @@ import { publishedAssignments, sortedPeople } from '../lib';
 const all = await publishedAssignments();
 const featured = all.filter((a) => a.data.featured).slice(0, 3);
 const mopan = all.filter((a) => a.data.title.startsWith('MOPAN Assessment'));
-const econ = all.filter((a) => a.data.economic);
+const strands = [
+  { t: 'Strategy and policy advice', d: 'Advice to the leadership and Boards of development institutions on strategy, institutional reform and resource mobilization.', items: all.filter((a) => a.data.line === 'Advisory'), link: '/experience/?line=Advisory' },
+  { t: 'Corporate and strategic evaluation', d: 'Independent evaluations of the strategies, policies, programs and operations of multilateral development banks and funds.', items: all.filter((a) => a.data.line === 'Evaluation' && a.data.client !== 'OECD / MOPAN'), link: '/experience/?line=Evaluation' },
+  { t: 'Economic research', d: 'Long-term development outlooks, macroeconomic and debt sustainability analysis, and infrastructure investment and finance.', items: all.filter((a) => a.data.economic), link: '/experience/?line=Research%20and%20Analysis' },
+  { t: 'Institutional assessments', d: 'MOPAN assessments of the performance of multilateral development banks, UN agencies and global funds.', items: mopan, link: '/experience/?client=OECD%20%2F%20MOPAN' },
+];
 const people = await sortedPeople();
 const lines = [
   { id: 'evaluation', t: 'Evaluation', d: 'Independent corporate, strategy, thematic, country and regional evaluations, project completion validations, and institutional assessments of multilateral organisations under the MOPAN methodology.' },
@@ -20,13 +25,13 @@ const lines = [
   <section class="dark hero">
     <img class="mark" src="/icon-512.png" alt="" aria-hidden="true" />
     <div class="wrap">
-      <h1>Independent, <span class="nb">evidence-based</span> evaluation that informs strategic <span class="nb">decision-making</span>.</h1>
-      <p class="lede">Centennial Advisory provides high-quality advisory, analytical and evaluation services.</p>
+      <h1>Evaluation, policy advice and strategy for development institutions.</h1>
+      <p class="lede">Centennial Advisory is exclusively focused on evaluation, policy advisory and strategic decision-making for development institutions.</p>
       <div class="eyebrow">Washington DC</div>
       <div class="stats">
         <div><b>1999</b><span>Practice established as the Centennial Group</span></div>
-        <div><b>25+</b><span>Years of work with AfDB, AsDB, IDB, IsDB, World Bank, and GEF</span></div>
-        <div><b>{mopan.filter((m) => !m.data.ongoing).length}</b><span>MOPAN assessments of multilateral organisations since 2020</span></div>
+        <div><b>25+</b><span>Years of work with the AfDB, AsDB, CAF, IDB, IFAD, IsDB, JICA, World Bank and GEF</span></div>
+        <div><b>{all.length}</b><span>Assignments for development banks, UN agencies, global funds and governments</span></div>
         <div><b>100+</b><span>AfDB projects validated through Project Completion Report Evaluation Notes</span></div>
       </div>
     </div>
@@ -34,7 +39,7 @@ const lines = [
 
   <section class="band stone" aria-labelledby="inst">
     <div class="wrap">
-      <div class="label" id="inst">Centennial collaborates with leading global and regional institutions</div>
+      <div class="label" id="inst">Clients and institutions assessed</div>
       <ul class="logos">{INSTITUTIONS.map((i) => <li><img src={`/images/institutions/${i.logo}.png`} alt={i.name} title={i.name} style={`--h:${i.h}px`} loading="lazy" /></li>)}</ul>
     </div>
   </section>
@@ -62,50 +67,39 @@ const lines = [
 
   <section class="band stone">
     <div class="wrap">
-      <div class="split">
+      <div class="section-head">
         <div>
-          <div class="label">MOPAN</div>
-          <h2>MOPAN Assessments</h2>
+          <div class="label">Areas of work</div>
+          <h2>Selected work</h2>
         </div>
-        <div>
-          <p>Centennial has conducted assessments for the Multilateral Organisation Performance Assessment Network (MOPAN), hosted by the OECD, and thus has a good understanding of the recent performance and challenges of multilateral development banks and UN agencies. Each assessment captures a panoramic overview of an organisation's performance across strategic management, operational management, relationship management, and performance management and results.</p>
-          <ul class="ruled cols">
-            {mopan.map((m) => <li><b>{m.data.title.replace(/^MOPAN Assessment of (the )?/, '')}</b>{' '}<span style="color:var(--muted)">{m.data.ongoing ? 'ongoing' : m.data.end}</span></li>)}
-          </ul>
-        </div>
+        <a class="more" href="/experience/">All assignments</a>
+      </div>
+      <div class="grid-2 strands">
+        {strands.map((st) => (
+          <article class="card">
+            <h3>{st.t}</h3>
+            <p>{st.d}</p>
+            <ul class="ruled">
+              {st.items.slice(0, 4).map((m) => <li><a href={`/experience/${m.id}/`}>{m.data.title}</a> <span class="yr">{m.data.client === 'OECD / MOPAN' ? '' : m.data.client + ' · '}{m.data.ongoing ? 'ongoing' : (m.data.end ?? m.data.start)}</span></li>)}
+            </ul>
+            <a class="more" href={st.link}>More</a>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
   <section class="band">
     <div class="wrap">
-      <div class="split">
-        <div>
-          <div class="label">Research and Analysis</div>
-          <h2>Economic Research</h2>
-        </div>
-        <div>
-          <p>Centennial's economic work spans long-term development outlooks, macroeconomic and debt sustainability analysis, and the impact and financing of infrastructure. Studies such as Africa 2050 and Africa Reset, prepared for JICA, were presented at the TICAD V and TICAD VI Summits, the AfDB Annual Meetings and the Emerging Markets Forum.</p>
-          <ul class="ruled cols">
-            {econ.map((m) => <li><a href={`/experience/${m.id}/`}><b>{m.data.title}</b></a>{' '}<span style="color:var(--muted)">{m.data.client} · {m.data.end ?? m.data.start}</span></li>)}
-          </ul>
-          <a class="more" href="/experience/?line=Research%20and%20Analysis" style="margin-top:18px">All research and analysis assignments</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="band stone">
-    <div class="wrap">
       <div class="section-head">
-        <div><div class="label">Experience</div><h2>Selected assignments</h2></div>
+        <div><div class="label">Experience</div><h2>Featured assignments</h2></div>
         <a class="more" href="/experience/">All assignments</a>
       </div>
       <div class="grid-3">{featured.map((a) => <AssignmentCard a={a} />)}</div>
     </div>
   </section>
 
-  <section class="band">
+  <section class="band stone">
     <div class="wrap">
       <div class="section-head">
         <div>

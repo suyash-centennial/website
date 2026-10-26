@@ -6,6 +6,7 @@ line: Advisory
 start: 2018
 end: 2019
 team: [anil-sood, kenneth-lay]
+featured: true
 ---
 
 ## The assignment

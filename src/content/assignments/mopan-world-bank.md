@@ -6,7 +6,7 @@ line: Evaluation
 start: 2020
 end: 2023
 team: [rakesh-nangia, anil-sood]
-featured: true
+featured: false
 ---
 
 ## The assignment

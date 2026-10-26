@@ -4,7 +4,7 @@ export const SITE = {
   // Keep false until launch so search engines skip the preview. Set true when the real domain goes live.
   indexable: false,
   description:
-    'Centennial Advisory provides high-quality advisory, analytical and evaluation services.',
+    'Centennial Advisory is exclusively focused on evaluation, policy advisory and strategic decision-making for development institutions.',
   location: 'Washington DC',
   email: 'contact@centennial-advisory.com',
 };

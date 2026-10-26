@@ -245,6 +245,17 @@ p { margin: 0 0 1em; max-width: 46rem; color: var(--body); }
 .legal { border-top: 1px solid rgba(255,255,255,.1); }
 .legal .wrap { display: block; padding-top: 18px; padding-bottom: 22px; font-size: 13.5px; color: #8CA2B8; }
 
+h3.sub { font-family: var(--sans); font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 0 0 4px; }
+.band h3.sub { font-size: 12.5px; margin: 0 0 4px; }
+h3.sub + .ruled { margin-bottom: 30px; }
+
+/* home: areas of work */
+.strands .card p { margin-bottom: 14px; }
+.strands .ruled li { padding: 10px 0; font-size: 15.5px; line-height: 1.4; }
+.strands .ruled a { color: var(--heading); font-weight: 600; }
+.strands .yr { color: var(--muted); font-size: 14px; white-space: nowrap; }
+.strands .more { margin-top: 16px; }
+
 /* publications */
 .pubs { list-style: none; padding: 0; margin: 18px 0 0; }
 .pubs li { border-top: 1px solid var(--line); padding: 18px 0; }

@@ -5,17 +5,18 @@ import ContactBand from '../components/ContactBand.astro';
 import WorldMap from '../components/WorldMap.astro';
 import { COUNTRIES, REGIONS } from '../data/countries';
 const strengths = [
-  ['Proven MDB experience', 'more than 25 years of work with AfDB, AsDB, IDB, IsDB, World Bank, and GEF.'],
+  ['Proven MDB experience', 'more than 25 years of work with the AfDB, AsDB, CAF, IDB, IFAD, IsDB, World Bank and GEF.'],
   ['Methodological rigor', 'consistent use of OECD-DAC and ECG standards; peer-reviewed outputs under IDEV, GEF, GPE, and MOPAN.'],
   ['Multidisciplinary expertise', 'evaluation, governance, institutional reform, performance management, and economic analysis.'],
   ['Economic research', 'long-term development outlooks, macroeconomic and debt sustainability analysis, and infrastructure finance studies for JICA, GIZ, the ICA, and the AfDB.'],
   ['Regional insight', 'longstanding presence in Africa, with a good understanding of cultural diversity and sensitivity; multilingual expertise.'],
   ['Quality assurance', 'senior oversight by former MDB executives ensures analytical accuracy, timeliness, and utility.'],
 ];
+const HOW = ['Methodological rigor', 'Quality assurance'];
 const values = ['Integrity and objectivity', 'Methodological rigor', 'Partnership and learning', 'Contextual sensitivity'];
 ---
 <Base title="About" description="Company profile, mission and values, geographic experience and organizational strengths of Centennial Advisory.">
-  <PageHero title="About Centennial Advisory" lede="Centennial Advisory provides high-quality advisory, analytical and evaluation services." />
+  <PageHero title="About Centennial Advisory" lede="Centennial Advisory is exclusively focused on evaluation, policy advisory and strategic decision-making for development institutions." />
 
   <section class="band">
     <div class="wrap">
@@ -23,8 +24,8 @@ const values = ['Integrity and objectivity', 'Methodological rigor', 'Partnershi
         <h2>Company Profile</h2>
         <div>
           <p>Centennial Advisory builds on the practice of the Centennial Group, established in 1999 as a globally recognized advisory firm specializing in strategy, policy, and institutional consultancy services. The Group offered comprehensive advice on a diverse range of development issues and had a proven record of supporting international financial institutions, multilateral development banks (MDBs), and development agencies. Its work spanned diagnostics, policy formulation, strategy development, institutional reform, and program evaluation.</p>
-          <p>The Centennial Group novated to Centennial Advisory all rights and interests in its consulting-related intellectual property, staff, methodologies, templates, and databases.</p>
-          <p>Centennial collaborates with leading global and regional institutions, including the African Development Bank (AfDB), Asian Development Bank (AsDB), Global Environment Facility (GEF), Global Partnership for Education (GPE), Inter-American Development Bank (IDB), Islamic Development Bank (IsDB), Japan International Cooperation Agency (JICA), Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ), Organisation for Economic Co-operation and Development (OECD) through MOPAN, World Bank Group (WBG), and numerous UN agencies (UNDP, FAO, UNEP, UNCDF).</p>
+          <p>The Centennial Group's consulting practice, including its staff, methodologies, templates, databases and intellectual property, passed to Centennial Advisory.</p>
+          <p>Centennial's clients include leading global and regional institutions: the African Development Bank (AfDB), Asian Development Bank (AsDB), Development Bank of Latin America (CAF), Global Environment Facility (GEF), Global Partnership for Education (GPE), Inter-American Development Bank (IDB), International Fund for Agricultural Development (IFAD), Islamic Development Bank (IsDB), Japan International Cooperation Agency (JICA), Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ), the Organisation for Economic Co-operation and Development (OECD) through MOPAN, the World Bank Group (WBG), and UN agencies including UNDP and FAO. Through MOPAN, Centennial has also assessed multilateral development banks, UN agencies and global funds, including the World Bank, IFC, EBRD, AsDB, UNEP, UNCDF and UNOPS.</p>
         </div>
       </div>
       <div class="split">
@@ -51,7 +52,7 @@ const values = ['Integrity and objectivity', 'Methodological rigor', 'Partnershi
       <div class="split">
         <h2>Leadership and Experts</h2>
         <div>
-          <p>Centennial's team is composed of seasoned experts, many of whom previously held prominent roles such as Vice Presidents or Directors at institutions like the World Bank, the International Monetary Fund, and the African Development Bank. With extensive experience in leading both small and large teams, they have executed diverse evaluations and projects with a strong commitment to quality and timeliness.</p>
+          <p>Centennial's team is composed of seasoned experts, many of whom previously held prominent roles such as Vice Presidents or Directors at institutions like the World Bank, the International Monetary Fund, the African Development Bank and the Asian Development Bank. With extensive experience in leading both small and large teams, they have executed diverse evaluations and projects with a strong commitment to quality and timeliness.</p>
           <p>Centennial operates through a core leadership team supported by an extensive network of senior and regional experts. This model ensures both agility and depth, drawing on the talents of more than 100 senior experts to deploy multi-disciplinary teams while maintaining consistent quality and client engagement. Supported by national consultants, research professionals, and analytical staff, Centennial's experts carry out document research and review, data compilation, fieldwork, and specialized analyses.</p>
           <a class="more" href="/people/">Leadership and senior experts</a>
         </div>
@@ -87,7 +88,12 @@ const values = ['Integrity and objectivity', 'Methodological rigor', 'Partnershi
     <div class="wrap">
       <div class="split">
         <h2>Organizational Strengths</h2>
-        <ul class="ruled">{strengths.map(([a, b]) => <li><b>{a}</b>: {b}</li>)}</ul>
+        <div>
+          <h3 class="sub">What Centennial brings</h3>
+          <ul class="ruled">{strengths.filter(([a]) => !HOW.includes(a)).map(([a, b]) => <li><b>{a}</b>: {b}</li>)}</ul>
+          <h3 class="sub">How Centennial works</h3>
+          <ul class="ruled">{strengths.filter(([a]) => HOW.includes(a)).map(([a, b]) => <li><b>{a}</b>: {b}</li>)}</ul>
+        </div>
       </div>
     </div>
   </section>
