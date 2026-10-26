@@ -31,3 +31,15 @@ export const PARTNERS: Partner[] = [
 export function workFor<T extends { id: string; data: { client: string } }>(p: Partner, all: T[]): T[] {
   return all.filter((a) => (p.clients ?? []).includes(a.data.client) || (p.ids ?? []).includes(a.id));
 }
+
+const LINES = ['Evaluation', 'Advisory', 'Research and Analysis'];
+export function statsFor<T extends { id: string; data: { client: string; line: string; start?: number; end?: number; ongoing?: boolean } }>(work: T[]) {
+  const starts = work.map((a) => a.data.start ?? a.data.end ?? 9999);
+  const ends = work.map((a) => a.data.end ?? a.data.start ?? 0);
+  const ongoing = work.some((a) => a.data.ongoing);
+  const s = Math.min(...starts), e = Math.max(...ends);
+  const span = ongoing ? `${s}–present` : s === e ? String(e) : `${s}–${e}`;
+  const lines = LINES.filter((l) => work.some((a) => a.data.line === l));
+  const latest = [...work].sort((x, y) => (Number(y.data.ongoing) - Number(x.data.ongoing)) || ((y.data.end ?? y.data.start ?? 0) - (x.data.end ?? x.data.start ?? 0)));
+  return { n: work.length, span, lines, latest, first: s };
+}

@@ -1,14 +1,57 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
-import PartnerNav from '../../components/PartnerNav.astro';
 import ContactBand from '../../components/ContactBand.astro';
+import { PARTNERS, workFor, statsFor } from '../../data/partners';
+import { PUBLICATIONS } from '../../data/publications';
+import { publishedAssignments, years, hasPage } from '../../lib';
+const all = await publishedAssignments();
+const list = PARTNERS.map((p) => {
+  const work = workFor(p, all);
+  return { p, st: statsFor(work), reports: PUBLICATIONS.filter((x) => x.assignment && work.some((a) => a.id === x.assignment)).length };
+}).filter((x) => x.st.n > 0);
+const lead = list.slice(0, 4);
+const rest = list.slice(4);
 ---
 <Base title="Partners" description="Centennial Advisory's partner institutions.">
   <PageHero title="Partners" />
   <section class="band">
     <div class="wrap">
-      <PartnerNav />
+      <div class="lead-partners">
+        {lead.map(({ p, st, reports }) => (
+          <article class="lp">
+            <a class="lp-logo" href={`/partners/${p.slug}/`} aria-label={p.name}>
+              {p.logo ? <img src={`/images/institutions/${p.logo}.png`} alt={p.name} style={`--h:${Math.round((p.h ?? 40) * 1.5)}px`} /> : <span>{p.short}</span>}
+            </a>
+            <div class="lp-body">
+              <h2><a href={`/partners/${p.slug}/`}>{p.name}</a></h2>
+              <ul class="lp-figs">
+                <li><b>{st.n}</b> {st.n === 1 ? 'assignment' : 'assignments'}</li>
+                <li><b>{st.span}</b></li>
+                {reports > 0 && <li><b>{reports}</b> published {reports === 1 ? 'report' : 'reports'}</li>}
+              </ul>
+              <ul class="lp-list">
+                {st.latest.slice(0, 3).map((a) => <li>{hasPage(a) ? <a href={`/experience/${a.id}/`}>{a.data.title}</a> : <b>{a.data.title}</b>}<span>{years(a)}</span></li>)}
+              </ul>
+              <a class="more" href={`/partners/${p.slug}/`}>All {st.n} assignments</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="band stone">
+    <div class="wrap">
+      <div class="section-head"><div><h2>Other partner institutions</h2></div></div>
+      <div class="op-grid">
+        {rest.map(({ p, st, reports }) => (
+          <a class="op" href={`/partners/${p.slug}/`}>
+            <span class="op-logo">{p.logo ? <img src={`/images/institutions/${p.logo}.png`} alt="" style={`--h:${p.h}px`} /> : <span class="op-text">{p.tile ?? p.short}</span>}</span>
+            <span class="op-name">{p.name}</span>
+            <span class="op-meta">{st.n} {st.n === 1 ? 'assignment' : 'assignments'} · {st.span}{reports ? ` · ${reports} ${reports === 1 ? 'report' : 'reports'}` : ''}</span>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
   <ContactBand />

@@ -1,22 +1,17 @@
 ---
 import { PARTNERS, workFor } from '../data/partners';
 import { publishedAssignments } from '../lib';
-interface Props { current?: string; compact?: boolean }
-const { current, compact = false } = Astro.props;
+interface Props { current?: string }
+const { current } = Astro.props;
 const all = await publishedAssignments();
-const list = PARTNERS.map((p) => ({ p, n: workFor(p, all).length })).filter((x) => x.n > 0);
+const list = PARTNERS.map((p) => ({ p, n: workFor(p, all).length })).filter((x) => x.n > 0 && x.p.slug !== current);
 ---
-<nav class={`pnav ${compact ? 'compact' : ''}`} aria-label="Partner institutions">
+<nav class="pstrip" aria-label="Other partner institutions">
   <ul>
-    {list.map(({ p, n }) => (
-      <li class={p.slug === current ? 'on' : ''}>
-        <a href={`/partners/${p.slug}/`} aria-current={p.slug === current ? 'page' : undefined} title={p.name}>
-          <span class="pl">
-            {p.logo ? <img src={`/images/institutions/${p.logo}.png`} alt={p.name} style={`--h:${p.h}px`} loading="lazy" /> : <span class="pt">{p.tile ?? p.short}</span>}
-          </span>
-          <span class="pn">{p.tile ?? p.short} · {n}</span>
-        </a>
-      </li>
+    {list.map(({ p }) => (
+      <li><a href={`/partners/${p.slug}/`} title={p.name}>
+        {p.logo ? <img src={`/images/institutions/${p.logo}.png`} alt={p.name} style={`--h:${p.h}px`} loading="lazy" /> : <span>{p.tile ?? p.short}</span>}
+      </a></li>
     ))}
   </ul>
 </nav>
