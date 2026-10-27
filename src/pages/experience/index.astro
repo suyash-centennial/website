@@ -4,28 +4,32 @@ import PageHero from '../../components/PageHero.astro';
 import AssignmentRow from '../../components/AssignmentRow.astro';
 import ContactBand from '../../components/ContactBand.astro';
 import { publishedAssignments } from '../../lib';
-import { PARTNERS, workFor } from '../../data/partners';
+import { PARTNERS, PARTNER_ROW, workFor } from '../../data/partners';
 const items = await publishedAssignments();
 const count = (k: string, v: string) => items.filter((a) => (a.data as any)[k] === v).length;
 const lines = ['Evaluation', 'Advisory', 'Research and Analysis'].filter((l) => count('line', l));
 const SECTORS = ['Agriculture and rural development', 'Climate change and environment', 'Energy', 'Transport, water and ICT infrastructure', 'Finance and private sector development', 'Education', 'Health', 'Governance and public sector management'];
 const inSector = (s: string) => items.filter((a) => (a.data.sectors as string[]).includes(s)).length;
 const sectors = SECTORS.filter((s) => inSector(s));
-const partners = PARTNERS.filter((p) => workFor(p, items).length > 0);
+const partners = PARTNER_ROW.map((s) => PARTNERS.find((p) => p.slug === s)!).filter((p) => workFor(p, items).length > 0);
 const partnersOf = (id: string) => partners.filter((p) => workFor(p, items).some((a) => a.id === id)).map((p) => p.slug).join('|');
 ---
 <Base title="Experience" description="Evaluations, institutional assessments, advisory and analytical assignments for multilateral development banks, UN agencies and global funds.">
   <PageHero title="Experience" lede="More than 25 years of evaluation, policy advisory and economic work with the AfDB, AsDB, CAF, IDB, IFAD, IsDB, JICA, World Bank and GEF, and MOPAN assessments of multilateral organisations since 2020." />
-  <section class="band">
+  <section class="pbar" aria-label="Partner institutions">
     <div class="wrap">
-      <div class="plogos" role="group" aria-label="Filter by partner institution">
-        <button class="pl-btn all" type="button" data-filter="partner" data-value="" aria-pressed="true">All</button>
+      <div class="pbar-row" role="group" aria-label="Filter by partner institution">
+        <button class="pb all" type="button" data-filter="partner" data-value="" aria-pressed="true">All work</button>
         {partners.map((p) => (
-          <button class="pl-btn" type="button" data-filter="partner" data-value={p.slug} aria-pressed="false" title={p.name}>
-            {p.logo ? <img src={`/images/institutions/${p.logo}.png`} alt={p.name} style={`--h:${p.h}px`} /> : <span>{p.tile ?? p.short}</span>}
+          <button class="pb" type="button" data-filter="partner" data-value={p.slug} aria-pressed="false" title={p.name}>
+            <img src={`/images/institutions/${p.logo}.png`} alt={p.name} style={`--h:${p.h}px`} />
           </button>
         ))}
       </div>
+    </div>
+  </section>
+  <section class="band">
+    <div class="wrap">
       <div class="filters" role="group" aria-label="Filter by service">
         <span class="fl">Service</span>
         <div class="chips">

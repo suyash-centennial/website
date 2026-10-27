@@ -28,6 +28,9 @@ export const PARTNERS: Partner[] = [
   { slug: 'ndf', name: 'National Development Fund, Saudi Arabia', short: 'NDF Saudi Arabia', tile: 'Saudi NDF', clients: ['NDF Saudi Arabia'] },
 ];
 
+// Shown as the logo row on the Experience page, in this order.
+export const PARTNER_ROW = ['afdb', 'oecd-mopan', 'jica', 'ifad', 'asdb', 'world-bank', 'gef', 'idb'];
+
 export function workFor<T extends { id: string; data: { client: string } }>(p: Partner, all: T[]): T[] {
   return all.filter((a) => (p.clients ?? []).includes(a.data.client) || (p.ids ?? []).includes(a.id));
 }

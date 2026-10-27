@@ -4,7 +4,7 @@ import AssignmentCard from '../components/AssignmentCard.astro';
 import PersonCard from '../components/PersonCard.astro';
 import ContactBand from '../components/ContactBand.astro';
 import { INSTITUTIONS } from '../site';
-import { PARTNERS, workFor } from '../data/partners';
+import { PARTNERS, PARTNER_ROW, workFor } from '../data/partners';
 import { publishedAssignments, sortedPeople } from '../lib';
 const all = await publishedAssignments();
 const featured = all.filter((a) => a.data.featured).slice(0, 3);
@@ -16,7 +16,7 @@ const strands = [
   { t: 'Institutional assessments', items: mopan, link: '/experience/?partner=oecd-mopan' },
 ];
 const people = await sortedPeople();
-const pageFor = (logo: string) => PARTNERS.find((p) => p.logo === logo && workFor(p, all).length > 0);
+const pageFor = (logo: string) => PARTNERS.find((p) => p.logo === logo && PARTNER_ROW.includes(p.slug) && workFor(p, all).length > 0);
 const lines = [
   { id: 'evaluation', t: 'Evaluation', d: 'Independent corporate, strategy, thematic, country and regional evaluations, project completion validations, and institutional assessments of multilateral organisations under the MOPAN methodology.' },
   { id: 'advisory', t: 'Advisory', d: 'Advice to the leadership of multilateral development institutions on strategy, institutional reform, results management, and development effectiveness.' },
