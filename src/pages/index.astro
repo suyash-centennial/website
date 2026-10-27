@@ -13,7 +13,7 @@ const strands = [
   { t: 'Strategy and policy advice', items: all.filter((a) => a.data.line === 'Advisory'), link: '/experience/?line=Advisory' },
   { t: 'Corporate and strategic evaluation', items: all.filter((a) => a.data.line === 'Evaluation' && a.data.client !== 'OECD / MOPAN'), link: '/experience/?line=Evaluation' },
   { t: 'Economic research', items: all.filter((a) => a.data.economic), link: '/experience/?line=Research%20and%20Analysis' },
-  { t: 'Institutional assessments', items: mopan, link: '/experience/?client=OECD%20%2F%20MOPAN' },
+  { t: 'Institutional assessments', items: mopan, link: '/experience/?partner=oecd-mopan' },
 ];
 const people = await sortedPeople();
 const pageFor = (logo: string) => PARTNERS.find((p) => p.logo === logo && workFor(p, all).length > 0);
@@ -42,8 +42,7 @@ const lines = [
   <section class="band stone" aria-labelledby="inst">
     <div class="wrap">
       <div class="label center" id="inst">Institutions Centennial has worked with</div>
-      <ul class="logos">{INSTITUTIONS.map((i) => { const pg = pageFor(i.logo); const img = <img src={`/images/institutions/${i.logo}.png`} alt={i.name} title={i.name} style={`--h:${i.h}px`} loading="lazy" />; return <li>{pg ? <a href={`/partners/${pg.slug}/`}>{img}</a> : img}</li>; })}</ul>
-      <p class="center-link"><a class="more" href="/partners/">All partners</a></p>
+      <ul class="logos">{INSTITUTIONS.map((i) => { const pg = pageFor(i.logo); const img = <img src={`/images/institutions/${i.logo}.png`} alt={i.name} title={i.name} style={`--h:${i.h}px`} loading="lazy" />; return <li>{pg ? <a href={`/experience/?partner=${pg.slug}`}>{img}</a> : img}</li>; })}</ul>
     </div>
   </section>
 

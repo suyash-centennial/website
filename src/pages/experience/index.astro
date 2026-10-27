@@ -4,24 +4,27 @@ import PageHero from '../../components/PageHero.astro';
 import AssignmentRow from '../../components/AssignmentRow.astro';
 import ContactBand from '../../components/ContactBand.astro';
 import { publishedAssignments } from '../../lib';
+import { PARTNERS, workFor } from '../../data/partners';
 const items = await publishedAssignments();
 const count = (k: string, v: string) => items.filter((a) => (a.data as any)[k] === v).length;
-const clients = [...new Set(items.map((a) => a.data.client))].sort((a, b) => count('client', b) - count('client', a));
 const lines = ['Evaluation', 'Advisory', 'Research and Analysis'].filter((l) => count('line', l));
 const SECTORS = ['Agriculture and rural development', 'Climate change and environment', 'Energy', 'Transport, water and ICT infrastructure', 'Finance and private sector development', 'Education', 'Health', 'Governance and public sector management'];
 const inSector = (s: string) => items.filter((a) => (a.data.sectors as string[]).includes(s)).length;
 const sectors = SECTORS.filter((s) => inSector(s));
+const partners = PARTNERS.filter((p) => workFor(p, items).length > 0);
+const partnersOf = (id: string) => partners.filter((p) => workFor(p, items).some((a) => a.id === id)).map((p) => p.slug).join('|');
 ---
 <Base title="Experience" description="Evaluations, institutional assessments, advisory and analytical assignments for multilateral development banks, UN agencies and global funds.">
   <PageHero title="Experience" lede="More than 25 years of evaluation, policy advisory and economic work with the AfDB, AsDB, CAF, IDB, IFAD, IsDB, JICA, World Bank and GEF, and MOPAN assessments of multilateral organisations since 2020." />
   <section class="band">
     <div class="wrap">
-      <div class="filters" role="group" aria-label="Filter by client">
-        <span class="fl">Client</span>
-        <div class="chips">
-        <button class="chip" type="button" data-filter="client" data-value="" aria-pressed="true">All</button>
-        {clients.map((c) => <button class="chip" type="button" data-filter="client" data-value={c} aria-pressed="false">{c} ({count('client', c)})</button>)}
-        </div>
+      <div class="plogos" role="group" aria-label="Filter by partner institution">
+        <button class="pl-btn all" type="button" data-filter="partner" data-value="" aria-pressed="true">All</button>
+        {partners.map((p) => (
+          <button class="pl-btn" type="button" data-filter="partner" data-value={p.slug} aria-pressed="false" title={p.name}>
+            {p.logo ? <img src={`/images/institutions/${p.logo}.png`} alt={p.name} style={`--h:${p.h}px`} /> : <span>{p.tile ?? p.short}</span>}
+          </button>
+        ))}
       </div>
       <div class="filters" role="group" aria-label="Filter by service">
         <span class="fl">Service</span>
@@ -37,32 +40,40 @@ const sectors = SECTORS.filter((s) => inSector(s));
         {sectors.map((s) => <button class="chip" type="button" data-filter="sector" data-value={s} aria-pressed="false">{s} ({inSector(s)})</button>)}
         </div>
       </div>
+      {partners.map((p) => (
+        <div class="ppanel" data-for={p.slug} hidden>
+          <h2>{p.name}</h2>
+          {p.intro?.map((t) => <p>{t}</p>)}
+        </div>
+      ))}
       <p class="count" aria-live="polite"><span id="count">{items.length}</span> assignments</p>
-      <ul class="rows" id="rows">{items.map((a) => <AssignmentRow a={a} />)}</ul>
+      <ul class="rows" id="rows">{items.map((a) => <AssignmentRow a={a} partners={partnersOf(a.id)} />)}</ul>
     </div>
   </section>
   <ContactBand />
 </Base>
 <script>
-  const state: Record<string, string> = { client: '', line: '', sector: '' };
+  const state: Record<string, string> = { partner: '', line: '', sector: '' };
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('.ppanel'));
   const rows = Array.from(document.querySelectorAll<HTMLElement>('#rows .row'));
   const count = document.getElementById('count');
-  document.querySelectorAll<HTMLButtonElement>('.chip').forEach((chip) => {
+  document.querySelectorAll<HTMLButtonElement>('button[data-filter]').forEach((chip) => {
     chip.addEventListener('click', () => {
       const key = chip.dataset.filter!;
       state[key] = chip.dataset.value ?? '';
-      document.querySelectorAll<HTMLButtonElement>(`.chip[data-filter="${key}"]`).forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      document.querySelectorAll<HTMLButtonElement>(`button[data-filter="${key}"]`).forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
       let shown = 0;
       rows.forEach((r) => {
-        const ok = (!state.client || r.dataset.client === state.client) && (!state.line || r.dataset.line === state.line) && (!state.sector || (r.dataset.sectors ?? '').split('|').includes(state.sector));
+        const ok = (!state.partner || (r.dataset.partners ?? '').split('|').includes(state.partner)) && (!state.line || r.dataset.line === state.line) && (!state.sector || (r.dataset.sectors ?? '').split('|').includes(state.sector));
         r.hidden = !ok; if (ok) shown++;
       });
+      panels.forEach((p) => { p.hidden = p.dataset.for !== state.partner; });
       if (count) count.textContent = String(shown);
     });
   });
   const q = new URLSearchParams(location.search);
-  ['client', 'line', 'sector'].forEach((k) => {
+  ['partner', 'line', 'sector'].forEach((k) => {
     const v = q.get(k);
-    if (v) document.querySelectorAll<HTMLButtonElement>(`.chip[data-filter="${k}"]`).forEach((c) => { if (c.dataset.value === v) c.click(); });
+    if (v) document.querySelectorAll<HTMLButtonElement>(`button[data-filter="${k}"]`).forEach((c) => { if (c.dataset.value === v) c.click(); });
   });
 </script>

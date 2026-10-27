@@ -1,11 +1,11 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { hasPage, years } from '../lib';
-interface Props { a: CollectionEntry<'assignments'>; }
-const { a } = Astro.props;
+interface Props { a: CollectionEntry<'assignments'>; partners?: string }
+const { a, partners = '' } = Astro.props;
 const d = a.data;
 ---
-<li class="row" data-client={d.client} data-line={d.line} data-sectors={d.sectors.join("|")}>
+<li class="row" data-client={d.client} data-line={d.line} data-sectors={d.sectors.join("|")} data-partners={partners}>
   <span class="client">{d.client}</span>
   <div>
     <h3>{hasPage(a) ? <a href={`/experience/${a.id}/`}>{d.title}</a> : d.title}</h3>
