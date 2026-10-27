@@ -20,7 +20,7 @@ export const PARTNERS: Partner[] = [
   { slug: 'fao', name: 'Food and Agriculture Organization', short: 'FAO', logo: 'fao', h: 46, clients: ['FAO'] },
   { slug: 'unep', name: 'United Nations Environment Programme', short: 'UNEP', logo: 'unep', h: 48, ids: ['mopan-unep'] },
   { slug: 'uncdf', name: 'United Nations Capital Development Fund', short: 'UNCDF', logo: 'uncdf', h: 48, ids: ['mopan-uncdf'] },
-  { slug: 'caf', name: 'CAF, Development Bank of Latin America and the Caribbean', short: 'CAF', logo: 'caf', h: 36 },
+  { slug: 'caf', name: 'CAF, Development Bank of Latin America and the Caribbean', short: 'CAF', logo: 'caf', h: 36, clients: ['CAF'] },
   { slug: 'undp', name: 'United Nations Development Programme', short: 'UNDP', logo: 'undp', h: 52 },
   { slug: 'isdb', name: 'Islamic Development Bank Group', short: 'IsDB', clients: ['IsDB'] },
   { slug: 'ica', name: 'Infrastructure Consortium for Africa', short: 'ICA', clients: ['ICA'] },
@@ -29,7 +29,7 @@ export const PARTNERS: Partner[] = [
 ];
 
 // Shown as the logo row on the Experience page, in this order.
-export const PARTNER_ROW = ['afdb', 'oecd-mopan', 'jica', 'ifad', 'asdb', 'world-bank', 'gef', 'idb'];
+export const PARTNER_ROW = ['afdb', 'oecd-mopan', 'jica', 'ifad', 'asdb', 'world-bank', 'caf', 'gef', 'idb'];
 
 export function workFor<T extends { id: string; data: { client: string } }>(p: Partner, all: T[]): T[] {
   return all.filter((a) => (p.clients ?? []).includes(a.data.client) || (p.ids ?? []).includes(a.id));
