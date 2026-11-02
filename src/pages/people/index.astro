@@ -4,6 +4,8 @@ import PageHero from '../../components/PageHero.astro';
 import PersonCard from '../../components/PersonCard.astro';
 import ContactBand from '../../components/ContactBand.astro';
 import { sortedPeople } from '../../lib';
+import { EXPERTS } from '../../data/experts';
+const experts = [...EXPERTS].sort((a, b) => a.sort.localeCompare(b.sort));
 const people = await sortedPeople();
 ---
 <Base title="People" description="Centennial Advisory's leadership and senior experts, including former Vice Presidents and Directors of multilateral development banks.">
@@ -13,6 +15,14 @@ const people = await sortedPeople();
       <p style="margin-bottom:30px">Centennial operates through a core leadership team supported by an extensive network of senior and regional experts, including former Vice Presidents and Directors of MDBs.</p>
       <ul class="people">{people.map((p) => <PersonCard p={p} />)}</ul>
       <p class="note" style="margin-top:30px">This model ensures both agility and depth, deploying multi-disciplinary teams while maintaining consistent quality and client engagement.</p>
+    </div>
+  </section>
+  <section class="band stone" aria-labelledby="experts">
+    <div class="wrap">
+      <div class="label" id="experts">Senior experts</div>
+      <ul class="experts">
+        {experts.map((e) => <li><h3>{e.name}</h3><p>{e.bio}</p></li>)}
+      </ul>
     </div>
   </section>
   <ContactBand />

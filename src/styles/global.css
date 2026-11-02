@@ -441,3 +441,13 @@ h3.sub + .ruled { margin-bottom: 30px; }
   .site-footer .wrap > :first-child { grid-column: 1 / -1; }
   .institutions li { font-size: 18px; }
 }
+
+/* Senior experts list on People */
+.experts { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 56px; }
+.experts li { border-top: 1px solid var(--line); padding: 20px 0 18px; }
+.experts h3 { font-size: 19px; margin: 0 0 6px; }
+.experts p { font-size: 15.5px; line-height: 1.55; margin: 0; max-width: none; }
+@media (max-width: 760px) {
+  .experts { grid-template-columns: 1fr; }
+  .experts li { padding: 16px 0 14px; }
+}
