@@ -81,7 +81,7 @@ const lines = [
           <article class="card">
             <h3>{st.t}</h3>
             <ul class="ruled">
-              {st.items.slice(0, 4).map((m) => <li><a href={`/experience/${m.id}/`}>{m.data.title}</a> <span class="yr">{m.data.client === 'OECD / MOPAN' ? '' : m.data.client + ' · '}{m.data.ongoing ? 'ongoing' : (m.data.end ?? m.data.start)}</span></li>)}
+              {st.items.slice(0, 2).map((m) => <li><a href={`/experience/${m.id}/`}>{m.data.title}</a> <span class="yr">{m.data.client === 'OECD / MOPAN' ? '' : m.data.client + ' · '}{m.data.ongoing ? 'ongoing' : (m.data.end ?? m.data.start)}</span></li>)}
             </ul>
             <a class="more" href={st.link}>More</a>
           </article>
