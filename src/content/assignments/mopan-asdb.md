@@ -3,6 +3,7 @@ title: "MOPAN Assessment of the Asian Development Bank (AsDB)"
 client: "OECD / MOPAN"
 office: "Multilateral Organisation Performance Assessment Network"
 line: Evaluation
+start: 2024
 end: 2025
 team: []
 ---

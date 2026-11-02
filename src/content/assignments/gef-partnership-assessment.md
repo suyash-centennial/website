@@ -1,8 +1,11 @@
 ---
 title: "Assessment of the Strategy, Structure and Competitive Advantage of the GEF Partnership"
 client: "GEF"
+office: "Independent Evaluation Office"
 line: Evaluation
-team: []
+start: 2024
+end: 2025
+team: [rakesh-nangia]
 sectors: ["Climate change and environment"]
 ---
 

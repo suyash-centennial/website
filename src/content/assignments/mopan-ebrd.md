@@ -3,6 +3,7 @@ title: "MOPAN Assessment of the European Bank for Reconstruction and Development
 client: "OECD / MOPAN"
 office: "Multilateral Organisation Performance Assessment Network"
 line: Evaluation
+start: 2023
 end: 2024
 team: []
 sectors: ["Finance and private sector development"]
