@@ -1,0 +1,19 @@
+---
+// Report cover: the real cover when public/images/covers/<id>.* exists, otherwise a designed title tile.
+import { coverFor } from '../lib';
+interface Props { id?: string; title: string; publisher?: string; year?: string | number; size?: 'sm' | 'md' | 'lg' }
+const { id, title, publisher = '', year = '', size = 'md' } = Astro.props;
+const src = coverFor(id);
+const tone = /MOPAN/.test(publisher) ? 'mopan' : /IDEV|African Development Bank|AfDB/.test(publisher) ? 'idev' : /IFAD/.test(publisher) ? 'ifad' : 'book';
+const long = title.length > 80;
+const pub = publisher.replace(/^IDEV, /, 'IDEV · ').replace('Independent Office of Evaluation, IFAD', 'IFAD IOE');
+---
+{src
+  ? <img class={`cover ${size}`} src={src} alt={`Cover of ${title}`} loading="lazy" />
+  : <div class={`cover tile ${size} ${tone}`} role="img" aria-label={title}>
+      <div class="t-in">
+        <span class="t-pub">{pub}</span>
+        <span class={`t-title${long ? ' long' : ''}`}>{title}</span>
+        <span class="t-year">{year}</span>
+      </div>
+    </div>}

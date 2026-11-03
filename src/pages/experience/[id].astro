@@ -6,6 +6,7 @@ import AssignmentRow from '../../components/AssignmentRow.astro';
 import ContactBand from '../../components/ContactBand.astro';
 import { hasPage, years, publishedAssignments } from '../../lib';
 import { PUBLICATIONS } from '../../data/publications';
+import Cover from '../../components/Cover.astro';
 
 export async function getStaticPaths() {
   const items = (await getCollection('assignments', ({ data }) => data.published)).filter(hasPage);
@@ -32,6 +33,7 @@ const related = (await publishedAssignments()).filter((x) => x.id !== a.id && x.
       <div class="detail">
         <div class="prose"><Content /></div>
         <aside class="aside">
+          {pubs.length > 0 && <a class="aside-cover" href={pubs[0].url} target="_blank" rel="noopener" aria-label={`Open ${pubs[0].title}`}><Cover id={a.id} title={pubs[0].title} publisher={pubs[0].publisher} year={pubs[0].year} /></a>}
           <h2>Client</h2><p>{d.client}{d.office && <><br />{d.office}</>}</p>
           <h2>Service</h2><p>{d.line}</p>
           {years(a) && (<><h2>Period</h2><p>{years(a)}</p></>)}

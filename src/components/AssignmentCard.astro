@@ -1,17 +1,28 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { years, hasPage } from '../lib';
-interface Props { a: CollectionEntry<'assignments'>; kicker?: string; tags?: boolean }
-const { a, kicker, tags = false } = Astro.props;
+import { PUBLICATIONS } from '../data/publications';
+import Cover from './Cover.astro';
+interface Props { a: CollectionEntry<'assignments'>; kicker?: string; tags?: boolean; cover?: boolean }
+const { a, kicker, tags = false, cover = false } = Astro.props;
 const d = a.data;
 const blurb = (a.body ?? '').split('\n').find((l) => l.trim() && !l.startsWith('#'))?.trim() ?? '';
 const short = blurb.length > 230 ? blurb.slice(0, blurb.lastIndexOf(' ', 220)) + '…' : blurb;
+const pub = PUBLICATIONS.find((p) => p.assignment === a.id);
+const href = hasPage(a) ? `/experience/${a.id}/` : null;
 ---
-<article class="card acard">
-  {(kicker ?? d.client) && <div class="client">{kicker ?? d.client}</div>}
-  <h3>{hasPage(a) ? <a href={`/experience/${a.id}/`}>{d.title}</a> : d.title}</h3>
-  <div class="meta2">{[d.office, years(a)].filter(Boolean).join(' · ')}</div>
-  {short && <p>{short}</p>}
-  {tags && d.sectors.length > 0 && <ul class="mini-tags">{d.sectors.map((x) => <li>{x}</li>)}</ul>}
-  {hasPage(a) && <a class="more" href={`/experience/${a.id}/`}>Read more</a>}
+<article class={`card acard${cover ? ' has-cover' : ''}`}>
+  {cover && (
+    <a class="cover-panel" href={href ?? undefined} tabindex="-1" aria-hidden="true">
+      <Cover id={a.id} title={pub?.title ?? d.title} publisher={pub?.publisher ?? (d.client === 'AfDB' ? 'African Development Bank' : d.client)} year={pub?.year ?? (d.end ?? d.start ?? '')} />
+    </a>
+  )}
+  <div class={cover ? 'acard-body' : 'acard-inner'}>
+    {(kicker ?? d.client) && <div class="client">{kicker ?? d.client}</div>}
+    <h3>{href ? <a href={href}>{d.title}</a> : d.title}</h3>
+    <div class="meta2">{[d.office, years(a)].filter(Boolean).join(' · ')}</div>
+    {short && <p>{short}</p>}
+    {tags && d.sectors.length > 0 && <ul class="mini-tags">{d.sectors.map((x) => <li>{x}</li>)}</ul>}
+    {href && <a class="more" href={href}>Read more</a>}
+  </div>
 </article>

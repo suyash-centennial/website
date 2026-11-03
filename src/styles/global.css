@@ -451,3 +451,50 @@ h3.sub + .ruled { margin-bottom: 30px; }
   .experts { grid-template-columns: 1fr; }
   .experts li { padding: 16px 0 14px; }
 }
+
+/* Report covers and title tiles */
+.cover { display: block; aspect-ratio: 3 / 4; width: 100%; object-fit: cover; box-shadow: 0 1px 2px rgba(16,32,52,.12), 0 10px 24px -8px rgba(16,32,52,.28); background: #fff; }
+.cover.tile { position: relative; overflow: hidden; container-type: inline-size; color: #fff; background: linear-gradient(160deg, #1A4E80 0%, var(--navy) 55%, #0E355C 100%); }
+.t-in { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 9cqw 9cqw 8cqw; }
+.cover.tile::after { content: ''; position: absolute; width: 95cqw; height: 95cqw; right: -38cqw; bottom: -30cqw; background: url(/icon-512.png) center / contain no-repeat; filter: brightness(0) invert(1); opacity: .08; }
+.cover.tile.idev { background: linear-gradient(160deg, #13706B 0%, #0B5A57 55%, #084745 100%); }
+.cover.tile.idev .t-pub { border-color: #9FD9D3; }
+.cover.tile.ifad { background: linear-gradient(160deg, #2E6A3F 0%, #22552F 60%, #1A4425 100%); }
+.cover.tile.ifad .t-pub { border-color: #B9DCA6; }
+.cover.tile.book { background: linear-gradient(160deg, #F4F1EA 0%, #E9E4D8 100%); color: var(--heading); }
+.cover.tile.book::after { filter: none; opacity: .07; }
+.t-pub { font-size: 6.2cqw; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; line-height: 1.35; padding-bottom: 5cqw; border-bottom: max(1px, .9cqw) solid var(--accent); }
+.t-title { font-family: var(--serif); font-weight: 600; font-size: 9.6cqw; line-height: 1.18; margin-top: 8cqw; display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden; position: relative; z-index: 1; }
+.t-title.long { font-size: 8.2cqw; -webkit-line-clamp: 8; }
+.t-year { margin-top: auto; font-size: 6.5cqw; letter-spacing: .08em; opacity: .8; position: relative; z-index: 1; }
+@container (max-width: 110px) {
+  .t-title { -webkit-line-clamp: 4; font-size: 11cqw; margin-top: 8cqw; }
+  .t-pub { font-size: 8cqw; }
+  .t-year { font-size: 9cqw; }
+}
+
+/* Featured cards with a cover panel */
+.acard.has-cover { padding: 0; overflow: hidden; }
+.acard .cover-panel { background: var(--stone); display: flex; justify-content: center; align-items: center; padding: 30px; border-bottom: 1px solid var(--line); }
+.acard .cover-panel .cover { width: 150px; flex: none; transition: transform .25s ease; }
+.acard.has-cover:hover .cover-panel .cover { transform: translateY(-4px); }
+.acard .acard-body { padding: 26px 30px 28px; display: flex; flex-direction: column; flex: 1; }
+.stone .acard .cover-panel { background: #E4E9EE; }
+
+/* Publications list with thumbnails */
+.pubs li.with-cover { display: grid; grid-template-columns: 78px 1fr; gap: 22px; align-items: start; }
+.pubs li.with-cover .cover { width: 78px; }
+.pubs li.with-cover a.thumb { display: block; }
+.pubs li.with-cover a.thumb:hover .cover { transform: translateY(-2px); }
+.pubs .cover { transition: transform .2s ease; }
+
+/* Cover on assignment pages */
+.aside .aside-cover { display: block; width: 170px; margin: 4px 0 30px; }
+@media (max-width: 760px) {
+  .acard .cover-panel { padding: 24px; }
+  .acard .cover-panel .cover { width: 120px; }
+  .pubs li.with-cover { grid-template-columns: 62px 1fr; gap: 16px; }
+  .pubs li.with-cover .cover { width: 62px; }
+  .aside .aside-cover { width: 140px; }
+}
+.acard-inner { display: flex; flex-direction: column; flex: 1; }

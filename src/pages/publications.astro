@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import ContactBand from '../components/ContactBand.astro';
 import { PUBLICATIONS, GROUPS } from '../data/publications';
+import Cover from '../components/Cover.astro';
 ---
 <Base title="Publications" description="Published reports, evaluations and books from Centennial assignments for MOPAN, the African Development Bank, IFAD, JICA and the Infrastructure Consortium for Africa.">
   <PageHero title="Publications" />
@@ -16,11 +17,14 @@ import { PUBLICATIONS, GROUPS } from '../data/publications';
           <div>
             <ul class="pubs">
               {PUBLICATIONS.filter((p) => p.group === g).map((p) => (
-                <li>
+                <li class="with-cover">
+                  <a class="thumb" href={p.url} target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><Cover id={p.assignment} title={p.title} publisher={p.publisher} year={p.year} size="sm" /></a>
+                  <div>
                   <h3><a href={p.url} target="_blank" rel="noopener">{p.title}</a></h3>
                   <div class="pmeta">{p.publisher} · {p.year}</div>
                   {p.note && <div class="pnote">{p.note}</div>}
                   {p.assignment && <a class="more small" href={`/experience/${p.assignment}/`}>View assignment</a>}
+                  </div>
                 </li>
               ))}
             </ul>

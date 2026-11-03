@@ -34,3 +34,10 @@ export const initials = (name: string) => {
   const w = name.split(/\s+/);
   return (w[0][0] + (w.length > 1 ? w[w.length - 1][0] : '')).toUpperCase();
 };
+
+/** Report cover if one has been added at public/images/covers/<assignment id>.(jpg|png|webp) */
+export function coverFor(id?: string) {
+  if (!id) return null;
+  for (const ext of ['jpg', 'png', 'webp']) if (fs.existsSync(`public/images/covers/${id}.${ext}`)) return `/images/covers/${id}.${ext}`;
+  return null;
+}
