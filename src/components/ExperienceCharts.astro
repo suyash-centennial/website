@@ -1,0 +1,62 @@
+---
+// Two small charts drawn at build time: assignments by start year, and by institution.
+import { publishedAssignments } from '../lib';
+import { PARTNERS, workFor } from '../data/partners';
+const all = await publishedAssignments();
+const yearOf = (a: any) => a.data.start ?? a.data.end;
+const dated = all.filter((a) => yearOf(a));
+const Y0 = Math.min(...dated.map(yearOf)), Y1 = Math.max(...dated.map(yearOf));
+const years = Array.from({ length: Y1 - Y0 + 1 }, (_, i) => Y0 + i);
+const perYear = years.map((y) => ({ y, n: dated.filter((a) => yearOf(a) === y).length }));
+const max = Math.max(...perYear.map((p) => p.n));
+const top = Math.ceil(max / 5) * 5;
+// column chart geometry
+const W = 560, H = 230, L = 28, R = 6, T = 14, B = 26;
+const slot = (W - L - R) / years.length, bw = Math.min(18, slot - 6);
+const yS = (n: number) => T + (H - T - B) * (1 - n / top);
+const ticks = Array.from({ length: top / 5 + 1 }, (_, i) => i * 5);
+const col = (x: number, n: number) => {
+  const y = yS(n), base = yS(0), r = Math.min(4, (base - y) / 2);
+  return `M${x},${base}V${y + r}Q${x},${y} ${x + r},${y}H${x + bw - r}Q${x + bw},${y} ${x + bw},${y + r}V${base}Z`;
+};
+// institutions
+const inst = PARTNERS.map((p) => ({ p, n: workFor(p, all).length })).filter((x) => x.n > 0).sort((a, b) => b.n - a.n).slice(0, 9);
+const imax = inst[0].n;
+const BW = 560, rowH = 24, lab = 118;
+const BH = inst.length * rowH + 4;
+const bar = (n: number) => (BW - lab - 40) * (n / imax);
+const lineCounts = ['Evaluation', 'Advisory', 'Research and Analysis'].map((l) => ({ l, n: all.filter((a) => a.data.line === l).length }));
+---
+<section class="band stone glance" aria-label="Experience at a glance">
+  <div class="wrap">
+    <div class="glance-lines">
+      {lineCounts.map((x) => <div><b>{x.n}</b><span>{x.l}</span></div>)}
+    </div>
+    <div class="glance-grid">
+      <figure class="chart">
+        <figcaption>Assignments by start year</figcaption>
+        <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Column chart of assignments by start year, ${Y0} to ${Y1}`}>
+          {ticks.map((t) => (<><line x1={L} x2={W - R} y1={yS(t)} y2={yS(t)} class="grid" /><text x={L - 8} y={yS(t) + 4} class="tick" text-anchor="end">{t}</text></>))}
+          {perYear.map((p, i) => p.n > 0 && (
+            <path d={col(L + i * slot + (slot - bw) / 2, p.n)} class="col"><title>{p.y}: {p.n} {p.n === 1 ? 'assignment' : 'assignments'}</title></path>
+          ))}
+          {perYear.map((p, i) => (p.y % 4 === 0 || i === 0 || i === years.length - 1) && (
+            <text x={L + i * slot + slot / 2} y={H - 6} class="tick" text-anchor="middle">{p.y}</text>
+          ))}
+        </svg>
+      </figure>
+      <figure class="chart">
+        <figcaption>Assignments by institution</figcaption>
+        <svg viewBox={`0 0 ${BW} ${BH}`} role="img" aria-label="Bar chart of assignments by institution">
+          {inst.map((x, i) => (
+            <a href={`/experience/?partner=${x.p.slug}`}>
+              <text x={lab - 10} y={i * rowH + 16} class="blab" text-anchor="end">{x.p.tile ?? x.p.short}</text>
+              <path d={`M${lab},${i * rowH + 6}H${lab + bar(x.n) - 4}Q${lab + bar(x.n)},${i * rowH + 6} ${lab + bar(x.n)},${i * rowH + 10}V${i * rowH + 18}Q${lab + bar(x.n)},${i * rowH + 22} ${lab + bar(x.n) - 4},${i * rowH + 22}H${lab}Z`} class="hbar"><title>{x.p.name}: {x.n}</title></path>
+              <text x={lab + bar(x.n) + 8} y={i * rowH + 18} class="bval">{x.n}</text>
+            </a>
+          ))}
+        </svg>
+      </figure>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,16 @@
+---
+// A row of report covers linking to the Publications page.
+import { PUBLICATIONS } from '../data/publications';
+import Cover from './Cover.astro';
+const picks = ['mopan-world-bank', 'mopan-ifc', 'covid-19-response', 'africa-2050', 'mopan-climate-study', 'africa-reset', 'eastern-africa-risp', 'latin-america-2040'];
+const shelf = picks.map((id) => PUBLICATIONS.find((p) => p.assignment === id)!).filter(Boolean);
+---
+<ul class="shelf">
+  {shelf.map((p) => (
+    <li>
+      <a href={p.url} target="_blank" rel="noopener" title={p.title}>
+        <Cover id={p.assignment} title={p.title} publisher={p.publisher} year={p.year} />
+      </a>
+    </li>
+  ))}
+</ul>

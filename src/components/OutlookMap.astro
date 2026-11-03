@@ -1,0 +1,54 @@
+---
+// Long-term outlook studies placed on a world map. Drawn at build time.
+import { geoNaturalEarth1, geoPath, geoCentroid } from 'd3-geo';
+import { feature } from 'topojson-client';
+import world from 'world-atlas/countries-110m.json';
+
+const W = 960, H = 470;
+const all = (feature(world as any, (world as any).objects.countries) as any).features.filter((f: any) => f.id !== '010');
+const projection = geoNaturalEarth1().fitExtent([[0, 0], [W, H]], { type: 'FeatureCollection', features: all } as any);
+const path = geoPath(projection);
+
+const LATAM = ['032','068','076','152','170','218','328','600','604','740','858','862','188','222','320','340','558','591','084','192','214','332','388','780','630','484'];
+const ASIA = ['156','392','410','408','496','158','356','586','050','144','524','064','004','398','860','795','417','762','096','116','360','418','458','104','608','702','764','704','626'];
+const NOT_AFRICA = ['887','682','512','376','400','368','760','422','196','275','414','784','634','364','048','724','620','380','300','792'];
+const inAfrica = (f: any) => { const [lon, lat] = geoCentroid(f); return lon > -26 && lon < 52 && lat > -36 && lat < 38 && !NOT_AFRICA.includes(f.id); };
+const covered = (f: any) => LATAM.includes(f.id) || ASIA.includes(f.id) || inAfrica(f);
+
+// pin = [lon, lat]; dx/dy = label offset from the pin in map units
+const STUDIES = [
+  { id: 'mexico-2042', name: 'Mexico 2042', by: 'CEESP', pin: [-102, 23], dx: -150, dy: -42 },
+  { id: 'latin-america-2040', name: 'Latin America 2040', by: 'CAF', pin: [-62, -12], dx: -200, dy: 46 },
+  { id: 'africa-2050', name: 'Africa 2050', by: 'JICA', pin: [20, 4], dx: -168, dy: 52 },
+  { id: 'central-asia-2050', name: 'Central Asia 2050', by: 'Nazarbayev University', pin: [64, 40], dx: -210, dy: -66 },
+  { id: 'kazakhstan-2050', name: 'Kazakhstan 2050', by: 'Government of Kazakhstan', pin: [68, 48.5], dx: -36, dy: -88 },
+  { id: 'india-2040-agriculture', name: 'India 2040', by: 'Syngenta Foundation', pin: [78.5, 21], dx: -64, dy: 92 },
+  { id: 'asia-2050', name: 'Asia 2050', by: 'Asian Development Bank', pin: [104, 33], dx: 74, dy: -74 },
+  { id: 'asean-2040', name: 'ASEAN 2040', by: 'JICA', pin: [112, 4], dx: 24, dy: 64 },
+].map((s) => {
+  const [x, y] = projection(s.pin as [number, number]) as [number, number];
+  const w = Math.max(s.name.length * 8.2, s.by.length * 6.1) + 22;
+  return { ...s, x, y, lx: x + s.dx, ly: y + s.dy, w };
+});
+const shapes = all.map((f: any) => ({ d: path(f) ?? '', on: covered(f) }));
+---
+<figure class="outlook">
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Map of Centennial's long-term outlook studies: Asia 2050, Africa 2050, Latin America 2040, Mexico 2042, India 2040, ASEAN 2040, Central Asia 2050 and Kazakhstan 2050">
+    {shapes.map((s) => <path d={s.d} class={s.on ? 'land on' : 'land'} />)}
+    {STUDIES.map((s) => (
+      <a href={`/experience/${s.id}/`} class="study">
+        <line x1={s.x} y1={s.y} x2={s.lx + (s.dx < 0 ? s.w : 0)} y2={s.ly + 18} class="leader" />
+        <rect x={s.lx} y={s.ly} width={s.w} height="40" rx="3" class="lbl" />
+        <text x={s.lx + 11} y={s.ly + 17} class="lname">{s.name}</text>
+        <text x={s.lx + 11} y={s.ly + 32} class="lby">{s.by}</text>
+        <circle cx={s.x} cy={s.y} r="5.5" class="pin" />
+      </a>
+    ))}
+  </svg>
+  <ul class="outlook-list">
+    {STUDIES.map((s) => <li><a href={`/experience/${s.id}/`}>{s.name}</a><span>{s.by}</span></li>)}
+  </ul>
+  <figcaption>
+    <a href="/experience/world-in-2050/"><b>The World in 2050</b></a> takes a long-term perspective on the economic and social outlook of the world to 2050, for CAF, JICA, IIES and the National Analytical Center of Nazarbayev University.
+  </figcaption>
+</figure>

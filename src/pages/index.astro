@@ -3,6 +3,10 @@ import Base from '../layouts/Base.astro';
 import AssignmentCard from '../components/AssignmentCard.astro';
 import PersonCard from '../components/PersonCard.astro';
 import ContactBand from '../components/ContactBand.astro';
+import StatsBand from '../components/StatsBand.astro';
+import WorldMap from '../components/WorldMap.astro';
+import CoverShelf from '../components/CoverShelf.astro';
+import { COUNTRIES } from '../data/countries';
 import { INSTITUTIONS } from '../site';
 import { PARTNERS, PARTNER_ROW, workFor } from '../data/partners';
 import { publishedAssignments, sortedPeople } from '../lib';
@@ -30,14 +34,10 @@ const lines = [
       <h1>Strategy, policy and evaluation for development institutions</h1>
       <p class="lede">Centennial advises on corporate strategy, development effectiveness and evaluation for multilateral development banks, UN agencies and governments.</p>
       <div class="eyebrow">Washington DC</div>
-      <div class="stats">
-        <div><b>1999</b><span>Practice established as the Centennial Group</span></div>
-        <div><b>25+</b><span>Years of work with the AfDB, AsDB, CAF, IDB, IFAD, IsDB, JICA, World Bank and GEF</span></div>
-        <div><b>{all.length}</b><span>Assignments for development banks, UN agencies, global funds and governments</span></div>
-        <div><b>100+</b><span>AfDB projects validated through Project Completion Report Evaluation Notes</span></div>
-      </div>
     </div>
   </section>
+
+  <StatsBand />
 
   <section class="band stone" aria-labelledby="inst">
     <div class="wrap">
@@ -67,7 +67,21 @@ const lines = [
     </div>
   </section>
 
-  <section class="band stone">
+  <section class="band stone geo" aria-labelledby="geo">
+    <div class="wrap">
+      <div class="geo-grid">
+        <div>
+          <div class="label">Geographic experience</div>
+          <h2 id="geo">{COUNTRIES.length} countries</h2>
+          <p>Centennial teams have carried out country work, missions, case studies and long-term development studies across Africa, Asia, Central Asia, the Middle East and Latin America.</p>
+          <a class="more" href="/about/#countries">All countries</a>
+        </div>
+        <WorldMap />
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
     <div class="wrap">
       <div class="section-head">
         <div>
@@ -90,13 +104,23 @@ const lines = [
     </div>
   </section>
 
-  <section class="band">
+  <section class="band stone">
     <div class="wrap">
       <div class="section-head">
         <div><div class="label">Experience</div><h2>Featured assignments</h2></div>
         <a class="more" href="/experience/">All assignments</a>
       </div>
       <div class="grid-3">{featured.map((a) => <AssignmentCard a={a} cover />)}</div>
+    </div>
+  </section>
+
+  <section class="band shelf-band">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="label">Publications</div><h2>Published reports and books</h2></div>
+        <a class="more" href="/publications/">All publications</a>
+      </div>
+      <CoverShelf />
     </div>
   </section>
 

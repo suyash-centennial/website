@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import OutlookMap from '../components/OutlookMap.astro';
 import AssignmentRow from '../components/AssignmentRow.astro';
 import ContactBand from '../components/ContactBand.astro';
 import { publishedAssignments } from '../lib';
@@ -124,6 +125,12 @@ const S: { id: string; t: string; band: string; intro: string[]; listHead: strin
             </>)}
           </div>
         </div>
+        {s.id === 'research' && (
+          <div class="outlook-wrap">
+            <div class="label">Long-term development outlooks</div>
+            <OutlookMap />
+          </div>
+        )}
       </div>
     </section>
   ))}
