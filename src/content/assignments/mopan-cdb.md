@@ -3,7 +3,9 @@ title: "MOPAN Assessment of the Caribbean Development Bank (CDB)"
 client: "OECD / MOPAN"
 office: "Multilateral Organisation Performance Assessment Network"
 line: Evaluation
+start: 2025
 end: 2026
+region: "Caribbean"
 team: []
 ---
 

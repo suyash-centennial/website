@@ -1,7 +1,7 @@
 // Countries where Centennial teams carried out country work, missions or case studies,
 // taken from the firm's assignment reference sheets and the published evaluation reports.
 // id = ISO 3166 numeric code, used to colour the map.
-export const COUNTRIES: { id: string; name: string; region: string }[] = [
+export const COUNTRIES: { id: string; name: string; region: string; at?: [number, number] }[] = [
   { id: '120', name: 'Cameroon', region: 'Africa' },
   { id: '384', name: "Côte d'Ivoire", region: 'Africa' },
   { id: '180', name: 'Democratic Republic of Congo', region: 'Africa' },
@@ -40,7 +40,12 @@ export const COUNTRIES: { id: string; name: string; region: string }[] = [
   { id: '586', name: 'Pakistan', region: 'Asia' },
   { id: '608', name: 'Philippines', region: 'Asia' },
   { id: '704', name: 'Vietnam', region: 'Asia' },
-  { id: '076', name: 'Brazil', region: 'Latin America' },
-  { id: '484', name: 'Mexico', region: 'Latin America' },
+  { id: '044', name: 'The Bahamas', region: 'Latin America and the Caribbean' },
+  { id: '052', name: 'Barbados', region: 'Latin America and the Caribbean', at: [-59.55, 13.17] },
+  { id: '084', name: 'Belize', region: 'Latin America and the Caribbean' },
+  { id: '076', name: 'Brazil', region: 'Latin America and the Caribbean' },
+  { id: '328', name: 'Guyana', region: 'Latin America and the Caribbean' },
+  { id: '484', name: 'Mexico', region: 'Latin America and the Caribbean' },
+  { id: '670', name: 'Saint Vincent and the Grenadines', region: 'Latin America and the Caribbean', at: [-61.2, 13.25] },
 ];
-export const REGIONS = ['Africa', 'Middle East', 'Europe and Central Asia', 'Asia', 'Latin America'];
+export const REGIONS = ['Africa', 'Middle East', 'Europe and Central Asia', 'Asia', 'Latin America and the Caribbean'];

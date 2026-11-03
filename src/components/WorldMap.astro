@@ -16,6 +16,12 @@ const dots = all.filter((f: any) => byId.has(f.id) && geoArea(f) < 0.0004).map((
   const [x, y] = projection(geoCentroid(f)) as [number, number];
   return { x, y, name: byId.get(f.id) };
 });
+// island states too small for the base map are placed by coordinates
+const atlasIds = new Set(all.map((f: any) => f.id));
+COUNTRIES.filter((c) => c.at && !atlasIds.has(c.id)).forEach((c) => {
+  const [x, y] = projection(c.at!) as [number, number];
+  dots.push({ x, y, name: c.name });
+});
 ---
 <figure class="map">
   <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Map of ${COUNTRIES.length} countries where Centennial teams have worked`}>
