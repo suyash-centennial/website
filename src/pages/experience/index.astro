@@ -3,7 +3,6 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import AssignmentRow from '../../components/AssignmentRow.astro';
 import ContactBand from '../../components/ContactBand.astro';
-import ExperienceCharts from '../../components/ExperienceCharts.astro';
 import { publishedAssignments } from '../../lib';
 import { PARTNERS, PARTNER_ROW, workFor } from '../../data/partners';
 const items = await publishedAssignments();
@@ -17,7 +16,6 @@ const partnersOf = (id: string) => partners.filter((p) => workFor(p, items).some
 ---
 <Base title="Experience" description="Evaluations, institutional assessments, advisory and analytical assignments for multilateral development banks, UN agencies and global funds.">
   <PageHero title="Experience" lede="More than 25 years of evaluation, policy advisory and economic work with the AfDB, AsDB, CAF, IDB, IFAD, IsDB, JICA, World Bank and GEF, and MOPAN assessments of multilateral organisations since 2020." />
-  <ExperienceCharts />
   <section class="pbar" aria-label="Partner institutions">
     <div class="wrap">
       <div class="pbar-row" role="group" aria-label="Filter by partner institution">

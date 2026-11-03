@@ -3,7 +3,6 @@ import Base from '../layouts/Base.astro';
 import AssignmentCard from '../components/AssignmentCard.astro';
 import PersonCard from '../components/PersonCard.astro';
 import ContactBand from '../components/ContactBand.astro';
-import StatsBand from '../components/StatsBand.astro';
 import WorldMap from '../components/WorldMap.astro';
 import CoverShelf from '../components/CoverShelf.astro';
 import { COUNTRIES } from '../data/countries';
@@ -34,10 +33,14 @@ const lines = [
       <h1>Strategy, policy and evaluation for development institutions</h1>
       <p class="lede">Centennial advises on corporate strategy, development effectiveness and evaluation for multilateral development banks, UN agencies and governments.</p>
       <div class="eyebrow">Washington DC</div>
+      <div class="stats">
+        <div><b>1999</b><span>Practice established as the Centennial Group</span></div>
+        <div><b>25+</b><span>Years of work with the AfDB, AsDB, CAF, IDB, IFAD, IsDB, JICA, World Bank and GEF</span></div>
+        <div><b>{all.length}</b><span>Assignments for development banks, UN agencies, global funds and governments</span></div>
+        <div><b>100+</b><span>AfDB projects validated through Project Completion Report Evaluation Notes</span></div>
+      </div>
     </div>
   </section>
-
-  <StatsBand />
 
   <section class="band stone" aria-labelledby="inst">
     <div class="wrap">
