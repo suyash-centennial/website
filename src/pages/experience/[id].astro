@@ -4,7 +4,7 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import AssignmentRow from '../../components/AssignmentRow.astro';
 import ContactBand from '../../components/ContactBand.astro';
-import { hasPage, years, publishedAssignments } from '../../lib';
+import { hasPage, years, publishedAssignments, reportFor } from '../../lib';
 import { PUBLICATIONS } from '../../data/publications';
 import Cover from '../../components/Cover.astro';
 
@@ -17,6 +17,7 @@ const d = a.data;
 const { Content } = await render(a);
 const team = d.team.length ? await getEntries(d.team) : [];
 const pubs = PUBLICATIONS.filter((p) => p.assignment === a.id);
+const pdf = reportFor(a.id);
 const related = (await publishedAssignments()).filter((x) => x.id !== a.id && x.data.client === d.client).slice(0, 5);
 ---
 <Base title={d.title} description={`${d.title}. ${d.office ?? d.client}. Centennial Advisory.`}>
@@ -33,11 +34,11 @@ const related = (await publishedAssignments()).filter((x) => x.id !== a.id && x.
       <div class="detail">
         <div class="prose"><Content /></div>
         <aside class="aside">
-          {pubs.length > 0 && <a class="aside-cover" href={pubs[0].url} target="_blank" rel="noopener" aria-label={`Open ${pubs[0].title}`}><Cover id={a.id} title={pubs[0].title} publisher={pubs[0].publisher} year={pubs[0].year} /></a>}
+          {pubs.length > 0 && <a class="aside-cover" href={pdf ?? pubs[0].url} target="_blank" rel="noopener" aria-label={`Open ${pubs[0].title}`}><Cover id={a.id} title={pubs[0].title} publisher={pubs[0].publisher} year={pubs[0].year} /></a>}
           <h2>Client</h2><p>{d.client}{d.office && <><br />{d.office}</>}</p>
           <h2>Service</h2><p>{d.line}</p>
           {years(a) && (<><h2>Period</h2><p>{years(a)}</p></>)}
-          {pubs.length > 0 && (<><h2>Published report</h2><ul>{pubs.map((p) => <li><a href={p.url} target="_blank" rel="noopener">{p.title}</a> <span class="pmeta">({p.publisher}, {p.year})</span></li>)}</ul></>)}
+          {pubs.length > 0 && (<><h2>Published report</h2><ul>{pubs.map((p) => <li><a href={pdf ?? p.url} target="_blank" rel="noopener">{p.title}</a> <span class="pmeta">({p.publisher}, {p.year})</span></li>)}</ul></>)}
           {team.length > 0 && (<><h2>Centennial experts</h2><ul>{team.map((p) => <li><a href={`/people/${p.id}/`}>{p.data.name}</a></li>)}</ul></>)}
           <p style="margin:0"><a class="more" href="/experience/">All assignments</a></p>
         </aside>

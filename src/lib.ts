@@ -41,3 +41,8 @@ export function coverFor(id?: string) {
   for (const ext of ['jpg', 'png', 'webp']) if (fs.existsSync(`public/images/covers/${id}.${ext}`)) return `/images/covers/${id}.${ext}`;
   return null;
 }
+
+/** Report PDF hosted on the site, if one has been added at public/reports/<assignment id>.pdf */
+export function reportFor(id?: string) {
+  return id && fs.existsSync(`public/reports/${id}.pdf`) ? `/reports/${id}.pdf` : null;
+}

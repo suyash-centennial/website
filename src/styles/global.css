@@ -607,3 +607,4 @@ h3.sub + .ruled { margin-bottom: 30px; }
   .figures span { font-size: 13.5px; line-height: 1.4; }
   .figures::after { opacity: .05; }
 }
+.pubs h3 a.pdf::after { content: 'PDF'; display: inline-block; margin-left: 8px; padding: 1px 6px 0; border: 1px solid var(--chip); border-radius: 3px; font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent-ink); vertical-align: 3px; }

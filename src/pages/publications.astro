@@ -4,6 +4,8 @@ import PageHero from '../components/PageHero.astro';
 import ContactBand from '../components/ContactBand.astro';
 import { PUBLICATIONS, GROUPS } from '../data/publications';
 import Cover from '../components/Cover.astro';
+import { reportFor } from '../lib';
+const linkFor = (p: { assignment?: string; url: string }) => reportFor(p.assignment) ?? p.url;
 ---
 <Base title="Publications" description="Published reports, evaluations and books from Centennial assignments for MOPAN, the African Development Bank, IFAD, JICA and the Infrastructure Consortium for Africa.">
   <PageHero title="Publications" />
@@ -18,9 +20,9 @@ import Cover from '../components/Cover.astro';
             <ul class="pubs">
               {PUBLICATIONS.filter((p) => p.group === g).map((p) => (
                 <li class="with-cover">
-                  <a class="thumb" href={p.url} target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><Cover id={p.assignment} title={p.title} publisher={p.publisher} year={p.year} size="sm" /></a>
+                  <a class="thumb" href={linkFor(p)} target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><Cover id={p.assignment} title={p.title} publisher={p.publisher} year={p.year} size="sm" /></a>
                   <div>
-                  <h3><a href={p.url} target="_blank" rel="noopener">{p.title}</a></h3>
+                  <h3><a href={linkFor(p)} target="_blank" rel="noopener" class={reportFor(p.assignment) ? 'pdf' : undefined}>{p.title}</a></h3>
                   <div class="pmeta">{p.publisher} · {p.year}</div>
                   {p.note && <div class="pnote">{p.note}</div>}
                   {p.assignment && <a class="more small" href={`/experience/${p.assignment}/`}>View assignment</a>}
