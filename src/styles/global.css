@@ -453,7 +453,7 @@ h3.sub + .ruled { margin-bottom: 30px; }
 }
 
 /* Report covers and title tiles */
-.cover { display: block; aspect-ratio: 3 / 4; width: 100%; object-fit: cover; box-shadow: 0 1px 2px rgba(16,32,52,.12), 0 10px 24px -8px rgba(16,32,52,.28); background: #fff; }
+.cover { display: block; aspect-ratio: 210 / 297; width: 100%; object-fit: cover; box-shadow: 0 1px 2px rgba(16,32,52,.12), 0 10px 24px -8px rgba(16,32,52,.28); background: #fff; }
 .cover.tile { position: relative; overflow: hidden; container-type: inline-size; color: #fff; background: linear-gradient(160deg, #1A4E80 0%, var(--navy) 55%, #0E355C 100%); }
 .t-in { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 9cqw 9cqw 8cqw; }
 .cover.tile::after { content: ''; position: absolute; width: 95cqw; height: 95cqw; right: -38cqw; bottom: -30cqw; background: url(/icon-512.png) center / contain no-repeat; filter: brightness(0) invert(1); opacity: .08; }
